@@ -1,26 +1,50 @@
 @import "tailwindcss";
 
+/* ۱. تعریف متغیرهای رنگی پیش‌فرض (تم روشن - Light) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #f9fafb; /* خاکستری بسیار روشن برای پس‌زمینه */
+    --foreground: #111827; /* دودی تیره برای متون */
+    --card: #ffffff; /* سفید خالص برای باکس‌ها و کارت‌ها */
+    --primary: #2563eb; /* آبی سازمانی پلتفرم */
+    --border: #e5e7eb; /* رنگ خطوط مرزی ملایم */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ۲. تعریف متغیرهای رنگی برای تم شب (Dark) */
+:root[data-theme="dark"] {
+    --background: #0f172a; /* سورمه‌ای خیلی تیره */
+    --foreground: #f8fafc; /* سفید شیری برای متون */
+    --card: #1e293b; /* سورمه‌ای لایت برای کارت‌ها */
+    --primary: #3b82f6; /* آبی روشن‌تر و مناسب شب */
+    --border: #334155; /* خطوط مرزی تیره */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ۳. تعریف متغیرهای رنگی برای تم بعد از ظهر (Afternoon) */
+:root[data-theme="afternoon"] {
+    --background: #f4eae1; /* کرم گرم و ملایم (حس غروب آفتاب) */
+    --foreground: #432c11; /* قهوه‌ای سوخته تیره برای خوانایی متون */
+    --card: #fdfaf7; /* کرم بسیار روشن مخصوص کارت‌ها */
+    --primary: #d97706; /* رنگ آجری/نارنجی پخته و گرم */
+    --border: #e7d5c4; /* خطوط مرزی متناسب با تناژ گرم */
 }
 
+/* ۴. نگاشت متغیرها در Tailwind v4 بدون ایجاد لوپ چرخشی */
+@theme {
+    /* برای حل ارور وب‌استور، مستقیماً به نام متغیرهایی که نکست‌جی‌اس در جاوااسکریپت ساخته اشاره می‌کنیم */
+    --font-sans: var(--font-vazir, sans-serif);
+    --font-mono: var(--font-geist, monospace);
+
+    /* معرفی رنگ‌های داینامیک به فریم‌ورک */
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-primary: var(--primary);
+    --color-border: var(--border);
+}
+
+/* اعمال انیمیشن نرم روی کل بدنه سایت هنگام سوییچ شدن تم‌ها */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
