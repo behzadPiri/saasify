@@ -1,0 +1,10 @@
+{
+  "ThemeSwitcher": {
+    "title": "Platform Appearance Settings",
+    "autoMode": "Smart & Automatic Adjustment (Tehran Time)",
+    "day": "☀️ Day",
+    "night": "🌙 Night",
+    "afternoon": "🌆 Afternoon",
+    "warning": "⚠️ Auto mode is active; manual switching is locked."
+  }
+}

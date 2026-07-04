@@ -1,15 +1,16 @@
 "use client";
 
 import {useTheme} from "@/shared/hooks/useTheme";
+import {useTranslations} from "next-intl";
 
 export function ThemeSwitcher() {
 
     const {theme, changeTheme, isAuto, toggleAuto} = useTheme()
-
+    const t = useTranslations("ThemeSwitcher")
 
     return (
         <div className="flex flex-col gap-4 p-5 bg-card border border-border rounded-2xl shadow-md max-w-sm">
-            <h3 className="font-bold text-lg text-foreground">تنظیمات ظاهر پلتفرم</h3>
+            <h3 className="font-bold text-lg text-foreground">{t("title")}</h3>
 
             {/* بخش تیک تم اتوماتیک */}
             <label className="flex items-center gap-3 cursor-pointer user-select-none">
@@ -20,7 +21,7 @@ export function ThemeSwitcher() {
                     className="w-5 h-5 accent-primary cursor-pointer"
                 />
                 <span className="text-sm font-medium text-foreground">
-                    تنظیم هوشمند و خودکار (بر اساس ساعت رسمی ایران)
+                    {t("autoMode")}
                 </span>
             </label>
 
@@ -36,7 +37,7 @@ export function ThemeSwitcher() {
                             : "text-foreground hover:bg-card/50 disabled:hover:bg-transparent"
                     }`}
                 >
-                    ☀️ روز
+                    {t("day")}
                 </button>
 
                 <button
@@ -48,7 +49,7 @@ export function ThemeSwitcher() {
                             : "text-foreground hover:bg-card/50 disabled:hover:bg-transparent"
                     }`}
                 >
-                    🌙 شب
+                    {t("night")}
                 </button>
 
                 <button
@@ -60,14 +61,12 @@ export function ThemeSwitcher() {
                             : "text-foreground hover:bg-card/50 disabled:hover:bg-transparent"
                     }`}
                 >
-                    🌆 غروب
+                    {t("afternoon")}
                 </button>
             </div>
 
             {isAuto && (
-                <p className="text-xs text-amber-600 font-medium">
-                    ⚠️ حالت خودکار فعال است؛ تغییر دستی تم تا زمان غیرفعال‌سازی قفل می‌باشد.
-                </p>
+                <p className="text-xs text-amber-600 font-medium">{t("warning")}</p>
             )}
         </div>
     );

@@ -46,5 +46,5 @@ body {
     font-family: var(--font-sans);
     background-color: var(--color-background);
     color: var(--color-foreground);
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 1s ease, color 1s ease, border-color 1s ease;
 }
