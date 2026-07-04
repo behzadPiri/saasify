@@ -11,11 +11,27 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: ReactNode; }>) {
     return (
         <html
-            lang="en"
-            dir="ltr"
-            data-theme="light"
+            lang="fa"
+            dir="rtl"
             className={`${vazirFont.variable} ${geistFont.variable} h-full antialiased`}
         >
+        <head>
+            {/* این اسکریپت کوچک قبل از بالا آمدن بدنه سایت، تم را هماهنگ می‌کند */}
+            <script
+                dangerouslySetInnerHTML={{
+                    __html: `
+              try {
+                var savedTheme = localStorage.getItem("saasify-theme");
+                if (savedTheme) {
+                  document.documentElement.setAttribute("data-theme", savedTheme);
+                }
+              } catch (e) {}
+            `,
+                }}
+            />
+
+        </head>
+
         <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
         </body>
