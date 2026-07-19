@@ -1,5 +1,9 @@
-import {redirect} from "next/navigation"
+import {getLocale} from "@/i18n/server";
+import {redirect} from "@/i18n/navigation";
 
-export default function Page() {
-    redirect("/dashboard");
+
+export default async function Page() {
+    const locale = await getLocale();
+    console.log({locale});
+    redirect({href: '/dashboard', locale: locale});
 };
