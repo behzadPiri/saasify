@@ -3,53 +3,74 @@
 import { useLanguageSwitcher, LANGUAGES } from "@/shared/hooks/useLanguageSwitcher";
 
 export function LanguageSwitcher() {
-    const { isOpen, dropdownRef, activeLang, toggleDropdown, handleLangChange } = useLanguageSwitcher();
+    const {
+        isOpen,
+        dropdownRef,
+        activeLang,
+        currentLocale,
+        toggleDropdown,
+        handleLangChange,
+    } = useLanguageSwitcher();
 
     return (
-        /* 🌟 تغییر اصلی ۱: اضافه کردن w-max تا باکس قرمز/مادر به هیچ وجه توسط کامپوننت‌های والد در صفحه کش نیاید */
-        <div className="relative inline-block text-left w-max " ref={dropdownRef}>
-            {/* دکمه اصلی */}
+        /* 🌟 حل باگ تراز: اضافه شدن w-max برای جلوگیری از کش آمدن دکمه توسط دیوهای والد */
+        <div className="relative inline-block text-left w-max" ref={dropdownRef}>
+            {/* دکمه اصلی دراپ‌داون - با استایل مدرن شیشه‌ای و هاور نرم */}
             <button
                 onClick={toggleDropdown}
                 type="button"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-2.5 sm:px-4 py-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 shadow-sm hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all focus:outline-none"
+                className="flex items-center gap-2.5 px-4 py-2 text-sm font-semibold border rounded-xl bg-card/80 dark:bg-card/40 backdrop-blur-md border-border/80 hover:bg-accent hover:text-accent-foreground shadow-sm transition-all duration-300 focus:outline-none active:scale-98"
             >
-                <span className="text-base leading-none">{activeLang.flag}</span>
-                <span className="hidden sm:block whitespace-nowrap">{activeLang.name}</span>
+                <span className="text-base select-none">{activeLang.flag}</span>
+                <span className="tracking-wide text-foreground/90">{activeLang.name}</span>
                 <svg
-                    className={`h-4 w-4 text-zinc-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
+                    className={`w-4 h-4 text-muted-foreground transition-transform duration-300 ${isOpen ? "rotate-180 text-primary" : ""}`}
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
                 >
-                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd"/>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7"/>
                 </svg>
             </button>
 
-            {/* کادر زیرمنو */}
+            {/* منوی بازشو پاپ‌آپ - کاملاً ریسپانسیو و تراز شده */}
             {isOpen && (
                 <div
-                    /* 🌟 تغییر اصلی ۲: با ltr:left-0 و rtl:right-0 کادر در هردو حالت فارسی و انگلیسی دقیقاً زیر خود دکمه فیکس و قفل می‌شود */
-                    className="absolute ltr:left-0 rtl:right-0 mt-2 w-36 origin-top rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-lg z-50 animate-in fade-in zoom-in-95 duration-100"
+                    /* 🌟 حل باگ جهت‌دهی: استفاده از کلاس‌های هوشمند ltr:left-0 rtl:right-0 جهت چفت شدن دقیق کادر زیر دکمه در هر دو زبان */
+                    className="absolute z-50 mt-2.5 w-48 rounded-2xl border border-border bg-card/95 dark:bg-card/90 backdrop-blur-xl p-1.5 shadow-xl shadow-shadow/5 focus:outline-none animate-in fade-in slide-in-from-top-3 duration-200 ltr:left-0 rtl:right-0 origin-top"
                     role="menu"
                 >
-                    <div className="py-1 p-1" role="none">
+                    <div className="flex flex-col gap-1">
                         {LANGUAGES.map((lang) => (
                             <button
                                 key={lang.code}
                                 onClick={() => handleLangChange(lang.code)}
-                                className={`flex items-center justify-between w-full px-3 py-2 text-sm rounded-lg transition-colors ${
-                                    activeLang.code === lang.code
-                                        ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-semibold"
-                                        : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
+                                type="button"
+                                className={`flex items-center justify-between w-full px-3 py-2.5 text-sm rounded-xl transition-all duration-200 group ${
+                                    currentLocale === lang.code
+                                        ? "bg-primary/10 text-primary font-bold shadow-sm"
+                                        : "text-foreground/80 hover:bg-accent hover:text-accent-foreground"
                                 }`}
+                                style={{ direction: lang.dir }}
                                 role="menuitem"
                             >
-                                <div className="flex items-center gap-2">
-                                    <span className="text-base leading-none">{lang.flag}</span>
-                                    <span className="whitespace-nowrap">{lang.name}</span>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-base transition-transform group-hover:scale-110">
+                                        {lang.flag}
+                                    </span>
+                                    <span className="font-medium">{lang.name}</span>
                                 </div>
-                                {activeLang.code === lang.code && (
-                                    <span className="text-xs text-zinc-400 dark:text-zinc-500 font-bold">✓</span>
+
+                                {/* تیک تایید زبان فعال */}
+                                {currentLocale === lang.code && (
+                                    <svg 
+                                        className="w-4 h-4 text-primary animate-in scale-in duration-200" 
+                                        fill="none"
+                                        viewBox="0 0 24 24" 
+                                        stroke="currentColor"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7"/>
+                                    </svg>
                                 )}
                             </button>
                         ))}

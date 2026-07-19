@@ -1,2 +1,2 @@
-export {ThemeSwitcher} from "./ThemeSwitcher"
-export {LanguageSwitcher} from "./LanguageSwitcher"
+export {ThemeSwitcher} from "./ThemeSwitcher";
+export {LanguageSwitcher} from "./LanguageSwitcher";
