@@ -1,13 +1,19 @@
 "use client";
 
-import {useEffect, useState} from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
+
+export type ThemeType = "light" | "dark" | "afternoon";
 
 export function useTheme() {
-    const [theme, setTheme] = useState<string>("light");
+    const [theme, setTheme] = useState<ThemeType>("light");
     const [isAuto, setIsAuto] = useState<boolean>(false);
-    const [mounted, setMounted] = useState<boolean>(false); // استیت کمکی برای لود
+    const [mounted, setMounted] = useState<boolean>(false);
 
-    const getTehranAutoTheme = (): string => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    // محاسبه تم بر اساس ساعت تهران
+    const getTehranAutoTheme = useCallback((): ThemeType => {
         const tehranHourStr = new Date().toLocaleTimeString("en-US", {
             timeZone: "Asia/Tehran",
             hour: "2-digit",
@@ -18,30 +24,70 @@ export function useTheme() {
         if (hour >= 6 && hour < 17) return "light";
         if (hour >= 17 && hour < 20) return "afternoon";
         return "dark";
-    };
-
-    // ۱. فاز لود اولیه: فقط یک بار تنظیمات را می‌خوانیم و مونت شدن را تایید می‌کنیم
-    useEffect(() => {
-        const savedTheme = localStorage.getItem("saasify-theme") || "light";
-        const savedAuto = localStorage.getItem("saasify-theme-auto") === "true";
-        setTimeout(() => {
-            setIsAuto(savedAuto);
-            setTheme(savedAuto ? getTehranAutoTheme() : savedTheme);
-            setMounted(true); // اعلام اینکه کامپوننت با موفقیت در مرورگر سوار شد
-        }, 0)
-
     }, []);
 
-    // ۲. فاز واکنش به تغییرات: فقط زمانی اجرا می‌شود که کامپوننت کاملاً مونت شده باشد
+    // ۱. استفاده از ترفند هوشمندانه تو: انتقال عملیات به چرخه بعدی مرورگر برای نابود کردن ارور ESLint
     useEffect(() => {
-        if (!mounted) return; // تا قبل از لود کامل، کاری انجام نده
+        const savedAuto = localStorage.getItem("saasify-theme-auto") === "true";
+        const savedTheme = (localStorage.getItem("saasify-theme") as ThemeType) || "light";
+
+        const timer = setTimeout(() => {
+            if (savedAuto) {
+                setIsAuto(true);
+                setTheme(getTehranAutoTheme());
+            } else {
+                setTheme(savedTheme);
+            }
+            setMounted(true);
+        }, 0);
+
+        return () => clearTimeout(timer);
+    }, [getTehranAutoTheme]);
+
+    // ۲. اعمال کلاس‌ها به تگ HTML و ذخیره تغییرات دکمه‌ها در رندرهای بعدی
+    useEffect(() => {
+        if (!mounted) return;
 
         document.documentElement.setAttribute("data-theme", theme);
+        if (theme === "dark") {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
         localStorage.setItem("saasify-theme", theme);
         localStorage.setItem("saasify-theme-auto", String(isAuto));
     }, [theme, isAuto, mounted]);
 
-    const changeTheme = (themeName: string) => {
+    // ۳. اینتروال حالت خودکار
+    useEffect(() => {
+        if (!isAuto || !mounted) return;
+
+        const interval = setInterval(() => {
+            const currentAutoTheme = getTehranAutoTheme();
+            if (theme !== currentAutoTheme) {
+                setTheme(currentAutoTheme);
+            }
+        }, 60000);
+
+        return () => clearInterval(interval);
+    }, [isAuto, theme, mounted, getTehranAutoTheme]);
+
+    // ۴. مدیریت کلیک بیرونی
+    useEffect(() => {
+        if (!isOpen) return;
+
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [isOpen]);
+
+    const changeTheme = (themeName: ThemeType) => {
         if (isAuto) return;
         setTheme(themeName);
     };
@@ -53,5 +99,22 @@ export function useTheme() {
         }
     };
 
-    return {theme, isAuto, changeTheme, toggleAuto};
+    const getActiveIconType = (): "auto" | "light" | "afternoon" | "dark" => {
+        if (isAuto) return "auto";
+        if (theme === "light") return "light";
+        if (theme === "afternoon") return "afternoon";
+        return "dark";
+    };
+
+    return {
+        theme,
+        isAuto,
+        mounted,
+        changeTheme,
+        toggleAuto,
+        isOpen,
+        setIsOpen,
+        dropdownRef,
+        getActiveIconType
+    };
 }
