@@ -1,17 +1,30 @@
 "use client";
 
+/**
+ * کامپوننت سوئیچر زبان (نسخه دسکتاپ)
+ * شامل دکمه با نمایش پرچم و نام زبان فعلی و منوی بازشو با لیست زبان‌ها
+ * تغییر زبان با تنظیم کوکی NEXT_LOCALE و ریدایرکت صفحه انجام می‌شود
+ * در موبایل با position fixed در بالای صفحه نمایش داده می‌شود
+ * در دسکتاپ با position absolute زیر دکمه باز می‌شود
+ */
+
 import {useLanguageSwitcher} from "../hooks/useLanguageSwitcher";
 import {Icons} from "@/shared/components/ui/icons";
 import {LANGUAGES} from "../hooks/useLanguageSwitcher";
 
+/**
+ * کامپوننت سوئیچر زبان دسکتاپ
+ * state زبان و توابع مرتبط از هوک useLanguageSwitcher دریافت می‌شود
+ */
 export function LanguageSwitcher() {
+    // دریافت state و توابع مورد نیاز از هوک useLanguageSwitcher
     const {
-        isOpen,
-        dropdownRef,
-        activeLang,
-        currentLocale,
-        toggleDropdown,
-        handleLangChange,
+        isOpen,             // آیا دراپ‌داون باز است؟
+        dropdownRef,        // رفرنس به المان دراپ‌داون برای بستن با کلیک بیرون
+        activeLang,         // زبان فعلی شامل کد، نام و پرچم
+        currentLocale,      // کد زبان فعلی (fa یا en)
+        toggleDropdown,     // تابع باز/بسته کردن دراپ‌داون
+        handleLangChange,   // تابع تغییر زبان
     } = useLanguageSwitcher();
 
     // اختصاص کامپوننت پرچم فعال به متغیری با حرف بزرگ جهت رندر در JSX
@@ -19,26 +32,32 @@ export function LanguageSwitcher() {
 
     return (
         <div className="relative w-max flex-initial shrink-0 " ref={dropdownRef}>
-            {/* دکمه اصلی دراپ‌داون */}
+            {/* دکمه اصلی دراپ‌داون - با نمایش پرچم، نام زبان و فلش چرخشی */}
             <button
                 onClick={toggleDropdown}
                 type="button"
                 className="flex items-center gap-2.5 px-4 py-2 text-sm font-semibold border rounded-xl bg-card/80 dark:bg-card/40 backdrop-blur-md border-border/80 hover:bg-accent hover:text-accent-foreground shadow-sm transition-all duration-300 focus:outline-none active:scale-[0.98] md:cursor-pointer"
             >
+                {/* پرچم زبان فعلی */}
                 <span className="flex items-center shrink-0">
                     <ActiveFlag size={18}/>
                 </span>
+                {/* نام زبان فعلی */}
                 <span className="tracking-wide text-foreground/90">{activeLang.name}</span>
+                {/* فلش چرخشی - هنگام باز بودن دراپ‌داون 180 درجه می‌چرخد */}
                 <Icons.Arrow
                     className={`w-4 h-4 text-muted-foreground transition-transform duration-300 ${isOpen ? "rotate-180 text-primary" : ""}`}
                 />
             </button>
 
             {/* منوی بازشو پاپ‌آپ */}
+            {/* در موبایل: position fixed در بالای صفحه */}
+            {/* در دسکتاپ: position absolute زیر دکمه */}
             {isOpen && (
                 <div
-                    className="fixed top-16 right-4 w-48 sm:absolute sm:top-full sm:mt-2.5 sm:left-0 sm:right-auto sm:w-48 z-50 rounded-2xl border border-border bg-card/95 dark:bg-card/90 backdrop-blur-xl p-1.5 shadow-xl shadow-shadow/5 focus:outline-none animate-in fade-in slide-in-from-top-3 duration-200">
+                    className="fixed top-16 right-4 w-48 sm:absolute sm:top-full sm:mt-2.5 sm:left-0 sm:right-auto sm:w-48 z-50 rounded-2xl border border-border bg-card backdrop-blur-xl p-1.5 shadow-xl shadow-shadow/5 focus:outline-none animate-in fade-in slide-in-from-top-3 duration-200">
                     <div className="flex flex-col gap-1">
+                        {/* رندر لیست زبان‌های موجود */}
                         {LANGUAGES.map((lang) => {
                             // اختصاص به متغیر با حرف بزرگ برای رندر داینامیک درون حلقه map
                             const FlagIcon = lang.flag;
@@ -50,18 +69,22 @@ export function LanguageSwitcher() {
                                     type="button"
                                     className={`flex items-center justify-between w-full px-3 py-2.5 text-sm rounded-xl transition-all duration-200 group md:cursor-pointer ${
                                         currentLocale === lang.code
+                                            // حالت زبان فعال: پس‌زمینه اصلی با فونت بولد
                                             ? "bg-primary/10 text-primary font-bold shadow-sm"
+                                            // حالت عادی: رنگ معمولی با هاور
                                             : "text-foreground/80 hover:bg-accent hover:text-accent-foreground"
                                     }`}
                                 >
                                     <div className="flex items-center gap-3">
+                                        {/* پرچم زبان با افکت بزرگ‌ شدن در هاور */}
                                         <span className="flex items-center transition-transform group-hover:scale-105">
                                             <FlagIcon size={18}/>
                                         </span>
+                                        {/* نام زبان */}
                                         <span className="font-medium">{lang.name}</span>
                                     </div>
 
-                                    {/* تیک تایید زبان فعال */}
+                                    {/* تیک تایید زبان فعال - با انیمیشن ظاهر شدن */}
                                     {currentLocale === lang.code && (
                                         <Icons.Check className="w-4 h-4 text-primary animate-in scale-in duration-200"/>
                                     )}

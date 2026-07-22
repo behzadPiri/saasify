@@ -8,10 +8,22 @@
     "search": "Search"
   },
   "ThemeSwitcher": {
-    "autoMode": "Smart & Automatic Adjustment (Tehran Time)",
+    "autoMode": "Smart & Automatic Adjustment",
     "day": "Day",
     "night": "Night",
     "afternoon": "Afternoon",
     "warning": "Auto mode is active; manual switching is locked."
+  },
+  "Sidebar": {
+    "title": "Navigation",
+    "collapse": "Collapse menu",
+    "items": {
+      "dashboard": "Dashboard",
+      "projects": "Projects",
+      "billing": "Billing",
+      "notifications": "Notifications",
+      "settings": "Settings",
+      "support": "Support"
+    }
   }
 }

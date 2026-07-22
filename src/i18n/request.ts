@@ -1,3 +1,7 @@
+/**
+ * تنظیمات درخواست next-intl
+ * تعیین زبان و بارگذاری فایل‌های ترجمه برای هر درخواست
+ */
 
 // src/i18n/request.ts
 import {getRequestConfig} from "next-intl/server";

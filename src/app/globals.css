@@ -2,46 +2,64 @@
 
 /* ۱. تعریف متغیرهای رنگی پیش‌فرض (تم روشن - Light) */
 :root {
-    --background: #f9fafb; /* خاکستری بسیار روشن برای پس‌زمینه */
-    --foreground: #111827; /* دودی تیره برای متون */
-    --card: #ffffff; /* سفید خالص برای باکس‌ها و کارت‌ها */
-    --primary: #2563eb; /* آبی سازمانی پلتفرم */
-    --border: #e5e7eb; /* رنگ خطوط مرزی ملایم */
+    --background: #f9fafb;
+    --foreground: #111827;
+    --card: #ffffff;
+    --primary: #2563eb;
+    --border: #e5e7eb;
+    --muted: #f3f4f6;
+    --muted-foreground: #6b7280;
+    --accent: #f3f4f6;
+    --accent-foreground: #111827;
+    --primary-foreground: #ffffff;
 }
 
-/* ۲. تعریف متغیرهای رنگی برای تم شب (Dark) */
+/* ۲. تم شب (Dark) */
 :root[data-theme="dark"] {
-    --background: #0f172a; /* سورمه‌ای خیلی تیره */
-    --foreground: #f8fafc; /* سفید شیری برای متون */
-    --card: #1e293b; /* سورمه‌ای لایت برای کارت‌ها */
-    --primary: #3b82f6; /* آبی روشن‌تر و مناسب شب */
-    --border: #334155; /* خطوط مرزی تیره */
+    --background: #0f172a;
+    --foreground: #f8fafc;
+    --card: #1e293b;
+    --primary: #3b82f6;
+    --border: #334155;
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
+    --accent: #1e293b;
+    --accent-foreground: #f8fafc;
+    --primary-foreground: #ffffff;
 }
 
-/* ۳. تعریف متغیرهای رنگی برای تم بعد از ظهر (Afternoon) */
+/* ۳. تم بعد از ظهر (Afternoon) */
 :root[data-theme="afternoon"] {
-    --background: #f4eae1; /* کرم گرم و ملایم (حس غروب آفتاب) */
-    --foreground: #432c11; /* قهوه‌ای سوخته تیره برای خوانایی متون */
-    --card: #fdfaf7; /* کرم بسیار روشن مخصوص کارت‌ها */
-    --primary: #d97706; /* رنگ آجری/نارنجی پخته و گرم */
-    --border: #e7d5c4; /* خطوط مرزی متناسب با تناژ گرم */
+    --background: #f4eae1;
+    --foreground: #432c11;
+    --card: #fdfaf7;
+    --primary: #d97706;
+    --border: #e7d5c4;
+    --muted: #f0e4d7;
+    --muted-foreground: #8b6d52;
+    --accent: #f0e4d7;
+    --accent-foreground: #432c11;
+    --primary-foreground: #ffffff;
 }
 
-/* ۴. نگاشت متغیرها در Tailwind v4 بدون ایجاد لوپ چرخشی */
+/* ۴. نگاشت متغیرها در Tailwind v4 */
 @theme {
-    /* برای حل ارور وب‌استور، مستقیماً به نام متغیرهایی که نکست‌جی‌اس در جاوااسکریپت ساخته اشاره می‌کنیم */
     --font-sans: var(--font-vazir, sans-serif);
     --font-mono: var(--font-geist, monospace);
 
-    /* معرفی رنگ‌های داینامیک به فریم‌ورک */
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-card: var(--card);
     --color-primary: var(--primary);
     --color-border: var(--border);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-primary-foreground: var(--primary-foreground);
 }
 
-/* اعمال انیمیشن نرم روی کل بدنه سایت هنگام سوییچ شدن تم‌ها */
+/* ۵. کلیدفریم‌های انیمیشن */
 @keyframes fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -62,26 +80,41 @@
     to { transform: scale(1); }
 }
 
+@keyframes slide-in-from-start {
+    from { transform: translateX(-0.5rem); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slide-in-from-end {
+    from { transform: translateX(0.5rem); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* انیمیشن ورود آیتم‌های سایدبار با تاخیر پلکانی */
+@keyframes sidebar-item-enter {
+    from {
+        opacity: 0;
+        transform: translateX(-0.75rem) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
 .animate-in {
     animation-duration: 0.2s;
     animation-timing-function: ease-out;
 }
 
-.fade-in {
-    animation-name: fade-in;
-}
+.fade-in { animation-name: fade-in; }
+.slide-in-from-top-3 { animation-name: slide-in-from-top-3; }
+.slide-in-from-top-1 { animation-name: slide-in-from-top-1; }
+.scale-in { animation-name: scale-in; }
 
-.slide-in-from-top-3 {
-    animation-name: slide-in-from-top-3;
-}
-
-.slide-in-from-top-1 {
-    animation-name: slide-in-from-top-1;
-}
-
-.scale-in {
-    animation-name: scale-in;
-}
+/* کلاس‌های کمکی برای اسکرول‌بار */
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
 
 body {
     font-family: var(--font-sans);

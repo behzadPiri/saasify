@@ -75,6 +75,11 @@
 //     };
 // }
 
+/**
+ * هوک تغییر زبان - مدیریت جابجایی بین فارسی و انگلیسی
+ * شامل تنظیم کوکی NEXT_LOCALE و ریدایرکت با توجه به قوانین as-needed
+ */
+
 "use client";
 
 import { useLocale } from "next-intl";
@@ -104,22 +109,30 @@ export function useLanguageSwitcher() {
     const toggleDropdown = useCallback(() => setIsOpen((prev) => !prev), []);
     const closeDropdown = useCallback(() => setIsOpen(false), []);
 
+    // تابع تغییر زبان: تنظیم کوکی و ریدایرکت صفحه
     const handleLangChange = (targetLocale: LocaleCode) => {
+        // اگر زبان فعلی با زبان مقصد یکی باشد، فقط منو را ببند
         if (currentLocale === targetLocale) {
             setIsOpen(false);
             return;
         }
 
+        // تنظیم کوکی NEXT_LOCALE برای شناسایی زبان در middleware
         document.cookie = `NEXT_LOCALE=${targetLocale}; path=/; max-age=31536000; SameSite=Lax`;
 
+        // پاک کردن پیشوند زبان فعلی از آدرس URL
         let cleanPath = window.location.pathname;
         const localePattern = new RegExp(`^\\/(${LANGUAGES.map((l) => l.code).join("|")})(\\/|$)`);
         cleanPath = cleanPath.replace(localePattern, "/");
 
+        // اطمینان از شروع مسیر با اسلش
         if (!cleanPath.startsWith("/")) {
             cleanPath = "/" + cleanPath;
         }
 
+        // ریدایرکت بر اساس قوانین localePrefix: "as-needed"
+        // فارسی: بدون پیشوند زبان
+        // انگلیسی: با پیشوند /en
         if (targetLocale === "fa") {
             window.location.href = cleanPath;
         } else {
@@ -129,6 +142,7 @@ export function useLanguageSwitcher() {
         setIsOpen(false);
     };
 
+    // بستن دراپ‌داون با کلیک در خارج از آن
     useEffect(() => {
         if (!isOpen) return;
         const handleClickOutside = (event: MouseEvent) => {
@@ -140,15 +154,17 @@ export function useLanguageSwitcher() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [isOpen]);
 
+    // زبان فعال فعلی بر اساس locale جاری
     const activeLang = LANGUAGES.find((l) => l.code === currentLocale) || LANGUAGES[0];
 
+    // برگرداندن state و توابع مورد نیاز کامپوننت‌های سوئیچر زبان
     return {
-        isOpen,
-        dropdownRef,
-        activeLang,
-        currentLocale,
-        toggleDropdown,
-        closeDropdown,
-        handleLangChange,
+        isOpen,             // آیا دراپ‌داون زبان باز است؟
+        dropdownRef,        // رفرنس به المان دراپ‌داون برای بستن با کلیک بیرون
+        activeLang,         // زبان فعلی شامل کد، نام و پرچم
+        currentLocale,      // کد زبان فعلی (fa یا en)
+        toggleDropdown,     // تابع باز/بسته کردن دراپ‌داون
+        closeDropdown,      // تابع بستن دراپ‌داون
+        handleLangChange,   // تابع تغییر زبان با تنظیم کوکی و ریدایرکت
     };
 }
