@@ -55,7 +55,7 @@ export function ThemeSwitcher() {
             {/* دکمه اصلی سوئیچر */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center justify-center w-10 h-10 rounded-xl border border-border bg-card text-foreground hover:bg-background transition-colors text-lg shadow-sm flex-shrink-0"
+                className="flex items-center justify-center w-10 h-10 rounded-xl border border-border bg-card text-foreground hover:bg-background transition-colors text-lg shadow-sm shrink-0 md:cursor-pointer"
                 type="button"
             >
                 {renderIcon()}
@@ -64,13 +64,13 @@ export function ThemeSwitcher() {
             {/* منوی بازشو با ساختار یکپارچه */}
             {isOpen && (
                 <div
-                    className="absolute top-full mt-2 w-64 bg-card border border-border rounded-2xl shadow-xl p-3 z-50 flex flex-col gap-3 animate-in fade-in slide-in-from-top-1 duration-200">
-
+                    className="fixed top-16 left-1/2 -translate-x-1/2 w-64 mx-auto sm:absolute sm:top-full sm:mt-2 sm:left-0 sm:translate-x-0 sm:w-64 sm:mx-0 bg-card border border-border rounded-2xl shadow-xl p-3 z-50 flex flex-col gap-3 animate-in fade-in slide-in-from-top-1 duration-200">
                     {/* بخش اول: فعال‌سازی حالت خودکار */}
                     <Checkbox
                         checked={isAuto}
                         onChange={toggleAuto}
                         label={t("autoMode")}
+
                     />
 
                     <div className="h-px bg-border -mt-1"/>
@@ -89,7 +89,7 @@ export function ThemeSwitcher() {
                                         changeTheme(option.id);
                                         setIsOpen(false);
                                     }}
-                                    className={`flex flex-col items-center justify-center gap-1.5 py-2 rounded-lg text-[10px] font-bold transition-all ${
+                                    className={`flex flex-col items-center justify-center gap-1.5 py-2 rounded-lg text-[10px] font-bold transition-all md:cursor-pointer ${
                                         isActive
                                             ? "bg-background text-foreground shadow-sm scale-100"
                                             : "text-muted-foreground hover:text-foreground hover:bg-background/40"

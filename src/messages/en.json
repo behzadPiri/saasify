@@ -1,4 +1,12 @@
 {
+  "Header": {
+    "placeholder": "Search...",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "navMenu": "Navigation menu",
+    "closeSearch": "Close search",
+    "search": "Search"
+  },
   "ThemeSwitcher": {
     "autoMode": "Smart & Automatic Adjustment (Tehran Time)",
     "day": "Day",

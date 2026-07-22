@@ -1,4 +1,12 @@
 {
+  "Header": {
+    "placeholder": "جستجو...",
+    "openMenu": "باز کردن منو",
+    "closeMenu": "بستن منو",
+    "navMenu": "منوی ناوبری",
+    "closeSearch": "بستن جستجو",
+    "search": "جستجو"
+  },
   "ThemeSwitcher": {
     "autoMode": "تنظیم هوشمند و خودکار",
     "day": "روز",

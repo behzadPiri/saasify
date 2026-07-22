@@ -22,7 +22,7 @@ export function Checkbox({ checked, onChange, label, disabled, className = "", .
                 checked={checked}
                 disabled={disabled}
                 onChange={(e) => !disabled && onChange(e.target.checked)}
-                className="sr-only"
+                className="sr-only md:cursor-pointer"
                 {...props}
             />
 
@@ -32,7 +32,7 @@ export function Checkbox({ checked, onChange, label, disabled, className = "", .
                این یعنی کادر در هر دو حالت روشن و خاموش کاملاً فیکس و بدون تغییر مکان باقی می‌ماند.
             */}
             <div
-                className={`flex items-center justify-center w-5 h-5 rounded-lg border transition-all duration-200 shrink-0
+                className={`flex items-center justify-center w-5 h-5 rounded-lg border transition-all duration-200 shrink-0 md:cursor-pointer
                     ${checked
                     ? "bg-primary border-primary text-primary-foreground shadow-sm scale-100"
                     : "bg-card border-border text-transparent group-hover:border-primary/60"
