@@ -1,79 +1,46 @@
-// "use client";
-//
-// import { useState, useCallback, useRef, useEffect } from "react";
-// import { useRouter } from "@/i18n/navigation";
-//
-// export function useSearch() {
-//   const [query, setQuery] = useState("");
-//   const [isExpanded, setIsExpanded] = useState(false);
-//   const inputRef = useRef<HTMLInputElement>(null);
-//   const router = useRouter();
-//   const expandedRef = useRef(false);
-//
-//   expandedRef.current = isExpanded;
-//
-//   const handleSearch = useCallback(
-//     (e: React.FormEvent) => {
-//       e.preventDefault();
-//       if (query.trim()) {
-//         router.push(`/search?q=${encodeURIComponent(query.trim())}`);
-//         setIsExpanded(false);
-//       }
-//     },
-//     [query, router],
-//   );
-//
-//   useEffect(() => {
-//     function onKey(e: KeyboardEvent) {
-//       if ((e.metaKey || e.ctrlKey) && e.code === "KeyK") {
-//         e.preventDefault();
-//         e.stopPropagation();
-//         if (window.innerWidth >= 768) {
-//           inputRef.current?.focus();
-//         } else {
-//           setIsExpanded(true);
-//         }
-//       }
-//       if (e.key === "Escape" && expandedRef.current) {
-//         setIsExpanded(false);
-//         setQuery("");
-//       }
-//     }
-//     document.addEventListener("keydown", onKey, true);
-//     return () => document.removeEventListener("keydown", onKey, true);
-//   }, []);
-//
-//   useEffect(() => {
-//     if (isExpanded) inputRef.current?.focus();
-//   }, [isExpanded]);
-//
-//   const toggleExpand = useCallback(() => setIsExpanded((v) => !v), []);
-//   const closeExpand = useCallback(() => {
-//     setIsExpanded(false);
-//     setQuery("");
-//   }, []);
-//
-//   return { query, setQuery, isExpanded, inputRef, handleSearch, toggleExpand, closeExpand };
-// }
+// هوک جستجو - نسخه قبلی (غیرفعال)
+// این نسخه از expandedRef برای جلوگیری از closure استفاده می‌کند
+// نسخه فعلی در خط 60 به بعد قرار دارد
 
+
+/**
+ * هوک مدیریت جستجوی سراسری برنامه
+ * شامل state و توابع مورد نیاز نوار جستجو:
+ * - متن جستجو (query)
+ * - باز/بسته بودن پوشش جستجوی موبایل (isExpanded)
+ * - ارسال فرم جستجو با Enter
+ * - شورتکات ⌘K / Ctrl+K برای باز کردن سریع جستجو
+ * - شورتکات Escape برای بستن و پاک کردن
+ * - فوکوس خودکار روی اینپوت هنگام باز شدن در موبایل
+ */
 
 "use client";
 
 import  { useState, useCallback, useRef, useEffect,FormEvent } from "react";
 import { useRouter } from "@/i18n/navigation";
 
+/**
+ * هوک اصلی جستجو - state و توابع مورد نیاز نوار جستجو را فراهم می‌کند
+ * @returns اbj شامل query, setQuery, isExpanded, inputRef, handleSearch, toggleExpand, closeExpand
+ */
 export function useSearch() {
+  // متن جستجوی کاربر
   const [query, setQuery] = useState("");
+  // آیا پوشش جستجوی موبایل باز است؟ (فقط در صفحه‌نمایش کوچک)
   const [isExpanded, setIsExpanded] = useState(false);
+  // رفرنس به اینپوت جستجو برای فوکوس خودکار
   const inputRef = useRef<HTMLInputElement>(null);
+  // روتر next-intl برای ناوبری به صفحه نتایج جستجو
   const router = useRouter();
 
-  // ۱. هندل کردن ارسال فرم جستجو
+  // تابع handleSearch: هندل کردن ارسال فرم جستجو با Enter
+  // اگر متن خالی نباشد، به صفحه نتایج جستجو ریدایرکت می‌کند
   const handleSearch = useCallback(
       (e: FormEvent) => {
         e.preventDefault();
         const trimmedQuery = query.trim();
         if (trimmedQuery) {
+          // ریدایرکت به صفحه جستجو با پارامتر q
           router.push(`/search?q=${encodeURIComponent(trimmedQuery)}`);
           setIsExpanded(false);
         }
@@ -81,14 +48,17 @@ export function useSearch() {
       [query, router]
   );
 
-  // ۲. مدیریت کلیدهای میانبر (Ctrl+K / Cmd+K و Escape)
+  // اثر ۱: مدیریت کلیدهای میانبر (Ctrl+K / Cmd+K و Escape)
+  // با useCapture: true در مرحله capture گرفته می‌شود تا قبل از سایر listenerها اجرا شود
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      // شورتکات Ctrl+K یا Cmd+K
+      // شورتکات Ctrl+K یا Cmd+K: باز کردن سریع جستجو
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         e.stopPropagation();
 
+        // در دسکتاپ: فوکوس روی اینپوت
+        // در موبایل: باز کردن پوشش جستجو
         if (window.innerWidth >= 768) {
           inputRef.current?.focus();
         } else {
@@ -96,7 +66,7 @@ export function useSearch() {
         }
       }
 
-      // کلید Escape برای بستن/پاک کردن
+      // کلید Escape: بستن پوشش جستجو و پاک کردن متن
       if (e.key === "Escape") {
         setIsExpanded(false);
         setQuery("");
@@ -108,7 +78,8 @@ export function useSearch() {
     return () => document.removeEventListener("keydown", handleKeyDown, true);
   }, []);
 
-  // ۳. فوکوس روی اینپوت به محض باز شدن در موبایل (با وقفه کوتاه جهت اطمینان از رندر DOM)
+  // اثر ۲: فوکوس خودکار روی اینپوت به محض باز شدن پوشش جستجو در موبایل
+  // با وقفه کوتاه (50ms) جهت اطمینان از رندر کامل DOM
   useEffect(() => {
     if (isExpanded) {
       const timer = setTimeout(() => {
@@ -118,10 +89,12 @@ export function useSearch() {
     }
   }, [isExpanded]);
 
+  // تابع toggleExpand: باز/بسته کردن پوشش جستجوی موبایل
   const toggleExpand = useCallback(() => {
     setIsExpanded((prev) => !prev);
   }, []);
 
+  // تابع closeExpand: بستن پوشش جستجو و پاک کردن متن جستجو
   const closeExpand = useCallback(() => {
     setIsExpanded(false);
     setQuery("");
