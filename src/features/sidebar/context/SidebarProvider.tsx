@@ -9,7 +9,7 @@
  */
 
 import {createContext, ReactNode} from "react";
-import {useSidebarProvider} from "@/features/sidebar/hooks/useSidebarProvider";
+import useSidebarProvider from "@/features/sidebar/hooks/useSidebarProvider";
 
 
 // تعریف type مقادیر Context

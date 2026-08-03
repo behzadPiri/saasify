@@ -8,22 +8,231 @@
     "search": "جستجو"
   },
   "ThemeSwitcher": {
-    "autoMode": "تنظیم هوشمند و خودکار",
+    "autoMode": "هوشمند و خودکار",
     "day": "روز",
     "night": "شب",
-    "afternoon": "غروب",
-    "warning": "حالت خودکار فعال است؛ تغییر دستی تم تا زمان غیرفعال‌سازی قفل می‌باشد."
+    "afternoon": "عصر",
+    "warning": "حالت خودکار فعال است؛ تغییر دستی تم قفل شده است."
   },
   "Sidebar": {
-    "title": "منوی ناوبری",
-    "collapse": "جمع کردن منو",
+    "title": "ناوبری",
+    "collapse": "جمع کردن سایدبار",
     "items": {
       "dashboard": "داشبورد",
       "projects": "پروژه‌ها",
+      "team": "تیم",
+      "analytics": "تحلیل‌ها",
+      "activity": "فعالیت‌ها",
       "billing": "صورت‌حساب",
       "notifications": "اعلانات",
       "settings": "تنظیمات",
       "support": "پشتیبانی"
     }
+  },
+  "Dashboard": {
+    "title": "داشبورد",
+    "subtitle": "نمای کلی پروژه‌ها، تیم و درآمد شما",
+    "refresh": "به‌روزرسانی داده‌ها",
+    "retry": "تلاش مجدد",
+    "statsLabel": "شاخص‌های کلیدی",
+    "stats": {
+      "totalProjects": "کل پروژه‌ها",
+      "activeProjects": "پروژه‌های فعال",
+      "teamMembers": "اعضای تیم",
+      "revenue": "درآمد",
+      "fromLastMonth": "از ماه قبل"
+    },
+    "revenueChart": {
+      "title": "روند درآمد",
+      "growth": "رشد مداوم",
+      "total": "جمع درآمد",
+      "yAxisTitle": "درآمد (میلیون)",
+
+      "legendLabel": "درآمد",
+      "noData": "داده‌ای برای نمایش وجود ندارد"
+    },
+    "projectDistribution": {
+      "title": "توزیع پروژه‌ها",
+      "total": "مجموع",
+      "noData": "داده‌ای برای نمایش وجود ندارد",
+      "status": {
+        "active": "فعال",
+        "completed": "تکمیل شده",
+        "onHold": "معلق",
+        "archived": "بایگانی شده"
+      },
+      "chartAriaLabel": "نمودار دایره‌ای"
+    },
+    "quickActions": {
+      "title": "دسترسی سریع",
+      "newProject": "پروژه جدید",
+      "newProjectDesc": "ایجاد پروژه جدید برای تیم",
+      "inviteMember": "دعوت عضو",
+      "inviteMemberDesc": "افزودن عضو جدید به تیم",
+      "viewReports": "گزارش‌ها",
+      "viewReportsDesc": "مشاهده گزارش‌های تحلیلی",
+      "settings": "تنظیمات",
+      "settingsDesc": "مدیریت تنظیمات حساب کاربری"
+    },
+    "upgradeBanner": {
+      "title": "ارتقا به پلن حرفه‌ای",
+      "description": "گزارش‌های پیشرفته، پشتیبانی اختصاصی و اعضای نامحدود.",
+      "cta": "مشاهده پلن‌ها"
+    },
+    "planUsage": {
+      "title": "مصرف پلن فعلی",
+      "manage": "مدیریت پلن",
+      "of": "از",
+      "projects": "پروژه‌ها",
+      "members": "اعضای تیم",
+      "storage": "فضای ذخیره‌سازی",
+      "apiCalls": "تماس‌های API",
+      "bandwidth": "پهنای باند",
+      "planName": "پلن استاندارد",
+      "overallLabel": "مصرف کلی",
+      "renewsOn": "تجدید در",
+      "upgrade": "ارتقا پلن",
+      "remaining": "باقی‌مانده",
+      "statusNormal": "در محدوده عادی",
+      "statusHigh": "استفاده بالا",
+      "statusCritical": "سهمیه رو به اتمام",
+      "unit": {
+        "gb": " گیگابایت"
+      }
+    },
+    "activity": {
+      "title": "فعالیت‌های اخیر",
+      "viewAll": "مشاهده تمام فعالیت‌ها",
+      "noActivity": "فعالیتی اخیر وجود ندارد",
+      "justNow": "همین الان",
+      "minutesAgo": "{count} دقیقه پیش",
+      "hoursAgo": "{count} ساعت پیش",
+      "daysAgo": "{count} روز پیش"
+    },
+    "projects": {
+      "title": "پروژه‌های اخیر",
+      "viewAll": "مشاهده تمام پروژه‌ها",
+      "noProjects": "هنوز پروژه‌ای وجود ندارد",
+      "members": "عضو",
+      "status": {
+        "active": "فعال",
+        "completed": "تکمیل شده",
+        "onHold": "معلق",
+        "archived": "بایگانی شده"
+      }
+    },
+    "months": {
+      "farvardin": "فروردین",
+      "ordibehesht": "اردیبهشت",
+      "khordad": "خرداد",
+      "tir": "تیر",
+      "mordad": "مرداد",
+      "shahrivar": "شهریور",
+      "mehr": "مهر",
+      "aban": "آبان",
+      "azar": "آذر",
+      "day": "دی",
+      "bahman": "بهمن",
+      "esfand": "اسفند"
+    }
+  },
+  "Projects": {
+    "title": "پروژه‌ها",
+    "subtitle": "مدیریت و ردیابی پروژه‌های خود",
+    "newProject": "پروژه جدید",
+    "noProjects": "پروژه‌ای یافت نشد",
+    "createFirst": "اولین پروژه خود را بسازید",
+    "status": {
+      "active": "فعال",
+      "completed": "تکمیل شده",
+      "onHold": "معلق",
+      "archived": "بایگانی شده"
+    },
+    "filters": {
+      "all": "همه",
+      "active": "فعال",
+      "completed": "تکمیل شده"
+    }
+  },
+  "Team": {
+    "title": "تیم",
+    "subtitle": "مدیریت اعضای تیم و سطح دسترسی‌ها",
+    "inviteMember": "دعوت عضو جدید",
+    "noMembers": "هنوز عضوی در تیم نیست",
+    "roles": {
+      "owner": "مالک",
+      "admin": "مدیر",
+      "member": "عضو",
+      "viewer": "مشاهده‌کننده"
+    }
+  },
+  "Analytics": {
+    "title": "تحلیل‌ها",
+    "subtitle": "بینش‌ها و گزارش‌ها",
+    "overview": "نمای کلی",
+    "performance": "عملکرد",
+    "export": "خروجی گزارش"
+  },
+  "Activity": {
+    "title": "فعالیت‌ها",
+    "subtitle": "فعالیت‌های اخیر در فضای کاری شما",
+    "noActivity": "فعالیتی برای نمایش وجود ندارد",
+    "filter": "فیلتر بر اساس نوع"
+  },
+  "Billing": {
+    "title": "صورت‌حساب",
+    "subtitle": "مدیریت اشتراک و پرداخت‌ها",
+    "currentPlan": "پلن فعلی",
+    "paymentHistory": "تاریخچه پرداخت‌ها",
+    "upgrade": "ارتقای پلن"
+  },
+  "Notifications": {
+    "title": "اعلانات",
+    "subtitle": "با هشدارهای مهم به‌روز بمانید",
+    "markAllRead": "همه را خوانده شده علامت بزن",
+    "noNotifications": "اعلانی وجود ندارد"
+  },
+  "Settings": {
+    "title": "تنظیمات",
+    "subtitle": "مدیریت حساب کاربری و ترجیحات",
+    "profile": "پروفایل",
+    "general": "عمومی",
+    "appearance": "ظاهر",
+    "notifications": "اعلانات",
+    "security": "امنیت",
+    "billing": "صورت‌حساب"
+  },
+  "Support": {
+    "title": "پشتیبانی",
+    "subtitle": "دریافت راهنما و تماس با ما",
+    "documentation": "مستندات",
+    "contactUs": "تماس با ما",
+    "faq": "سوالات متداول"
+  },
+  "Common": {
+    "save": "ذخیره",
+    "cancel": "لغو",
+    "delete": "حذف",
+    "edit": "ویرایش",
+    "view": "مشاهده",
+    "loading": "در حال بارگذاری...",
+    "error": "خطایی رخ داد",
+    "success": "موفقیت",
+    "confirm": "تایید",
+    "back": "بازگشت",
+    "next": "بعدی",
+    "previous": "قبلی",
+    "search": "جستجو",
+    "filter": "فیلتر",
+    "sort": "مرتب‌سازی",
+    "export": "خروجی",
+    "import": "ورودی",
+    "refresh": "به‌روزرسانی",
+    "close": "بستن",
+    "open": "باز کردن",
+    "yes": "بله",
+    "no": "خیر",
+    "optional": "اختیاری",
+    "required": "الزامی"
   }
 }

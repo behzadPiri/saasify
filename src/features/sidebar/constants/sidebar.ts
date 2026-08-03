@@ -3,7 +3,7 @@
  * هر آیتم شامل id، کلید ترجمه، آدرس href و آیکون مربوطه است
  */
 
-import { Icons } from "@/shared/components/ui/icons";
+import {Icons} from "@/shared/components/ui/icons";
 
 export interface SidebarNavItem {
     id: string;
@@ -24,6 +24,24 @@ export const SIDEBAR_NAV_ITEMS: SidebarNavItem[] = [
         translationKey: "items.projects",
         href: "/projects",
         icon: "Folder",
+    },
+    {
+        id: "team",
+        translationKey: "items.team",
+        href: "/team",
+        icon: "Users",
+    },
+    {
+        id: "analytics",
+        translationKey: "items.analytics",
+        href: "/analytics",
+        icon: "BarChart",
+    },
+    {
+        id: "activity",
+        translationKey: "items.activity",
+        href: "/activity",
+        icon: "Activity",
     },
     {
         id: "billing",

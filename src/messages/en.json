@@ -8,22 +8,230 @@
     "search": "Search"
   },
   "ThemeSwitcher": {
-    "autoMode": "Smart & Automatic Adjustment",
+    "autoMode": "Smart & Automatic",
     "day": "Day",
     "night": "Night",
-    "afternoon": "Afternoon",
-    "warning": "Auto mode is active; manual switching is locked."
+    "afternoon": "Evening",
+    "warning": "Auto mode is active; manual theme switching is locked."
   },
   "Sidebar": {
     "title": "Navigation",
-    "collapse": "Collapse menu",
+    "collapse": "Collapse sidebar",
     "items": {
       "dashboard": "Dashboard",
       "projects": "Projects",
+      "team": "Team",
+      "analytics": "Analytics",
+      "activity": "Activity",
       "billing": "Billing",
       "notifications": "Notifications",
       "settings": "Settings",
       "support": "Support"
     }
+  },
+  "Dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Overview of your projects, team, and revenue",
+    "refresh": "Refresh data",
+    "retry": "Retry",
+    "statsLabel": "Key metrics",
+    "stats": {
+      "totalProjects": "Total Projects",
+      "activeProjects": "Active Projects",
+      "teamMembers": "Team Members",
+      "revenue": "Revenue",
+      "fromLastMonth": "from last month"
+    },
+    "revenueChart": {
+      "title": "Revenue Trend",
+      "growth": "Growing steadily",
+      "total": "Total Revenue",
+      "yAxisTitle": "Revenue (Millions)",
+      "legendLabel": "Revenue",
+      "noData": "No data to display"
+    },
+    "projectDistribution": {
+      "title": "Project Distribution",
+      "total": "Total",
+      "noData": "No data to display",
+      "status": {
+        "active": "Active",
+        "completed": "Completed",
+        "onHold": "On Hold",
+        "archived": "Archived"
+      },
+      "chartAriaLabel": "Pie chart"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "newProject": "New Project",
+      "newProjectDesc": "Create a new project for your team",
+      "inviteMember": "Invite Member",
+      "inviteMemberDesc": "Add a new member to your team",
+      "viewReports": "View Reports",
+      "viewReportsDesc": "View analytical reports",
+      "settings": "Settings",
+      "settingsDesc": "Manage account settings"
+    },
+    "upgradeBanner": {
+      "title": "Upgrade to Pro",
+      "description": "Advanced reports, dedicated support, and unlimited members.",
+      "cta": "View plans"
+    },
+    "planUsage": {
+      "title": "Plan Usage",
+      "manage": "Manage plan",
+      "of": "of",
+      "projects": "Projects",
+      "members": "Team members",
+      "storage": "Storage",
+      "apiCalls": "API calls",
+      "bandwidth": "Bandwidth",
+      "planName": "Standard Plan",
+      "overallLabel": "Overall usage",
+      "renewsOn": "Renews on",
+      "upgrade": "Upgrade plan",
+      "remaining": "remaining",
+      "statusNormal": "Healthy usage",
+      "statusHigh": "High usage",
+      "statusCritical": "Running low",
+      "unit": {
+        "gb": " GB"
+      }
+    },
+    "activity": {
+      "title": "Recent Activity",
+      "viewAll": "View all activity",
+      "noActivity": "No recent activity",
+      "justNow": "Just now",
+      "minutesAgo": "{count} min ago",
+      "hoursAgo": "{count} hr ago",
+      "daysAgo": "{count} days ago"
+    },
+    "projects": {
+      "title": "Recent Projects",
+      "viewAll": "View all projects",
+      "noProjects": "No projects yet",
+      "members": "members",
+      "status": {
+        "active": "Active",
+        "completed": "Completed",
+        "onHold": "On Hold",
+        "archived": "Archived"
+      }
+    },
+    "months": {
+      "farvardin": "Farvardin",
+      "ordibehesht": "Ordibehesht",
+      "khordad": "Khordad",
+      "tir": "Tir",
+      "mordad": "Mordad",
+      "shahrivar": "Shahrivar",
+      "mehr": "Mehr",
+      "aban": "Aban",
+      "azar": "Azar",
+      "day": "Day",
+      "bahman": "Bahman",
+      "esfand": "Esfand"
+    }
+  },
+  "Projects": {
+    "title": "Projects",
+    "subtitle": "Manage and track your projects",
+    "newProject": "New Project",
+    "noProjects": "No projects found",
+    "createFirst": "Create your first project",
+    "status": {
+      "active": "Active",
+      "completed": "Completed",
+      "onHold": "On Hold",
+      "archived": "Archived"
+    },
+    "filters": {
+      "all": "All",
+      "active": "Active",
+      "completed": "Completed"
+    }
+  },
+  "Team": {
+    "title": "Team",
+    "subtitle": "Manage team members and permissions",
+    "inviteMember": "Invite Member",
+    "noMembers": "No team members yet",
+    "roles": {
+      "owner": "Owner",
+      "admin": "Admin",
+      "member": "Member",
+      "viewer": "Viewer"
+    }
+  },
+  "Analytics": {
+    "title": "Analytics",
+    "subtitle": "Insights and reports",
+    "overview": "Overview",
+    "performance": "Performance",
+    "export": "Export Report"
+  },
+  "Activity": {
+    "title": "Activity",
+    "subtitle": "Recent activity across your workspace",
+    "noActivity": "No activity to display",
+    "filter": "Filter by type"
+  },
+  "Billing": {
+    "title": "Billing",
+    "subtitle": "Manage your subscription and payments",
+    "currentPlan": "Current Plan",
+    "paymentHistory": "Payment History",
+    "upgrade": "Upgrade Plan"
+  },
+  "Notifications": {
+    "title": "Notifications",
+    "subtitle": "Stay updated with important alerts",
+    "markAllRead": "Mark all as read",
+    "noNotifications": "No notifications"
+  },
+  "Settings": {
+    "title": "Settings",
+    "subtitle": "Manage your account and preferences",
+    "profile": "Profile",
+    "general": "General",
+    "appearance": "Appearance",
+    "notifications": "Notifications",
+    "security": "Security",
+    "billing": "Billing"
+  },
+  "Support": {
+    "title": "Support",
+    "subtitle": "Get help and contact us",
+    "documentation": "Documentation",
+    "contactUs": "Contact Us",
+    "faq": "FAQ"
+  },
+  "Common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "export": "Export",
+    "import": "Import",
+    "refresh": "Refresh",
+    "close": "Close",
+    "open": "Open",
+    "yes": "Yes",
+    "no": "No",
+    "optional": "Optional",
+    "required": "Required"
   }
 }

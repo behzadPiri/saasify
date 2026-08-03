@@ -1,26 +1,25 @@
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useState, useSyncExternalStore} from "react";
 
 // کلید ذخیره‌سازی state در localStorage
 const STORAGE_KEY = "saasify-sidebar-collapsed";
 
-export function useSidebarProvider() {
-    // state جمع/باز بودن - مقدار اولیه false (سایدبار باز)
-    const [isCollapsed, setIsCollapsed] = useState(false);
-    // وضعیت mount: تا زمانی که mount کامل نشده، مقدار از localStorage خوانده نشده
-    const [mounted, setMounted] = useState(false);
-
-    // خواندن state ذخیره‌شده از localStorage هنگام mount شدن
-    useEffect(() => {
+function useSidebarProvider() {
+    // state جمع/باز بودن - مقدار اولیه از localStorage (اگر در دسترس باشد)
+    const [isCollapsed, setIsCollapsed] = useState(() => {
         try {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            if (stored !== null) {
-                setIsCollapsed(stored === "true");
-            }
+            if (typeof window === "undefined") return false;
+            return localStorage.getItem(STORAGE_KEY) === "true";
         } catch {
             // localStorage ممکن است در مرورگر غیرفعال باشد (مثلاً حالت خصوصی)
+            return false;
         }
-        setMounted(true);
-    }, []);
+    });
+    // وضعیت mount: در SSR مقدار false و در مرورگر true است (بدون نیاز به effect)
+    const mounted = useSyncExternalStore(
+        () => () => {},
+        () => true,
+        () => false,
+    );
 
     // تابع toggle: باز/بسته کردن سایدبار و ذخیره در localStorage
     const toggle = useCallback(() => {
@@ -39,3 +38,5 @@ export function useSidebarProvider() {
         toggle, mounted, isCollapsed,
     }
 }
+
+export default useSidebarProvider
