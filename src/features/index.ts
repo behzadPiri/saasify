@@ -1,3 +1,10 @@
 export {Header} from "./header";
 export {Sidebar, SidebarProvider} from "./sidebar";
 export {Dashboard} from "./dashboard";
+export {Projects} from "./projects";
+export {Team} from "./team";
+export {Analytics} from "./analytics";
+export {Activity} from "./activity";
+export {Billing} from "./billing";
+export {Notifications} from "./notifications";
+export {Settings} from "./settings/Settings";

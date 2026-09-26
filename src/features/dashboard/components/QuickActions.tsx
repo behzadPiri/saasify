@@ -11,9 +11,9 @@ import {Link} from "@/i18n/navigation";
 import type {QuickAction} from "../types";
 
 const VARIANT_STYLES = {
-    primary: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm",
-    secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-    outline: "border border-border bg-transparent hover:bg-accent/50",
+    primary: "border-primary/20 bg-primary/5 text-primary shadow-[0_10px_25px_rgba(99,102,241,0.12)]",
+    secondary: "border-violet-500/20 bg-violet-500/5 text-violet-600 dark:text-violet-300 shadow-[0_10px_25px_rgba(139,92,246,0.08)]",
+    outline: "border-border/70 bg-card/80 text-foreground shadow-[0_10px_25px_rgba(15,23,42,0.04)]",
 } as const;
 
 interface QuickActionsProps {
@@ -24,7 +24,7 @@ export function QuickActions({actions}: QuickActionsProps) {
     const t = useTranslations("Dashboard.quickActions");
 
     return (
-        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3" role="list">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4" role="list">
             {actions.map((action) => {
                 const Icon = Icons[action.icon as keyof typeof Icons];
                 const label = t(action.labelKey);
@@ -35,21 +35,35 @@ export function QuickActions({actions}: QuickActionsProps) {
                     <Link
                         key={action.id}
                         href={action.href}
+                        role="listitem"
                         className={`
-                            flex flex-col items-center justify-center gap-1.5 rounded-xl p-2 sm:p-3
-                            text-center transition-all duration-200
-                            hover:shadow-sm hover:-translate-y-0.5
-                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
+                            group relative flex h-full min-h-[132px] flex-col justify-between overflow-hidden rounded-2xl border p-3.5 text-left
+                            transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_30px_rgba(15,23,42,0.08)]
+                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2
                             ${variantStyle}
                         `}
-                        role="listitem"
                     >
-                        <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-lg bg-current/10">
-                            <Icon size={16} className="text-current" />
+                        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.24),transparent_32%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                        <div className="relative flex items-start justify-between gap-3">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-current/10 bg-background/70 text-current shadow-sm backdrop-blur-sm">
+                                <Icon size={18} className="text-current" />
+                            </div>
+                            <span className="rounded-full border border-current/10 bg-background/60 px-2 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-current/70">
+                                {t("action")}
+                            </span>
                         </div>
-                        <div>
-                            <p className="font-medium text-xs sm:text-sm truncate max-w-[80px]">{label}</p>
-                            <p className="text-[10px] sm:text-xs text-current/70 line-clamp-1">{description}</p>
+
+                        <div className="relative space-y-1.5">
+                            <p className="line-clamp-2 text-sm font-semibold sm:text-base">{label}</p>
+                            <p className="line-clamp-2 text-xs leading-5 text-current/70">{description}</p>
+                        </div>
+
+                        <div className="relative mt-3 flex items-center justify-between gap-2 border-t border-current/10 pt-2">
+                            <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-current/60">{t("open")}</span>
+                            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-current/10 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:scale-105">
+                                <Icons.ArrowRight size={14} className="text-current" />
+                            </span>
                         </div>
                     </Link>
                 );

@@ -11,7 +11,7 @@ import type {ProjectSummary} from "../types";
 import {useTranslations} from "next-intl";
 import {Link} from "@/i18n/navigation";
 import {formatCurrency} from "@/shared/lib/number-format";
-import {useProjectList} from "../hooks/useProjectList";
+import {useProjectList} from "@/features/dashboard";
 
 interface ProjectListProps {
     projects: ProjectSummary[];

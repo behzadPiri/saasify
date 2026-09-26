@@ -25,6 +25,7 @@ const PieChart = dynamic(() => import("./components/PieChart").then((m) => m.Pie
 
 export function Dashboard() {
     const t = useTranslations("Dashboard");
+    const tCommon = useTranslations("Common");
     const {
         stats,
         recentActivity,
@@ -96,18 +97,35 @@ export function Dashboard() {
 
     return (
         <div className="space-y-6 animate-in fade-in slide-in-from-top-3">
-            {/* Header Section */}
-            <div className="flex items-center justify-between gap-3 sm:gap-4 ">
-                <h1 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold">{t("subtitle")}</h1>
-                <button
-                    onClick={refetch}
-                    disabled={isLoading}
-                    className="flex items-center gap-1 sm:gap-2 shrink-0 px-3 py-2 sm:px-4 sm:py-2 rounded-lg bg-card border border-border/40 text-xs sm:text-sm font-medium hover:bg-accent/50 transition-colors disabled:opacity-50"
-                >
-                    <Icons.RefreshCw size={16} className={isLoading ? "animate-spin" : ""}/>
-                    <span>{t("refresh")}</span>
-                </button>
-            </div>
+            <section className="relative overflow-hidden rounded-[28px] border border-border/50 bg-card/80 p-5 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:p-6 lg:p-7">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.18),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(16,185,129,0.18),_transparent_35%)]" />
+
+                <div className="relative flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
+                    <div className="max-w-3xl space-y-4">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.22em] text-primary">
+                            <Icons.Dashboard size={12} />
+                            {t("title")}
+                        </div>
+
+                        <div>
+                            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{t("subtitle")}</h1>
+                            <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
+                                {t("quickActions.title")}
+                            </p>
+                        </div>
+                    </div>
+
+                    <button
+                        type="button"
+                        onClick={refetch}
+                        disabled={isLoading}
+                        className="inline-flex items-center justify-center gap-2 rounded-2xl border border-border/60 bg-card/90 px-4 py-3 text-sm font-semibold text-foreground transition hover:bg-accent/40 disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                        <Icons.RefreshCw size={16} className={isLoading ? "animate-spin" : ""} />
+                        {isLoading ? tCommon("loading") : t("refresh")}
+                    </button>
+                </div>
+            </section>
 
             {/* Stats Grid */}
             <div className="grid gap-3 sm:gap-4 grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4" role="region" aria-label={t("statsLabel")}>

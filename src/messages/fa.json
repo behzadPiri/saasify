@@ -65,6 +65,8 @@
     },
     "quickActions": {
       "title": "دسترسی سریع",
+      "action": "عملیات",
+      "open": "باز کردن",
       "newProject": "پروژه جدید",
       "newProjectDesc": "ایجاد پروژه جدید برای تیم",
       "inviteMember": "دعوت عضو",
@@ -151,19 +153,145 @@
     "filters": {
       "all": "همه",
       "active": "فعال",
-      "completed": "تکمیل شده"
-    }
+      "completed": "تکمیل شده",
+      "activeFilters": "فیلترهای فعال",
+      "clearAll": "پاک کردن همه"
+    },
+    "modal": {
+      "title": "پروژه جدید",
+      "description": "اطلاعات پروژه جدید را وارد کنید و سپس آن را ذخیره کنید.",
+      "name": "نام پروژه",
+      "budget": "بودجه",
+      "deadline": "مهلت",
+      "status": "وضعیت"
+    },
+    "search": "جستجو",
+    "clear": "پاک کردن",
+    "sortBy": "مرتب‌سازی بر اساس",
+    "sort": {
+      "recent": "آخرین",
+      "deadline": "مهلت",
+      "budget": "بودجه"
+    },
+    "budget": "بودجه",
+    "progress": "پیشرفت",
+    "members": "اعضا",
+    "projectDetails": "جزئیات پروژه",
+    "projectDetailsDescription": "پیشرفت، بودجه و جدول زمانی پروژه را ببینید.",
+    "projectId": "شناسه پروژه",
+    "projectNotFound": "پروژه یافت نشد",
+    "projectNotFoundDescription": "پروژه درخواستی در این فضای کاری پیدا نشد.",
+    "backToProjects": "بازگشت به پروژه‌ها",
+    "projectDetailsNote": "این صفحه جزئیات موقت برای پروژه انتخاب‌شده است.",
+    "projectDetailsFallback": "در نسخه کامل، این صفحه شامل وظایف، اعضای تیم و نقاط عطف خواهد بود.",
+    "nextSteps": "گام‌های بعدی",
+    "projectDetailsStep1": "نقاط عطف پروژه را بررسی و وضعیت را به‌روزرسانی کنید.",
+    "projectDetailsStep2": "اعضای تیم را تخصیص داده و مصرف بودجه را پیگیری کنید.",
+    "complete": "کامل",
+    "tasks": "وظیفه‌ها",
+    "taskBoard": "برد وظایف",
+    "done": "انجام‌شده",
+    "deadline": "مهلت",
+    "startDate": "تاریخ شروع",
+    "dueDate": "تاریخ سررسید",
+    "updatedAt": "آخرین بروزرسانی",
+    "timeline": "جدول زمانی",
+    "teamMembers": "اعضای تیم",
+    "task": {
+      "todo": "در انتظار",
+      "inProgress": "در حال انجام",
+      "done": "انجام‌شده"
+    },
+    "stats": {
+      "summary": "نمای کلی پروژه‌ها",
+      "subtitle": "پروژه‌ها را سریع فیلتر و پیگیری کنید",
+      "totalProjects": "کل پروژه‌ها",
+      "activeProjects": "پروژه‌های فعال",
+      "overdueProjects": "پروژه‌های معوق",
+      "totalBudget": "بودجه کل"
+    },
+    "loadErrorMessage": "بارگذاری پروژه‌ها با مشکل مواجه شد. لطفاً دوباره تلاش کنید.",
+    "back": "بازگشت"
   },
   "Team": {
     "title": "تیم",
-    "subtitle": "مدیریت اعضای تیم و سطح دسترسی‌ها",
-    "inviteMember": "دعوت عضو جدید",
+    "subtitle": "مدیریت افراد و سطح دسترسی‌ها",
+    "description": "فعالیت‌ها، سطح دسترسی‌ها و همکاری اعضا را در کل فضای کاری پیگیری کنید.",
+    "inviteMember": "دعوت عضو",
     "noMembers": "هنوز عضوی در تیم نیست",
+    "emptyTitle": "هیچ عضوی با فیلترهای شما مطابقت ندارد",
+    "emptyDescription": "جستجو را تغییر دهید یا یک عضو جدید را دعوت کنید.",
+    "search": "جستجوی اعضا",
+    "sortBy": "مرتب‌سازی بر اساس",
+    "filters": {
+      "all": "همه نقش‌ها",
+      "role": "نقش",
+      "activeFilters": "فیلترهای فعال",
+      "clearAll": "پاک کردن همه"
+    },
+    "sort": {
+      "name": "نام",
+      "role": "نقش",
+      "lastActive": "آخرین فعالیت"
+    },
+    "stats": {
+      "totalMembers": "کل اعضا",
+      "activeNow": "آنلاین",
+      "managers": "مدیران"
+    },
+    "status": {
+      "online": "آنلاین",
+      "away": "در حال رفت‌وآمد",
+      "offline": "آفلاین"
+    },
+    "meta": {
+      "projects": "پروژه‌ها",
+      "active": "فعال",
+      "location": "مکان",
+      "status": "وضعیت",
+      "total": "مجموع"
+    },
     "roles": {
       "owner": "مالک",
       "admin": "مدیر",
       "member": "عضو",
       "viewer": "مشاهده‌کننده"
+    },
+    "memberNotFound": "عضو یافت نشد",
+    "memberNotFoundDescription": "این عضو تیم در لیست پیدا نشد.",
+    "backToTeam": "بازگشت به تیم",
+    "createProject": "پروژه جدید",
+    "profile": {
+      "joined": "عضویت",
+      "activeStatus": "وضعیت",
+      "recentActivity": "فعالیت‌های اخیر",
+      "actions": {
+        "edit": "ویرایش پروفایل",
+        "delete": "حذف عضو",
+        "access": "تغییر دسترسی"
+      }
+    },
+    "invite": {
+      "badge": "دسترسی تیم",
+      "title": "دعوت عضو",
+      "description": "یک هم‌تیمی را اضافه کنید و نقش او را مشخص نمایید.",
+      "email": "ایمیل",
+      "role": "نقش",
+      "submit": "ارسال دعوت",
+      "success": "دعوت‌نامه برای {email} ارسال شد.",
+      "validation": {
+        "invalidEmail": "لطفاً یک ایمیل معتبر وارد کنید."
+      }
+    },
+    "create": {
+      "success": "پروژه \"{name}\" با موفقیت ایجاد شد."
+    },
+    "projects": {
+      "title": "پروژه‌ها",
+      "subtitle": "کارهای اختصاصی و همکاری‌های تیمی",
+      "search": "جستجوی پروژه‌ها",
+      "emptyTitle": "پروژه‌ای پیدا نشد",
+      "emptyDescription": "این عضو هنوز پروژه‌ای ندارد."
     }
   },
   "Analytics": {
@@ -177,37 +305,229 @@
     "title": "فعالیت‌ها",
     "subtitle": "فعالیت‌های اخیر در فضای کاری شما",
     "noActivity": "فعالیتی برای نمایش وجود ندارد",
-    "filter": "فیلتر بر اساس نوع"
+    "filter": "فیلتر بر اساس نوع",
+    "filterTitle": "فیلترهای رویدادها",
+    "filterDescription": "بر اساس نوع رویداد",
+    "timeline": "تایم‌لاین",
+    "recentEvents": "رویدادهای اخیر",
+    "allEvents": "کل رویدادها",
+    "today": "امروز",
+    "successfulActions": "عملیات موفق",
+    "itemsCount": "مورد",
+    "groups": {
+      "all": "همه",
+      "project": "پروژه",
+      "team": "تیم",
+      "payment": "پرداخت",
+      "task": "وظیفه"
+    },
+    "typeLabels": {
+      "project_created": "ایجاد پروژه",
+      "project_updated": "به‌روزرسانی پروژه",
+      "member_joined": "عضو جدید",
+      "payment_received": "دریافت پرداخت",
+      "task_completed": "تکمیل وظیفه"
+    },
+    "summaryBadge": {
+      "active": "فعال",
+      "highRate": "نرخ بالا"
+    }
   },
   "Billing": {
     "title": "صورت‌حساب",
     "subtitle": "مدیریت اشتراک و پرداخت‌ها",
+    "heroDescription": "صورت‌حساب‌ها، مصرف پلن و وضعیت پرداخت‌ها را در یک نگاه دنبال کنید.",
     "currentPlan": "پلن فعلی",
     "paymentHistory": "تاریخچه پرداخت‌ها",
-    "upgrade": "ارتقای پلن"
+    "upgrade": "ارتقای پلن",
+    "downloadInvoice": "دانلود فاکتور",
+    "monthlyBilling": "صورت‌حساب ماهانه",
+    "annualSavings": "صرفه‌جویی سالانه",
+    "nextInvoice": "فاکتور بعدی",
+    "monthly": "ماهانه",
+    "saved": "ذخیره‌شده",
+    "autoRenew": "تمدید خودکار",
+    "planName": "پلن حرفه‌ای",
+    "active": "فعال",
+    "renewsOn": "تمدید در",
+    "usage": "مصرف",
+    "teamSeats": "صندلی تیم",
+    "billingSummary": "خلاصه",
+    "paymentMethods": "روش‌های پرداخت",
+    "defaultCard": "روش پرداخت پیش‌فرض",
+    "secondaryCard": "کارت پشتیبان",
+    "default": "پیش‌فرض",
+    "activity": "فعالیت",
+    "lastPayment": "آخرین پرداخت",
+    "status": "وضعیت",
+    "paid": "پرداخت‌شده",
+    "pending": "در انتظار",
+    "invoiceHistory": "تاریخچه فاکتورها",
+    "viewAll": "مشاهده همه",
+    "invoice": "فاکتور",
+    "date": "تاریخ",
+    "amount": "مبلغ",
+    "receipt": "رسید",
+    "onlinePayment": "پرداخت آنلاین",
+    "bankTransfer": "کارت به کارت",
+    "cardNumber": "شماره کارت",
+    "invoiceDate": "تاریخ فاکتور",
+    "dueDate": "تاریخ سررسید",
+    "paymentMethod": "روش پرداخت",
+    "TotalAmount": "مبلغ کل",
+    "allInvoices": "همه فاکتورها",
+    "page": "صفحه",
+    "view": "مشاهده",
+    "close": "بستن",
+    "next": "بعدی",
+    "previous": "قبلی",
+    "featureItems": {
+      "unlimitedProjects": "پروژه نامحدود",
+      "advancedAnalytics": "تحلیل‌های پیشرفته",
+      "prioritySupport": "پشتیبانی اولویت‌دار",
+      "customIntegrations": "یکپارچه‌سازی‌های سفارشی"
+    },
+    "paymentDates": {
+      "jul12": "۱۲ ژوئیه ۲۰۲۶",
+      "jun12": "۱۲ ژوئن ۲۰۲۶",
+      "may12": "۱۲ مه ۲۰۲۶",
+      "apr12": "۱۲ آوریل ۲۰۲۶"
+    }
   },
   "Notifications": {
     "title": "اعلانات",
     "subtitle": "با هشدارهای مهم به‌روز بمانید",
     "markAllRead": "همه را خوانده شده علامت بزن",
-    "noNotifications": "اعلانی وجود ندارد"
+    "noNotifications": "اعلانی وجود ندارد",
+    "emptyHint": "هنگامی که هشدار جدیدی برسد، اینجا نمایش داده می‌شود.",
+    "feedTitle": "صندوق ورودی",
+    "feedSubtitle": "آخرین به‌روزرسانی‌های سیستم",
+    "stats": {
+      "total": "کل",
+      "active": "زنده",
+      "unread": "خوانده‌نشده",
+      "new": "جدید",
+      "thisWeek": "این هفته",
+      "updated": "به‌روزشده"
+    },
+    "pagination": {
+      "previous": "قبلی",
+      "next": "بعدی"
+    },
+    "read": "خوانده‌شده",
+    "unread": "خوانده‌نشده",
+    "tags": {
+      "billing": "صورت‌حساب",
+      "team": "تیم",
+      "security": "امنیت",
+      "performance": "عملکرد",
+      "system": "سیستم"
+    },
+    "items": {
+      "billing": {
+        "title": "فاکتور با موفقیت پرداخت شد",
+        "description": "آخرین فاکتور ماهانه شما پردازش شد و رسید آن آماده دانلود است."
+      },
+      "team": {
+        "title": "عضو جدید به تیم اضافه شد",
+        "description": "آوا پاتل به تیم طراحی اضافه شد و به پروژه آماده‌سازی اختصاص داده شد."
+      },
+      "security": {
+        "title": "بررسی امنیتی تکمیل شد",
+        "description": "احراز هویت دو مرحله‌ای با موفقیت بررسی شد و فعالیت مشکوکی یافت نشد."
+      },
+      "performance": {
+        "title": "هشدار عملکرد",
+        "description": "تاخیر API در ۲۰ دقیقه گذشته از سطح معمول بالاتر رفته است."
+      },
+      "system": {
+        "title": "تعمیرات سیستم کامل شد",
+        "description": "پنجره نگهداری برنامه‌ریزی‌شده با موفقیت به پایان رسید و همه خدمات در وضعیت عادی هستند."
+      }
+    }
   },
   "Settings": {
     "title": "تنظیمات",
-    "subtitle": "مدیریت حساب کاربری و ترجیحات",
+    "subtitle": "مدیریت حساب و ترجیحات",
+    "description": "فضای کاری، تنظیمات حریم خصوصی و ترجیحات تجربه را شخصی‌سازی کنید.",
     "profile": "پروفایل",
-    "general": "عمومی",
-    "appearance": "ظاهر",
-    "notifications": "اعلانات",
+    "profileDetails": "جزئیات پروفایل",
+    "productLead": "مدیر محصول",
+    "fullName": "نام کامل",
+    "emailAddress": "ایمیل",
+    "role": "سمت",
+    "timezone": "منطقه زمانی",
     "security": "امنیت",
-    "billing": "صورت‌حساب"
+    "accountSecurity": "امنیت حساب",
+    "password": "رمز عبور",
+    "twoFactor": "احراز هویت دو مرحله‌ای",
+    "lastLogin": "آخرین ورود",
+    "lastLoginToday": "امروز، 09:42",
+    "activeSessions": "نشست‌های فعال",
+    "activeSessionsValue": "۳ نشست فعال",
+    "changePassword": "تغییر رمز عبور",
+    "currentPassword": "رمز عبور فعلی",
+    "newPassword": "رمز عبور جدید",
+    "confirmPassword": "تایید رمز عبور جدید",
+    "updatePassword": "به‌روزرسانی رمز عبور",
+    "enabled": "فعال",
+    "notifications": "اعلان‌ها",
+    "preferences": "ترجیحات",
+    "manage": "مدیریت",
+    "notificationsEnabled": "اعلان‌های دسکتاپ",
+    "marketingUpdates": "به‌روزرسانی‌های بازاریابی",
+    "securityAlerts": "هشدارهای امنیتی",
+    "weeklyReports": "گزارش‌های هفتگی",
+    "save": "ذخیره"
   },
   "Support": {
     "title": "پشتیبانی",
     "subtitle": "دریافت راهنما و تماس با ما",
-    "documentation": "مستندات",
+    "headerDescription": "برای مشکلات فنی، سوالات مالی و راهنمایی محصول، خیلی سریع با تیم ما در ارتباط باشید.",
+    "documentation": "پایگاه دانش",
+    "documentationDesc": "راهنماها، مقاله‌های راه‌اندازی و بهترین شیوه‌ها را برای هر قابلیت ببینید.",
     "contactUs": "تماس با ما",
-    "faq": "سوالات متداول"
+    "faq": "سوالات متداول",
+    "faqTitle": "سوالات متداول",
+    "support": "پشتیبانی",
+    "submitTicket": "ثبت تیکت",
+    "responseTimeLabel": "میانگین پاسخ",
+    "responseTimeValue": "کمتر از ۳۰ دقیقه",
+    "satisfactionLabel": "رضایت کاربران",
+    "satisfactionValue": "۹۸٪",
+    "uptimeLabel": "آپتایم پلتفرم",
+    "uptimeValue": "۹۹٫۹۹٪",
+    "live": "آنلاین",
+    "topRated": "برترین",
+    "monitoring": "پایش",
+    "ticketFormTitle": "درخواست پشتیبانی جدید",
+    "subject": "موضوع",
+    "subjectPlaceholder": "مشکل را خلاصه بنویسید",
+    "category": "دسته‌بندی",
+    "categoryBilling": "صورتحساب",
+    "categoryTechnical": "فنی",
+    "categoryAccount": "حساب کاربری",
+    "categoryGeneral": "عمومی",
+    "priority": "اولویت",
+    "priorityLow": "کم",
+    "priorityMedium": "متوسط",
+    "priorityHigh": "زیاد",
+    "message": "پیام",
+    "messagePlaceholder": "توضیح بدهید چه اتفاقی افتاده و به چه کمکی نیاز دارید.",
+    "sendTicket": "ارسال تیکت",
+    "liveChat": "گفت‌وگوی زنده",
+    "liveChatDesc": "برای مشکلات فوری، با متخصص پشتیبانی به‌صورت زنده صحبت کنید.",
+    "emailSupport": "پشتیبانی ایمیل",
+    "emailSupportDesc": "درخواست خود را به‌صورت دقیق ارسال کنید و پاسخ کامل کتبی بگیرید.",
+    "openChannel": "باز کردن کانال",
+    "faqQuestionOne": "پاسخ‌گویی شما به تیکت‌ها چقدر سریع است؟",
+    "faqAnswerOne": "در ساعات کاری، اکثر تیکت‌ها در کمتر از ۳۰ دقیقه پاسخ می‌گیرند و در ساعات غیرکاری معمولاً در چند ساعت اولویت پاسخ‌گویی دارد.",
+    "faqQuestionTwo": "آیا برای صورتحساب و فاکتورها کمک می‌کنید؟",
+    "faqAnswerTwo": "بله. تیم صورتحساب به مسائل فاکتور، بازپرداخت، مشکلات پرداختی و تغییر اشتراک‌ها کمک می‌کند.",
+    "faqQuestionThree": "آیا تماس پشتیبانی از طریق چت هم داریم؟",
+    "faqAnswerThree": "بله. برای مشکلات فوری و درخواست‌های سریع، چت زنده در دسترس است.",
+    "faqQuestionFour": "آیا مستندات راه‌اندازی و امکانات وجود دارد؟",
+    "faqAnswerFour": "بله. پایگاه دانش شامل آموزش‌ها، راهنمای نصب، ادغام‌ها و منابع عیب‌یابی است."
   },
   "Common": {
     "save": "ذخیره",
@@ -228,6 +548,7 @@
     "export": "خروجی",
     "import": "ورودی",
     "refresh": "به‌روزرسانی",
+    "retry": "تلاش مجدد",
     "close": "بستن",
     "open": "باز کردن",
     "yes": "بله",

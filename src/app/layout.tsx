@@ -1,6 +1,7 @@
 import {ReactNode} from "react";
 import "./globals.css";
 import type {Metadata} from "next";
+import Script from "next/script";
 import {NextIntlClientProvider} from "next-intl";
 import {vazirFont, geistFont} from "@/core/fonts";
 import {getLocale, getMessages, setRequestLocale} from "@/i18n/server";
@@ -31,18 +32,14 @@ export default async function RootLayout({children}: Readonly<{ children: ReactN
         >
         <head>
             {/* این اسکریپت کوچک قبل از بالا آمدن بدنه سایت، تم را هماهنگ می‌کند */}
-            <script
-                dangerouslySetInnerHTML={{
-                    __html: `
-              try {
+            <Script id="theme-sync" strategy="beforeInteractive">
+              {`try {
                 var savedTheme = localStorage.getItem("saasify-theme");
                 if (savedTheme) {
                   document.documentElement.setAttribute("data-theme", savedTheme);
                 }
-              } catch (e) {}
-            `,
-                }}
-            />
+              } catch (e) {}`}
+            </Script>
             {/* تگ تایتل دستی حذف شد تا با شیء metadata تداخل پیدا نکند */}
         </head>
 

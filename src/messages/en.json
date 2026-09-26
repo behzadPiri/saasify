@@ -64,6 +64,8 @@
     },
     "quickActions": {
       "title": "Quick Actions",
+      "action": "Action",
+      "open": "Open",
       "newProject": "New Project",
       "newProjectDesc": "Create a new project for your team",
       "inviteMember": "Invite Member",
@@ -151,18 +153,133 @@
       "all": "All",
       "active": "Active",
       "completed": "Completed"
-    }
+    },
+    "search": "Search",
+    "clear": "Clear",
+    "sortBy": "Sort by",
+    "sort": {
+      "recent": "Most Recent",
+      "deadline": "Deadline",
+      "budget": "Budget"
+    },
+    "budget": "Budget",
+    "progress": "Progress",
+    "members": "Members",
+    "projectDetails": "Project details",
+    "projectDetailsDescription": "See project progress, budget, and timeline details.",
+    "projectId": "Project ID",
+    "projectNotFound": "Project not found",
+    "projectNotFoundDescription": "The requested project could not be found in this workspace.",
+    "backToProjects": "Back to projects",
+    "projectDetailsNote": "This is a placeholder detail page for the selected project.",
+    "projectDetailsFallback": "In a complete product, this page would show project tasks, team members, and milestones.",
+    "nextSteps": "Next steps",
+    "projectDetailsStep1": "Review project milestones and update status.",
+    "projectDetailsStep2": "Assign team members and track budget usage.",
+    "complete": "complete",
+    "tasks": "Tasks",
+    "taskBoard": "Task board",
+    "done": "done",
+    "deadline": "Deadline",
+    "startDate": "Start date",
+    "dueDate": "Due date",
+    "updatedAt": "Updated",
+    "timeline": "Timeline",
+    "teamMembers": "Team members",
+    "task": {
+      "todo": "To do",
+      "inProgress": "In progress",
+      "done": "Done"
+    },
+    "stats": {
+      "summary": "Project overview",
+      "subtitle": "Filter and track projects quickly",
+      "totalProjects": "Total Projects",
+      "activeProjects": "Active Projects",
+      "overdueProjects": "Overdue Projects",
+      "totalBudget": "Total Budget"
+    },
+    "loadErrorMessage": "Something went wrong while loading projects. Please try again."
   },
   "Team": {
     "title": "Team",
-    "subtitle": "Manage team members and permissions",
-    "inviteMember": "Invite Member",
+    "subtitle": "Manage your people and permissions",
+    "description": "Monitor activity, access levels, and collaboration across your workspace.",
+    "inviteMember": "Invite member",
     "noMembers": "No team members yet",
+    "emptyTitle": "No members match your filters",
+    "emptyDescription": "Try another search or invite a teammate to get started.",
+    "search": "Search members",
+    "sortBy": "Sort by",
+    "filters": {
+      "all": "All roles",
+      "role": "Role",
+      "activeFilters": "Active filters",
+      "clearAll": "Clear all"
+    },
+    "sort": {
+      "name": "Name",
+      "role": "Role",
+      "lastActive": "Last active"
+    },
+    "stats": {
+      "totalMembers": "Total members",
+      "activeNow": "Active now",
+      "managers": "Managers"
+    },
+    "status": {
+      "online": "Online",
+      "away": "Away",
+      "offline": "Offline"
+    },
+    "meta": {
+      "projects": "Projects",
+      "active": "Active",
+      "location": "Location",
+      "status": "Status",
+      "total": "Total"
+    },
     "roles": {
       "owner": "Owner",
       "admin": "Admin",
       "member": "Member",
       "viewer": "Viewer"
+    },
+    "memberNotFound": "Member not found",
+    "memberNotFoundDescription": "This team member could not be located.",
+    "backToTeam": "Back to team",
+    "createProject": "New project",
+    "profile": {
+      "joined": "Joined",
+      "activeStatus": "Status",
+      "recentActivity": "Recent activity",
+      "actions": {
+        "edit": "Edit profile",
+        "delete": "Delete member",
+        "access": "Change access"
+      }
+    },
+    "invite": {
+      "badge": "Team access",
+      "title": "Invite member",
+      "description": "Add a teammate and assign a role.",
+      "email": "Email address",
+      "role": "Role",
+      "submit": "Send invite",
+      "success": "Invitation sent to {email}.",
+      "validation": {
+        "invalidEmail": "Please enter a valid email address."
+      }
+    },
+    "create": {
+      "success": "Project \"{name}\" created successfully."
+    },
+    "projects": {
+      "title": "Projects",
+      "subtitle": "Assigned work and collaboration",
+      "search": "Search projects",
+      "emptyTitle": "No projects found",
+      "emptyDescription": "This teammate has no projects yet."
     }
   },
   "Analytics": {
@@ -176,37 +293,229 @@
     "title": "Activity",
     "subtitle": "Recent activity across your workspace",
     "noActivity": "No activity to display",
-    "filter": "Filter by type"
+    "filter": "Filter by type",
+    "filterTitle": "Event filters",
+    "filterDescription": "By event type",
+    "timeline": "Timeline",
+    "recentEvents": "Recent events",
+    "allEvents": "All events",
+    "today": "Today",
+    "successfulActions": "Successful actions",
+    "itemsCount": "items",
+    "groups": {
+      "all": "All",
+      "project": "Project",
+      "team": "Team",
+      "payment": "Payment",
+      "task": "Task"
+    },
+    "typeLabels": {
+      "project_created": "Project created",
+      "project_updated": "Project updated",
+      "member_joined": "Member joined",
+      "payment_received": "Payment received",
+      "task_completed": "Task completed"
+    },
+    "summaryBadge": {
+      "active": "Active",
+      "highRate": "High rate"
+    }
   },
   "Billing": {
     "title": "Billing",
     "subtitle": "Manage your subscription and payments",
+    "heroDescription": "Track invoices, plan usage, and your billing health in one place.",
     "currentPlan": "Current Plan",
     "paymentHistory": "Payment History",
-    "upgrade": "Upgrade Plan"
+    "upgrade": "Upgrade Plan",
+    "downloadInvoice": "Download invoice",
+    "monthlyBilling": "Monthly billing",
+    "annualSavings": "Annual savings",
+    "nextInvoice": "Next invoice",
+    "monthly": "Monthly",
+    "saved": "Saved",
+    "autoRenew": "Auto-renew",
+    "planName": "Pro Plan",
+    "active": "Active",
+    "renewsOn": "Renews on",
+    "usage": "Usage",
+    "teamSeats": "Team seats",
+    "billingSummary": "Summary",
+    "paymentMethods": "Payment methods",
+    "defaultCard": "Default payment method",
+    "secondaryCard": "Backup card",
+    "default": "Default",
+    "activity": "Activity",
+    "lastPayment": "Last payment",
+    "status": "Status",
+    "paid": "Paid",
+    "pending": "Pending",
+    "invoiceHistory": "Invoice history",
+    "viewAll": "View all",
+    "invoice": "Invoice",
+    "date": "Date",
+    "amount": "Amount",
+    "receipt": "Receipt",
+    "onlinePayment": "Online payment",
+    "bankTransfer": "Bank transfer",
+    "cardNumber": "Card number",
+    "invoiceDate": "Invoice date",
+    "dueDate": "Due date",
+    "paymentMethod": "Payment method",
+    "TotalAmount": "Total amount",
+    "allInvoices": "All invoices",
+    "page": "Page",
+    "view": "View",
+    "close": "Close",
+    "next": "Next",
+    "previous": "Previous",
+    "featureItems": {
+      "unlimitedProjects": "Unlimited projects",
+      "advancedAnalytics": "Advanced analytics",
+      "prioritySupport": "Priority support",
+      "customIntegrations": "Custom integrations"
+    },
+    "paymentDates": {
+      "jul12": "Jul 12, 2026",
+      "jun12": "Jun 12, 2026",
+      "may12": "May 12, 2026",
+      "apr12": "Apr 12, 2026"
+    }
   },
   "Notifications": {
     "title": "Notifications",
     "subtitle": "Stay updated with important alerts",
     "markAllRead": "Mark all as read",
-    "noNotifications": "No notifications"
+    "noNotifications": "No notifications",
+    "emptyHint": "New alerts will appear here as they arrive.",
+    "feedTitle": "Inbox",
+    "feedSubtitle": "Latest system updates",
+    "stats": {
+      "total": "Total",
+      "active": "Live",
+      "unread": "Unread",
+      "new": "New",
+      "thisWeek": "This week",
+      "updated": "Updated"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "read": "Read",
+    "unread": "Unread",
+    "tags": {
+      "billing": "Billing",
+      "team": "Team",
+      "security": "Security",
+      "performance": "Performance",
+      "system": "System"
+    },
+    "items": {
+      "billing": {
+        "title": "Invoice paid successfully",
+        "description": "Your latest monthly invoice was processed and the receipt is ready to download."
+      },
+      "team": {
+        "title": "New team member joined",
+        "description": "Ava Patel was added to the design team and assigned to the onboarding project."
+      },
+      "security": {
+        "title": "Security review complete",
+        "description": "Two-factor authentication was verified successfully and no unusual activity was detected."
+      },
+      "performance": {
+        "title": "Performance alert",
+        "description": "API latency increased above the normal baseline for the last 20 minutes."
+      },
+      "system": {
+        "title": "System maintenance finished",
+        "description": "The planned maintenance window ended successfully and all services are operating normally."
+      }
+    }
   },
   "Settings": {
     "title": "Settings",
     "subtitle": "Manage your account and preferences",
+    "description": "Customize your workspace, privacy settings, and experience preferences.",
     "profile": "Profile",
-    "general": "General",
-    "appearance": "Appearance",
-    "notifications": "Notifications",
+    "profileDetails": "Profile details",
+    "productLead": "Product Lead",
+    "fullName": "Full name",
+    "emailAddress": "Email address",
+    "role": "Role",
+    "timezone": "Timezone",
     "security": "Security",
-    "billing": "Billing"
+    "accountSecurity": "Account security",
+    "password": "Password",
+    "twoFactor": "Two-factor authentication",
+    "lastLogin": "Last login",
+    "lastLoginToday": "Today, 09:42",
+    "activeSessions": "Active sessions",
+    "activeSessionsValue": "3 active sessions",
+    "changePassword": "Change password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "updatePassword": "Update password",
+    "enabled": "Enabled",
+    "notifications": "Notifications",
+    "preferences": "Preferences",
+    "manage": "Manage",
+    "notificationsEnabled": "Desktop alerts",
+    "marketingUpdates": "Marketing updates",
+    "securityAlerts": "Security alerts",
+    "weeklyReports": "Weekly reports",
+    "save": "Save"
   },
   "Support": {
     "title": "Support",
     "subtitle": "Get help and contact us",
-    "documentation": "Documentation",
-    "contactUs": "Contact Us",
-    "faq": "FAQ"
+    "headerDescription": "Reach our team quickly for technical issues, billing questions, and product guidance.",
+    "documentation": "Knowledge base",
+    "documentationDesc": "Browse guides, setup articles, and best practices for every feature.",
+    "contactUs": "Contact us",
+    "faq": "FAQ",
+    "faqTitle": "Frequently asked questions",
+    "support": "Support",
+    "submitTicket": "Submit ticket",
+    "responseTimeLabel": "Avg. response time",
+    "responseTimeValue": "< 30 min",
+    "satisfactionLabel": "Customer satisfaction",
+    "satisfactionValue": "98%",
+    "uptimeLabel": "Platform uptime",
+    "uptimeValue": "99.99%",
+    "live": "Live",
+    "topRated": "Top rated",
+    "monitoring": "Monitoring",
+    "ticketFormTitle": "New support request",
+    "subject": "Subject",
+    "subjectPlaceholder": "Describe the issue briefly",
+    "category": "Category",
+    "categoryBilling": "Billing",
+    "categoryTechnical": "Technical",
+    "categoryAccount": "Account",
+    "categoryGeneral": "General",
+    "priority": "Priority",
+    "priorityLow": "Low",
+    "priorityMedium": "Medium",
+    "priorityHigh": "High",
+    "message": "Message",
+    "messagePlaceholder": "Tell us what happened and what you need help with.",
+    "sendTicket": "Send ticket",
+    "liveChat": "Live chat",
+    "liveChatDesc": "Talk to a support specialist in real time for urgent issues.",
+    "emailSupport": "Email support",
+    "emailSupportDesc": "Send a detailed request and get a full written response.",
+    "openChannel": "Open channel",
+    "faqQuestionOne": "How fast do you respond to tickets?",
+    "faqAnswerOne": "Most tickets are answered within 30 minutes during business hours and usually within a few hours outside standard support windows.",
+    "faqQuestionTwo": "Do you provide help for billing and invoices?",
+    "faqAnswerTwo": "Yes. Our billing team can help with invoices, refunds, payment issues, and subscription changes.",
+    "faqQuestionThree": "Can I contact support by chat?",
+    "faqAnswerThree": "Yes. Live chat is available for urgent issues and for customers who prefer quick real-time assistance.",
+    "faqQuestionFour": "Is there documentation for setup and features?",
+    "faqAnswerFour": "Yes. The knowledge base includes tutorials, setup guides, integrations, and troubleshooting resources."
   },
   "Common": {
     "save": "Save",
@@ -227,6 +536,7 @@
     "export": "Export",
     "import": "Import",
     "refresh": "Refresh",
+    "retry": "Retry",
     "close": "Close",
     "open": "Open",
     "yes": "Yes",
