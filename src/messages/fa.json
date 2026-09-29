@@ -261,6 +261,10 @@
     "memberNotFoundDescription": "این عضو تیم در لیست پیدا نشد.",
     "backToTeam": "بازگشت به تیم",
     "createProject": "پروژه جدید",
+    "tabs": {
+      "overview": "پروفایل",
+      "projects": "پروژه‌ها"
+    },
     "profile": {
       "joined": "عضویت",
       "activeStatus": "وضعیت",
@@ -269,6 +273,14 @@
         "edit": "ویرایش پروفایل",
         "delete": "حذف عضو",
         "access": "تغییر دسترسی"
+      },
+      "activity": {
+        "reviewedSprint": "بازبینی اهداف اسپرینت",
+        "updatedRoadmap": "به‌روزرسانی اولویت‌های نقشه راه",
+        "closedQa": "بستن ۳ تیکت کیفیت",
+        "twoHoursAgo": "۲ ساعت پیش",
+        "yesterday": "دیروز",
+        "threeDaysAgo": "۳ روز پیش"
       }
     },
     "invite": {

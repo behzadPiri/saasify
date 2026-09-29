@@ -7,6 +7,7 @@ import type {ActivityItem} from "@/features/dashboard/types";
 import {Icons} from "@/shared/components/ui/icons";
 
 type ActivityFilter = "all" | "project" | "team" | "payment" | "task";
+type ActivityGroup = Exclude<ActivityFilter, "all">;
 
 const activityItems: ActivityItem[] = [
   {
@@ -75,7 +76,7 @@ const activityItems: ActivityItem[] = [
   },
 ];
 
-function typeToGroup(type: ActivityItem["type"]): ActivityFilter {
+function typeToGroup(type: ActivityItem["type"]): ActivityGroup {
   if (type === "project_created" || type === "project_updated") return "project";
   if (type === "member_joined") return "team";
   if (type === "payment_received") return "payment";

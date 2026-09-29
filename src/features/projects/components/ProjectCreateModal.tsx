@@ -5,7 +5,7 @@
 // منطق فرم در `useProjectCreateForm` قرار دارد تا کامپوننت سبک بماند.
 import {useTranslations} from "next-intl";
 import {Icons} from "@/shared/components/ui/icons";
-import {useProjectCreateForm} from "../hooks/useProjectCreateForm";
+import {useProjectCreateForm} from "@/features/projects";
 import type {ProjectStatus} from "../types";
 
 interface ProjectCreateModalProps {

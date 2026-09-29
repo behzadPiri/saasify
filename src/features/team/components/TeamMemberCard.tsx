@@ -1,10 +1,8 @@
 "use client";
 
-import {useLocale, useTranslations} from "next-intl";
 import {Link} from "@/i18n/navigation";
 import {Icons} from "@/shared/components/ui/icons";
-import {getRelativeTime} from "../lib/relative-time";
-import {TEAM_ROLE_STYLE} from "../constants";
+import {useTeamMemberCard} from "@/features/team";
 import type {TeamMember} from "../types";
 
 interface TeamMemberCardProps {
@@ -12,26 +10,20 @@ interface TeamMemberCardProps {
 }
 
 export function TeamMemberCard({member}: TeamMemberCardProps) {
-  const t = useTranslations("Team");
-  const locale = useLocale();
-  const roleStyle = TEAM_ROLE_STYLE[member.role];
-  const statusLabel =
-    member.status === "online" ? t("status.online") : member.status === "away" ? t("status.away") : t("status.offline");
-  const relativeActivity = member.lastActiveAt ? getRelativeTime(member.lastActiveAt, locale) : member.lastActive;
+  const {t, initials, roleBadgeClass, roleLabel, statusDotClass, statusLabel, relativeActivity, href} =
+    useTeamMemberCard(member);
 
   return (
-    <Link href={`/team/${member.id}/projects`} className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-      <article className="h-full rounded-[28px] border border-border/50 bg-card/80 p-5 shadow-[0_16px_40px_rgba(15,23,42,0.05)] transition duration-200 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_18px_50px_rgba(99,102,241,0.12)]">
+    <Link href={href} className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+      <article
+        className="h-full rounded-[28px] border border-border/50 bg-card/80 p-5 shadow-[0_16px_40px_rgba(15,23,42,0.05)] transition duration-200 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_18px_50px_rgba(99,102,241,0.12)]"
+      >
         <div className="flex items-start justify-between gap-4">
           <div className="flex min-w-0 items-center gap-3">
             <div
               className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${member.avatarColor} text-sm font-bold text-white shadow-inner`}
             >
-              {member.name
-                .split(" ")
-                .slice(0, 2)
-                .map((part) => part[0]?.toUpperCase() ?? "")
-                .join("")}
+              {initials}
             </div>
 
             <div className="min-w-0">
@@ -40,19 +32,17 @@ export function TeamMemberCard({member}: TeamMemberCardProps) {
             </div>
           </div>
 
-          <span className={`inline-flex rounded-full px-2.5 py-1 text-[11px] font-semibold ${roleStyle.badge}`}>
-            {t(roleStyle.labelKey)}
+          <span className={`inline-flex rounded-full px-2.5 py-1 text-[11px] font-semibold ${roleBadgeClass}`}>
+            {roleLabel}
           </span>
         </div>
 
         <div className="mt-5 space-y-4">
-          <div className="flex items-center justify-between gap-3 rounded-2xl bg-muted/20 px-3 py-2 text-sm text-muted-foreground">
+          <div
+            className="flex items-center justify-between gap-3 rounded-2xl bg-muted/20 px-3 py-2 text-sm text-muted-foreground"
+          >
             <span className="inline-flex items-center gap-2 font-medium">
-              <span
-                className={`inline-flex h-2.5 w-2.5 rounded-full ${
-                  member.status === "online" ? "bg-emerald-500" : member.status === "away" ? "bg-amber-500" : "bg-slate-400"
-                }`}
-              />
+              <span className={`h-2.5 w-2.5 rounded-full ${statusDotClass}`} />
               {statusLabel}
             </span>
             <span className="truncate text-right">{member.location}</span>
@@ -80,3 +70,6 @@ export function TeamMemberCard({member}: TeamMemberCardProps) {
     </Link>
   );
 }
+
+// Add display name for ESLint
+TeamMemberCard.displayName = "TeamMemberCard";

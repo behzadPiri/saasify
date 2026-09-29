@@ -1,8 +1,14 @@
 "use client";
 
-import {useMemo, useState} from "react";
+/**
+ * مودال دعوت عضو
+ * فرم ایمیل و نقش با اعتبارسنجی پیش از ارسال
+ */
+
 import {useTranslations} from "next-intl";
 import {Icons} from "@/shared/components/ui/icons";
+import {INVITE_ROLE_OPTIONS} from "../constants";
+import {useInviteMemberModal} from "@/features/team";
 import type {TeamRole} from "../types";
 
 interface InviteMemberModalProps {
@@ -11,41 +17,15 @@ interface InviteMemberModalProps {
   onSubmit: (payload: {email: string; role: TeamRole}) => void;
 }
 
-const ROLE_OPTIONS: Array<{value: TeamRole; labelKey: string}> = [
-  {value: "admin", labelKey: "roles.admin"},
-  {value: "member", labelKey: "roles.member"},
-  {value: "viewer", labelKey: "roles.viewer"},
-];
-
-const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
-
 export function InviteMemberModal({open, onClose, onSubmit}: InviteMemberModalProps) {
   const t = useTranslations("Team");
   const tCommon = useTranslations("Common");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState<TeamRole>("member");
-  const [error, setError] = useState<string | null>(null);
-
-  const canSubmit = useMemo(() => isValidEmail(email), [email]);
+  const {email, role, error, canSubmit, handleEmailChange, handleRoleChange, handleSubmit} =
+    useInviteMemberModal({onClose, onSubmit});
 
   if (!open) {
     return null;
   }
-
-  const handleSubmit = () => {
-    const trimmedEmail = email.trim();
-
-    if (!isValidEmail(trimmedEmail)) {
-      setError(t("invite.validation.invalidEmail"));
-      return;
-    }
-
-    onSubmit({email: trimmedEmail, role});
-    setEmail("");
-    setRole("member");
-    setError(null);
-    onClose();
-  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
@@ -75,10 +55,7 @@ export function InviteMemberModal({open, onClose, onSubmit}: InviteMemberModalPr
             <input
               type="email"
               value={email}
-              onChange={(event) => {
-                setEmail(event.target.value);
-                if (error) setError(null);
-              }}
+              onChange={(event) => handleEmailChange(event.target.value)}
               placeholder="team@saasify.dev"
               className="mt-2 w-full rounded-2xl border border-border/60 bg-background/60 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
@@ -88,10 +65,10 @@ export function InviteMemberModal({open, onClose, onSubmit}: InviteMemberModalPr
             <span className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">{t("invite.role")}</span>
             <select
               value={role}
-              onChange={(event) => setRole(event.target.value as TeamRole)}
+              onChange={(event) => handleRoleChange(event.target.value as TeamRole)}
               className="mt-2 w-full rounded-2xl border border-border/60 bg-background/60 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
             >
-              {ROLE_OPTIONS.map((option) => (
+              {INVITE_ROLE_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
                   {t(option.labelKey)}
                 </option>

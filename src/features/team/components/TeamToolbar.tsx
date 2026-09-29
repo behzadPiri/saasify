@@ -2,6 +2,8 @@
 
 import {useTranslations} from "next-intl";
 import {Icons} from "@/shared/components/ui/icons";
+import {TEAM_SORT_OPTIONS} from "../constants";
+import {useTeamToolbar} from "@/features/team";
 import type {TeamFilterOption, TeamSortOption} from "../types";
 
 interface TeamToolbarProps {
@@ -16,12 +18,6 @@ interface TeamToolbarProps {
   onClearFilters: () => void;
 }
 
-const SORT_OPTIONS = [
-  {value: "name", labelKey: "sort.name"},
-  {value: "role", labelKey: "sort.role"},
-  {value: "lastActive", labelKey: "sort.lastActive"},
-] as const;
-
 export function TeamToolbar({
   searchValue,
   statusFilter,
@@ -34,7 +30,7 @@ export function TeamToolbar({
   onClearFilters,
 }: TeamToolbarProps) {
   const t = useTranslations("Team");
-  const hasFilters = searchValue.trim().length > 0 || statusFilter !== "all";
+  const {hasFilters} = useTeamToolbar({searchValue, statusFilter});
 
   return (
     <div className="grid gap-4 lg:grid-cols-[1.7fr_1fr]">
@@ -75,7 +71,7 @@ export function TeamToolbar({
                 onChange={(event) => onSortChange(event.target.value as TeamSortOption)}
                 className="w-full rounded-2xl border border-border/60 bg-background/60 px-4 py-3 text-sm text-foreground shadow-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
               >
-                {SORT_OPTIONS.map((option) => (
+                {TEAM_SORT_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value}>
                     {t(option.labelKey)}
                   </option>

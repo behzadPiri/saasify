@@ -1,11 +1,17 @@
-import {TeamMemberDetail} from "@/features/team/TeamMemberDetail";
+import {TeamMemberDetail} from "@/features";
+
+/**
+ * صفحهٔ پروفایل عضو تیم - نمای overview
+ */
 
 interface TeamMemberPageProps {
-  params: {
+  params: Promise<{
     memberId: string;
-  };
+  }>;
 }
 
-export default function TeamMemberPage({params}: TeamMemberPageProps) {
-  return <TeamMemberDetail memberId={params.memberId} />;
+export default async function TeamMemberPage({params}: TeamMemberPageProps) {
+  const {memberId} = await params;
+
+  return <TeamMemberDetail memberId={memberId} view="overview" />;
 }

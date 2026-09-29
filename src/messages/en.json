@@ -249,6 +249,10 @@
     "memberNotFoundDescription": "This team member could not be located.",
     "backToTeam": "Back to team",
     "createProject": "New project",
+    "tabs": {
+      "overview": "Overview",
+      "projects": "Projects"
+    },
     "profile": {
       "joined": "Joined",
       "activeStatus": "Status",
@@ -257,6 +261,14 @@
         "edit": "Edit profile",
         "delete": "Delete member",
         "access": "Change access"
+      },
+      "activity": {
+        "reviewedSprint": "Reviewed sprint goals",
+        "updatedRoadmap": "Updated roadmap priorities",
+        "closedQa": "Closed 3 QA tickets",
+        "twoHoursAgo": "2 hours ago",
+        "yesterday": "Yesterday",
+        "threeDaysAgo": "3 days ago"
       }
     },
     "invite": {
