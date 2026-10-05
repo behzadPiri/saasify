@@ -295,11 +295,55 @@
     }
   },
   "Analytics": {
-    "title": "Analytics",
-    "subtitle": "Insights and reports",
-    "overview": "Overview",
-    "performance": "Performance",
-    "export": "Export Report"
+    "title": "Advanced Analytics & Insights",
+    "subtitle": "Workspace insights, user behavior, and performance reports",
+    "badge": "Enterprise Analytics",
+    "heroDescription": "Unified overview of revenue stream, traffic volume, conversion patterns, and device breakdown in real time.",
+    "exportReport": "Export Report",
+    "liveUpdates": "Live sync enabled",
+    "timeRange": {
+      "today": "Today",
+      "7d": "Last 7 days",
+      "30d": "Last 30 days",
+      "90d": "Last 3 months",
+      "12m": "Last 12 months"
+    },
+    "metrics": {
+      "totalRevenue": "Total Revenue",
+      "totalVisits": "Total Visits",
+      "conversionRate": "Conversion Rate",
+      "bounceRate": "Bounce Rate",
+      "activeUsers": "Active Users",
+      "pageViews": "Page Views",
+      "avgSession": "Avg. Session Duration",
+      "ordersCount": "Completed Orders",
+      "vsLastPeriod": "vs last period"
+    },
+    "charts": {
+      "revenueTrend": "Revenue & Sales Trend",
+      "revenueSubtitle": "Comparing gross revenue with net profit in the selected range",
+      "grossRevenue": "Gross Revenue",
+      "netProfit": "Net Profit",
+      "trafficTrend": "Traffic & User Flow",
+      "trafficSubtitle": "Unique visits compared to total sessions",
+      "uniqueVisits": "Unique Visits",
+      "totalSessions": "Total Sessions",
+      "deviceBreakdown": "Device Distribution",
+      "deviceSubtitle": "Traffic share across mobile, desktop, and tablet",
+      "desktop": "Desktop",
+      "mobile": "Mobile",
+      "tablet": "Tablet",
+      "funnelTitle": "Conversion Funnel",
+      "funnelSubtitle": "Visitor progression from first entry to final payment",
+      "funnelDropoff": "Drop-off",
+      "topPagesTitle": "Top Visited Pages",
+      "topPagesSubtitle": "Performance of most popular URLs, bounce rates, and session durations",
+      "thPage": "Page Path",
+      "thViews": "Page Views",
+      "thUnique": "Unique Visitors",
+      "thTime": "Avg. Duration",
+      "thBounce": "Bounce Rate"
+    }
   },
   "Activity": {
     "title": "Activity",

@@ -307,11 +307,55 @@
     }
   },
   "Analytics": {
-    "title": "تحلیل‌ها",
-    "subtitle": "بینش‌ها و گزارش‌ها",
-    "overview": "نمای کلی",
-    "performance": "عملکرد",
-    "export": "خروجی گزارش"
+    "title": "تحلیل‌ها و آمار پیشرفته",
+    "subtitle": "بینش‌ها، رفتار کاربران و گزارش‌های عملکردی فضای کاری",
+    "badge": "تحلیل‌های سازمانی",
+    "heroDescription": "نمای یکپارچه از جریان درآمد، حجم ترافیک، الگوهای تبدیل و سهم دستگاه‌ها با به‌روزرسانی لحظه‌ای.",
+    "exportReport": "خروجی گزارش",
+    "liveUpdates": "به‌روزرسانی خودکار فعال است",
+    "timeRange": {
+      "today": "امروز",
+      "7d": "۷ روز اخیر",
+      "30d": "۳۰ روز اخیر",
+      "90d": "۳ ماه اخیر",
+      "12m": "یک سال گذشته"
+    },
+    "metrics": {
+      "totalRevenue": "درآمد کل",
+      "totalVisits": "بازدیدهای کل",
+      "conversionRate": "نرخ تبدیل",
+      "bounceRate": "نرخ پرش",
+      "activeUsers": "کاربران فعال",
+      "pageViews": "مشاهده صفحات",
+      "avgSession": "میانگین مدت نشست",
+      "ordersCount": "سفارشات نهایی",
+      "vsLastPeriod": "نسبت به دوره قبل"
+    },
+    "charts": {
+      "revenueTrend": "روند درآمد و فروش",
+      "revenueSubtitle": "مقایسه درآمد ناخالص با سود خالص در بازه انتخابی",
+      "grossRevenue": "درآمد ناخالص",
+      "netProfit": "سود خالص",
+      "trafficTrend": "روند ترافیک و کاربران",
+      "trafficSubtitle": "مقایسه بازدیدهای یکتا با کل نشست‌ها",
+      "uniqueVisits": "بازدیدهای یکتا",
+      "totalSessions": "کل نشست‌ها",
+      "deviceBreakdown": "سهم دستگاه‌های کاربران",
+      "deviceSubtitle": "توزیع ترافیک بر اساس موبایل، دسکتاپ و تبلت",
+      "desktop": "رایانه دسکتاپ",
+      "mobile": "گوشی هوشمند",
+      "tablet": "تبلت",
+      "funnelTitle": "قیف تبدیل کاربران (Conversion Funnel)",
+      "funnelSubtitle": "مسیر حرکت بازدیدکننده از اولین ورودی تا پرداخت نهایی",
+      "funnelDropoff": "ریزش",
+      "topPagesTitle": "پربازدیدترین صفحات و مسیرها",
+      "topPagesSubtitle": "بررسی عملکرد محبوب‌ترین URLها، زمان حضور و بانس ریت",
+      "thPage": "مسیر صفحه",
+      "thViews": "بازدیدها",
+      "thUnique": "بازدید یکتا",
+      "thTime": "میانگین زمان",
+      "thBounce": "نرخ پرش"
+    }
   },
   "Activity": {
     "title": "فعالیت‌ها",
