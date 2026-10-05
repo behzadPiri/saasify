@@ -331,6 +331,20 @@
     "summaryBadge": {
       "active": "Active",
       "highRate": "High rate"
+    },
+    "pagination": {
+      "ariaLabel": "Page navigation",
+      "pageSize": "Page size:",
+      "pageSizeAria": "Select items per page",
+      "itemsPerPage": "{count} items per page",
+      "showing": "Showing {start} to {end} of {total} items",
+      "pagesAria": "Page numbers",
+      "previous": "Previous",
+      "prev": "Prev",
+      "pageNumbersAria": "Page list",
+      "pageAria": "Page {page}",
+      "next": "Next",
+      "pageOf": "Page {current} of {total}"
     }
   },
   "Billing": {

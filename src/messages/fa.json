@@ -343,6 +343,20 @@
     "summaryBadge": {
       "active": "فعال",
       "highRate": "نرخ بالا"
+    },
+    "pagination": {
+      "ariaLabel": "ناوبری صفحات",
+      "pageSize": "تعداد در صفحه:",
+      "pageSizeAria": "انتخاب تعداد آیتم در صفحه",
+      "itemsPerPage": "{count} مورد در صفحه",
+      "showing": "نمایش {start} تا {end} از کل {total} مورد",
+      "pagesAria": "شماره صفحات",
+      "previous": "قبلی",
+      "prev": "قبلی",
+      "pageNumbersAria": "فهرست صفحات",
+      "pageAria": "صفحه {page}",
+      "next": "بعدی",
+      "pageOf": "صفحه {current} از {total}"
     }
   },
   "Billing": {
