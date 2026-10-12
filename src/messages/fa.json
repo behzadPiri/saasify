@@ -403,37 +403,38 @@
       "pageOf": "صفحه {current} از {total}"
     }
   },
-  "Billing": {
-    "title": "صورت‌حساب",
+"Billing": {
+    "title": "صورتحساب",
     "subtitle": "مدیریت اشتراک و پرداخت‌ها",
-    "heroDescription": "صورت‌حساب‌ها، مصرف پلن و وضعیت پرداخت‌ها را در یک نگاه دنبال کنید.",
+    "heroDescription": "صورتحساب‌ها، مصرف پلن و وضعیت پرداخت‌ها را در یک نگاه دنبال کنید.",
     "currentPlan": "پلن فعلی",
     "paymentHistory": "تاریخچه پرداخت‌ها",
     "upgrade": "ارتقای پلن",
     "downloadInvoice": "دانلود فاکتور",
-    "monthlyBilling": "صورت‌حساب ماهانه",
+    "monthlyBilling": "صورتحساب ماهانه",
     "annualSavings": "صرفه‌جویی سالانه",
     "nextInvoice": "فاکتور بعدی",
     "monthly": "ماهانه",
     "saved": "ذخیره‌شده",
     "autoRenew": "تمدید خودکار",
     "planName": "پلن حرفه‌ای",
-    "active": "فعال",
+    "active": "عالی",
     "renewsOn": "تمدید در",
     "usage": "مصرف",
-    "teamSeats": "صندلی تیم",
+    "teamSeats": "نشست تیم",
     "billingSummary": "خلاصه",
     "paymentMethods": "روش‌های پرداخت",
     "defaultCard": "روش پرداخت پیش‌فرض",
     "secondaryCard": "کارت پشتیبان",
     "default": "پیش‌فرض",
-    "activity": "فعالیت",
-    "lastPayment": "آخرین پرداخت",
+    "activity": "عالیت",
+    "lastPayment": " آخرین پرداخت",
     "status": "وضعیت",
     "paid": "پرداخت‌شده",
     "pending": "در انتظار",
+    "failed": "نا موفق",
     "invoiceHistory": "تاریخچه فاکتورها",
-    "viewAll": "مشاهده همه",
+    "viewAll": "نمایش همه",
     "invoice": "فاکتور",
     "date": "تاریخ",
     "amount": "مبلغ",
@@ -447,16 +448,56 @@
     "TotalAmount": "مبلغ کل",
     "allInvoices": "همه فاکتورها",
     "page": "صفحه",
-    "view": "مشاهده",
+    "view": "نمایش",
     "close": "بستن",
     "next": "بعدی",
     "previous": "قبلی",
+    "noInvoices": "فاکتوری برای نمایش وجود ندارد",
+    "noPaymentMethods": "روش پرداختی ثبت نشده است",
+    "summary": {
+      "monthlyBilling": "صورتحساب ماهانه",
+      "annualSavings": "صرفه‌جویی سالانه",
+      "nextInvoice": "فاکتور بعدی",
+      "monthlyBadge": "ماهانه",
+      "savingsBadge": "ذخیره‌شده",
+      "autoRenew": "تمدید خودکار"
+    },
     "featureItems": {
       "unlimitedProjects": "پروژه نامحدود",
       "advancedAnalytics": "تحلیل‌های پیشرفته",
       "prioritySupport": "پشتیبانی اولویت‌دار",
       "customIntegrations": "یکپارچه‌سازی‌های سفارشی"
     },
+    "plans": {
+      "starter": {
+        "name": "شروع",
+        "free": "رایگان",
+        "features": {
+          "1": "پروژه‌های محدود",
+          "2": "اعضای محدود",
+          "3": "پشتیبانی ایمیلی"
+        }
+      },
+      "pro": {
+        "name": "پرو",
+        "monthly": "ماهانه",
+        "badge": "محبوب",
+        "features": {
+          "1": "پروژه نامحدود",
+          "2": "تحلیل‌های پیشرفته",
+          "3": "پشتیبانی اولویت‌دار",
+          "4": "یکپارچه‌سازی‌های سفارشی"
+        }
+      },
+      "enterprise": "سازمانی",
+      "enterpriseFeatures": {
+        "1": "همه ویژگی‌های پرو",
+        "2": "مدیریت حساب اختصاصی",
+        "3": "آپتایم ۹۹.۹۹٪",
+        "4": "امنیت پیشرفته",
+        "5": "API دسترسی"
+      }
+},
     "paymentDates": {
       "jul12": "۱۲ ژوئیه ۲۰۲۶",
       "jun12": "۱۲ ژوئن ۲۰۲۶",

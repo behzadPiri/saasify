@@ -149,29 +149,32 @@
       "onHold": "On Hold",
       "archived": "Archived"
     },
-    "filters": {
-      "all": "All",
-      "active": "Active",
-      "completed": "Completed"
-    },
-    "search": "Search",
-    "clear": "Clear",
-    "sortBy": "Sort by",
-    "sort": {
-      "recent": "Most Recent",
-      "deadline": "Deadline",
-      "budget": "Budget"
-    },
-    "budget": "Budget",
-    "progress": "Progress",
-    "members": "Members",
-    "projectDetails": "Project details",
-    "projectDetailsDescription": "See project progress, budget, and timeline details.",
-    "projectId": "Project ID",
-    "projectNotFound": "Project not found",
-    "projectNotFoundDescription": "The requested project could not be found in this workspace.",
-    "backToProjects": "Back to projects",
-    "projectDetailsNote": "This is a placeholder detail page for the selected project.",
+"filters": {
+       "all": "All",
+       "active": "Active",
+       "completed": "Completed",
+       "activeFilters": "Active filters",
+       "clearAll": "Clear all"
+     },
+     "search": "Search",
+     "clear": "Clear",
+     "sortBy": "Sort by",
+     "sort": {
+       "recent": "Most Recent",
+       "deadline": "Deadline",
+       "budget": "Budget"
+     },
+     "budget": "Budget",
+     "progress": "Progress",
+     "members": "Members",
+     "projectDetails": "Project details",
+     "projectDetailsDescription": "See project progress, budget, and timeline details.",
+     "projectId": "Project ID",
+     "projectNotFound": "Project not found",
+     "projectNotFoundDescription": "The requested project could not be found in this workspace.",
+     "backToProjects": "Back to projects",
+     "back": "Back",
+     "projectDetailsNote": "This is a placeholder detail page for the selected project.",
     "projectDetailsFallback": "In a complete product, this page would show project tasks, team members, and milestones.",
     "nextSteps": "Next steps",
     "projectDetailsStep1": "Review project milestones and update status.",
@@ -199,8 +202,16 @@
       "overdueProjects": "Overdue Projects",
       "totalBudget": "Total Budget"
     },
-    "loadErrorMessage": "Something went wrong while loading projects. Please try again."
-  },
+"loadErrorMessage": "Something went wrong while loading projects. Please try again.",
+     "modal": {
+       "title": "New project",
+       "description": "Enter the new project details and then save them.",
+       "name": "Project name",
+       "budget": "Budget",
+       "deadline": "Deadline",
+       "status": "Status"
+     }
+   },
   "Team": {
     "title": "Team",
     "subtitle": "Manage your people and permissions",
@@ -419,38 +430,79 @@
     "lastPayment": "Last payment",
     "status": "Status",
     "paid": "Paid",
-    "pending": "Pending",
-    "invoiceHistory": "Invoice history",
-    "viewAll": "View all",
-    "invoice": "Invoice",
-    "date": "Date",
-    "amount": "Amount",
-    "receipt": "Receipt",
-    "onlinePayment": "Online payment",
-    "bankTransfer": "Bank transfer",
-    "cardNumber": "Card number",
-    "invoiceDate": "Invoice date",
-    "dueDate": "Due date",
-    "paymentMethod": "Payment method",
-    "TotalAmount": "Total amount",
-    "allInvoices": "All invoices",
-    "page": "Page",
-    "view": "View",
-    "close": "Close",
-    "next": "Next",
-    "previous": "Previous",
-    "featureItems": {
-      "unlimitedProjects": "Unlimited projects",
-      "advancedAnalytics": "Advanced analytics",
-      "prioritySupport": "Priority support",
-      "customIntegrations": "Custom integrations"
-    },
-    "paymentDates": {
-      "jul12": "Jul 12, 2026",
-      "jun12": "Jun 12, 2026",
-      "may12": "May 12, 2026",
-      "apr12": "Apr 12, 2026"
-    }
+"pending": "Pending",
+     "failed": "Failed",
+     "invoiceHistory": "Invoice history",
+     "viewAll": "View all",
+     "invoice": "Invoice",
+     "date": "Date",
+     "amount": "Amount",
+     "receipt": "Receipt",
+     "onlinePayment": "Online payment",
+     "bankTransfer": "Bank transfer",
+     "cardNumber": "Card number",
+     "invoiceDate": "Invoice date",
+     "dueDate": "Due date",
+     "paymentMethod": "Payment method",
+     "TotalAmount": "Total amount",
+     "allInvoices": "All invoices",
+     "page": "Page",
+     "view": "View",
+     "close": "Close",
+     "next": "Next",
+     "previous": "Previous",
+     "noInvoices": "No invoices to display",
+     "noPaymentMethods": "No payment methods registered",
+     "summary": {
+       "monthlyBilling": "Monthly billing",
+       "annualSavings": "Annual savings",
+       "nextInvoice": "Next invoice",
+       "monthlyBadge": "Monthly",
+       "savingsBadge": "Saved",
+       "autoRenew": "Auto-renew"
+     },
+     "featureItems": {
+       "unlimitedProjects": "Unlimited projects",
+       "advancedAnalytics": "Advanced analytics",
+       "prioritySupport": "Priority support",
+       "customIntegrations": "Custom integrations"
+     },
+     "plans": {
+       "starter": {
+         "name": "Starter",
+         "free": "Free",
+         "features": {
+           "1": "Limited projects",
+           "2": "Limited members",
+           "3": "Email support"
+         }
+       },
+       "pro": {
+         "name": "Pro",
+         "monthly": "Monthly",
+         "badge": "Popular",
+         "features": {
+           "1": "Unlimited projects",
+           "2": "Advanced analytics",
+           "3": "Priority support",
+           "4": "Custom integrations"
+         }
+       },
+       "enterprise": "Enterprise",
+       "enterpriseFeatures": {
+         "1": "All Pro features",
+         "2": "Dedicated account management",
+         "3": "99.99% uptime",
+         "4": "Advanced security",
+         "5": "API access"
+       }
+     },
+     "paymentDates": {
+       "jul12": "Jul 12, 2026",
+       "jun12": "Jun 12, 2026",
+       "may12": "May 12, 2026",
+       "apr12": "Apr 12, 2026"
+     }
   },
   "Notifications": {
     "title": "Notifications",
