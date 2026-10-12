@@ -548,7 +548,12 @@
     "marketingUpdates": "به‌روزرسانی‌های بازاریابی",
     "securityAlerts": "هشدارهای امنیتی",
     "weeklyReports": "گزارش‌های هفتگی",
-    "save": "ذخیره"
+    "save": "ذخیره",
+    "saving": "در حال ذخیره...",
+    "passwordRequired": "پر کردن این فیلد الزامی است",
+    "passwordTooShort": "رمز جدید باید حداقل ۸ کاراکتر باشد",
+    "passwordMismatch": "رمزهای جدید مطابقت ندارند",
+    "passwordUpdated": "رمز عبور با موفقیت به‌روزرسانی شد"
   },
   "Support": {
     "title": "پشتیبانی",

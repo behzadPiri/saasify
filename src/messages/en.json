@@ -536,7 +536,12 @@
     "marketingUpdates": "Marketing updates",
     "securityAlerts": "Security alerts",
     "weeklyReports": "Weekly reports",
-    "save": "Save"
+    "save": "Save",
+    "saving": "Saving...",
+    "passwordRequired": "This field is required",
+    "passwordTooShort": "New password must be at least 8 characters",
+    "passwordMismatch": "New passwords do not match",
+    "passwordUpdated": "Password updated successfully"
   },
   "Support": {
     "title": "Support",

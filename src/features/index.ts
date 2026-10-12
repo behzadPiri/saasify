@@ -7,4 +7,4 @@ export {Analytics} from "./analytics";
 export {Activity} from "./activity";
 export {Billing} from "./billing";
 export {Notifications} from "./notifications";
-export {Settings} from "./settings/Settings";
+export {Settings} from "./settings";
