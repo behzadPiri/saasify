@@ -1,11 +1,5 @@
-/**
- * صفحه ورود - فرم احراز هویت کاربر
- */
+import { Auth } from "@/features/auth";
 
 export default function Page() {
-    return (
-        <div>
-            <p>login</p>
-        </div>
-    );
-};
+    return <Auth />;
+}

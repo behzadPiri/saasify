@@ -47,7 +47,6 @@
       "growth": "رشد مداوم",
       "total": "جمع درآمد",
       "yAxisTitle": "درآمد (میلیون)",
-
       "legendLabel": "درآمد",
       "noData": "داده‌ای برای نمایش وجود ندارد"
     },
@@ -403,7 +402,7 @@
       "pageOf": "صفحه {current} از {total}"
     }
   },
-"Billing": {
+  "Billing": {
     "title": "صورتحساب",
     "subtitle": "مدیریت اشتراک و پرداخت‌ها",
     "heroDescription": "صورتحساب‌ها، مصرف پلن و وضعیت پرداخت‌ها را در یک نگاه دنبال کنید.",
@@ -497,7 +496,7 @@
         "4": "امنیت پیشرفته",
         "5": "API دسترسی"
       }
-},
+    },
     "paymentDates": {
       "jul12": "۱۲ ژوئیه ۲۰۲۶",
       "jun12": "۱۲ ژوئن ۲۰۲۶",
@@ -685,5 +684,24 @@
     "no": "خیر",
     "optional": "اختیاری",
     "required": "الزامی"
+  },
+  "Auth": {
+    "email": "ایمیل",
+    "password": "رمز عبور",
+    "emailPlaceholder": "you@example.com",
+    "passwordPlaceholder": "••••••",
+    "rememberMe": "مرا به خاطر بسپار",
+    "forgotPassword": "فراموشی رمز عبور",
+    "login": "ورود",
+    "or": "یا",
+    "continueWithGoogle": "ورود با گوگل",
+    "continueWithGithub": "ورود با گیت‌هاب",
+    "loginSuccess": "ورود موفق",
+    "loginError": "ورود ناموفق",
+    "errors": {
+      "required": "این فیلد الزامی است",
+      "invalidEmail": "ایمیل نامعتبر",
+      "minLength": "حداقل ۶ کاراکتر"
+    }
   }
 }
