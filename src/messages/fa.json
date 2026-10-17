@@ -508,11 +508,18 @@
   "Notifications": {
     "title": "اعلانات",
     "subtitle": "با هشدارهای مهم به‌روز بمانید",
+    "description": "پیگیری اعلان‌ها، هشدارها و رویدادهای مهم سیستم در یک مرکز یکپارچه و خوانا.",
+    "settings": "تنظیمات اعلان‌ها",
     "markAllRead": "همه را خوانده شده علامت بزن",
+    "deleteNotification": "حذف اعلان",
     "noNotifications": "اعلانی وجود ندارد",
+    "noFilterResults": "اعلانی مطابق این فیلتر یافت نشد",
     "emptyHint": "هنگامی که هشدار جدیدی برسد، اینجا نمایش داده می‌شود.",
     "feedTitle": "صندوق ورودی",
     "feedSubtitle": "آخرین به‌روزرسانی‌های سیستم",
+    "unreadCount": "{count} خوانده‌نشده",
+    "loadError": "خطا در دریافت اعلان‌ها",
+    "ariaLoading": "در حال بارگذاری اعلان‌ها",
     "stats": {
       "total": "کل",
       "active": "زنده",
@@ -521,9 +528,16 @@
       "thisWeek": "این هفته",
       "updated": "به‌روزشده"
     },
+    "filters": {
+      "all": "همه",
+      "read": "خوانده‌شده",
+      "unread": "خوانده‌نشده"
+    },
     "pagination": {
       "previous": "قبلی",
-      "next": "بعدی"
+      "next": "بعدی",
+      "pageInfo": "صفحه {current} از {total}",
+      "ariaLabel": "صفحه‌بندی اعلان‌ها"
     },
     "read": "خوانده‌شده",
     "unread": "خوانده‌نشده",

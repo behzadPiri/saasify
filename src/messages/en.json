@@ -507,11 +507,18 @@
   "Notifications": {
     "title": "Notifications",
     "subtitle": "Stay updated with important alerts",
+    "description": "Stay on top of system alerts, updates, and priority events from a single streamlined hub.",
+    "settings": "Notification settings",
     "markAllRead": "Mark all as read",
+    "deleteNotification": "Delete notification",
     "noNotifications": "No notifications",
+    "noFilterResults": "No notifications match this filter",
     "emptyHint": "New alerts will appear here as they arrive.",
     "feedTitle": "Inbox",
     "feedSubtitle": "Latest system updates",
+    "unreadCount": "{count} unread",
+    "loadError": "Failed to load notifications",
+    "ariaLoading": "Loading notifications",
     "stats": {
       "total": "Total",
       "active": "Live",
@@ -520,9 +527,16 @@
       "thisWeek": "This week",
       "updated": "Updated"
     },
+    "filters": {
+      "all": "All",
+      "read": "Read",
+      "unread": "Unread"
+    },
     "pagination": {
       "previous": "Previous",
-      "next": "Next"
+      "next": "Next",
+      "pageInfo": "Page {current} of {total}",
+      "ariaLabel": "Notifications pagination"
     },
     "read": "Read",
     "unread": "Unread",
