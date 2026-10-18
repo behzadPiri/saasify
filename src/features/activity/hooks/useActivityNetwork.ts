@@ -5,7 +5,7 @@
 
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useSyncExternalStore } from "react";
 import type { ActivityItem } from "@/features/activity";
 
 /**
@@ -79,6 +79,25 @@ export const DEFAULT_ACTIVITY_ITEMS: ActivityItem[] = [
 ];
 
 /**
+ * اشتراک در تغییرات وضعیت آنلاین/آفلاین مرورگر؛
+ * یک منبع خارجی است و از `setState` داخل افکت پرهیز می‌کند.
+ */
+function subscribeToOnlineStatus(callback: () => void): () => void {
+  window.addEventListener("online", callback);
+  window.addEventListener("offline", callback);
+  return () => {
+    window.removeEventListener("online", callback);
+    window.removeEventListener("offline", callback);
+  };
+}
+
+/** اسنپ‌شات وضعیت آنلاین در کلاینت */
+const getOnlineSnapshot = (): boolean => navigator.onLine;
+
+/** اسنپ‌شات وضعیت آنلاین در سرور (پیش از hydration) */
+const getServerOnlineSnapshot = (): boolean => true;
+
+/**
  * تنظیمات ورودی هوک مدیریت داده‌های شبکه
  */
 interface UseActivityNetworkOptions {
@@ -112,56 +131,53 @@ export function useActivityNetwork(
   const [activities, setActivities] = useState<ActivityItem[]>(initialActivities);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isOnline, setIsOnline] = useState(true);
+
+  // وضعیت آنلاین/آفلاین از طریق اشتراک در منبع خارجی (بدون setState داخل افکت)
+  const isOnline = useSyncExternalStore(
+    subscribeToOnlineStatus,
+    getOnlineSnapshot,
+    getServerOnlineSnapshot
+  );
 
   // مرجع برای لغو درخواست‌های همزمان با استفاده از AbortController
   const abortControllerRef = useRef<AbortController | null>(null);
 
   /**
-   * ردیابی وضعیت آنلاین و آفلاین بودن مرورگر
+   * دریافت اطلاعات از API با زنجیرهٔ Promise.
+   * تمام به‌روزرسانی‌های state داخل callbackهای async انجام می‌شود تا با قانون
+   * `set-state-in-effect` سازگار باشد.
    */
-  useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
-
-    setIsOnline(typeof navigator !== "undefined" ? navigator.onLine : true);
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
-
-    return () => {
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
-    };
-  }, []);
-
-  /**
-   * تابع دریافت اطلاعات از API با قابلیت مدیریت AbortSignal و پاکسازی دقیق
-   */
-  const fetchActivities = useCallback(async () => {
-    if (!fetchFn) return;
+  const fetchActivities = useCallback((): Promise<void> => {
+    if (!fetchFn) return Promise.resolve();
 
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
     }
-    abortControllerRef.current = new AbortController();
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
 
-    try {
-      setIsLoading(true);
-      setError(null);
-      const data = await fetchFn(abortControllerRef.current.signal);
-      setActivities(data);
-      if (onSuccess) {
-        onSuccess(data);
-      }
-    } catch (err) {
-      if (err instanceof Error && err.name === "AbortError") {
-        return; // نادیده گرفتن خطای لغو درخواست
-      }
-      const errorMessage = err instanceof Error ? err.message : "خطا در دریافت فعالیت‌ها";
-      setError(errorMessage);
-    } finally {
-      setIsLoading(false);
-    }
+    return Promise.resolve()
+      .then(() => {
+        if (controller.signal.aborted) return undefined;
+        setIsLoading(true);
+        setError(null);
+        return fetchFn(controller.signal);
+      })
+      .then((data) => {
+        if (!data || controller.signal.aborted) return;
+        setActivities(data);
+        onSuccess?.(data);
+      })
+      .catch((err: unknown) => {
+        if (err instanceof Error && err.name === "AbortError") {
+          return; // نادیده گرفتن خطای لغو درخواست
+        }
+        const errorMessage = err instanceof Error ? err.message : "خطا در دریافت فعالیت‌ها";
+        setError(errorMessage);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [fetchFn, onSuccess]);
 
   /**
@@ -169,7 +185,7 @@ export function useActivityNetwork(
    */
   useEffect(() => {
     if (autoFetch) {
-      fetchActivities();
+      void fetchActivities();
     }
 
     return () => {

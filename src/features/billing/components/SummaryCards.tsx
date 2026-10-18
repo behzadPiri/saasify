@@ -17,8 +17,6 @@ interface SummaryCardsProps {
   annualSavings: number;
   /** مبلغ فاکtors بعدی */
   nextInvoiceAmount: number;
-  /** درصد مصرف */
-  utilization: number;
 }
 
 const ACCENT_STYLES = {
@@ -44,7 +42,6 @@ export function SummaryCards({
   monthly,
   annualSavings,
   nextInvoiceAmount,
-  utilization,
 }: SummaryCardsProps) {
   const t = useTranslations("Billing");
   const locale = useLocale();

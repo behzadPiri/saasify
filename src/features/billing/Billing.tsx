@@ -80,7 +80,6 @@ export function Billing() {
         monthly={summary.monthly}
         annualSavings={summary.annualSavings}
         nextInvoiceAmount={summary.nextInvoiceAmount}
-        utilization={summary.utilization}
       />
 
       {/* گرید اصلی محتوا */}

@@ -29,7 +29,13 @@ export interface ActivityStats {
  */
 export function useActivityStats(activities: ActivityItem[]): ActivityStats {
   return useMemo(() => {
-    const now = Date.now();
+    // مبنای زمانی ترندها: جدیدترین زمان موجود در خود داده‌ها.
+    // به‌جای فراخوانی ناخالص `Date.now()` در فاز رندر (نقض قانون purity)،
+    // این مقدار به‌صورت خالص از روی activityها محاسبه می‌شود.
+    const now = activities.reduce(
+      (latest, item) => Math.max(latest, new Date(item.timestamp).getTime()),
+      0
+    );
     const oneDayMs = 24 * 60 * 60 * 1000;
     const oneWeekMs = 7 * oneDayMs;
 

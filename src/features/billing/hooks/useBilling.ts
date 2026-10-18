@@ -34,9 +34,6 @@ export function useBilling({currentPlanId = "pro"}: UseBillingOptions = {}) {
 
   // محاسبه خلاصه صورت‌accounts
   const summary = useMemo<BillingSummary>(() => {
-    const totalPaid = invoices
-      .filter((inv) => inv.status === "paid")
-      .reduce((sum, inv) => sum + inv.amount, 0);
     const monthlyAmount = currentPlan?.price ?? 0;
     const annualSavings = monthlyAmount * 2; // 2 ماه رایگان در سال
     const utilization = 72; // مقدار ثابت مصرف برای نمایش
@@ -49,7 +46,7 @@ export function useBilling({currentPlanId = "pro"}: UseBillingOptions = {}) {
       usedSeats: 24,
       totalSeats: 36,
     };
-  }, [currentPlan, invoices]);
+  }, [currentPlan]);
 
   // تاریخ تمدید پلن
   const renewDate = useMemo(() => new Date("2026-09-30T00:00:00Z"), []);

@@ -12,6 +12,7 @@ import {useState} from "react";
 import {useLocale, useTranslations} from "next-intl";
 import {Icons} from "@/shared/components/ui/icons";
 import {Link, usePathname} from "@/i18n/navigation";
+import {useBodyScrollLock} from "@/shared/hooks/useBodyScrollLock";
 import {MobileLanguageAccordion, MobileThemeAccordion} from "@/features/header";
 
 // پراپ‌های کامپوننت: باز/بسته بودن و تابع بستن
@@ -43,6 +44,9 @@ export function MobileNav({isOpen, onClose}: MobileNavProps) {
     // state آکاردئون باز: فقط یکی از تم یا زبان می‌تواند همزمان باز باشد
     const [openAccordion, setOpenAccordion] = useState<AccordionType>(null);
 
+    // قفل اسکرول صفحه اصلی تا وقتی دراور باز است
+    useBodyScrollLock(isOpen);
+
     // تابع باز/بسته کردن آکاردئون - اگر همان آکاردئون دوباره کلیک شود، بسته می‌شود
     const toggleAccordion = (type: AccordionType) => {
         setOpenAccordion((prev) => (prev === type ? null : type));
@@ -53,7 +57,7 @@ export function MobileNav({isOpen, onClose}: MobileNavProps) {
             {/* لایه پوشش نیمه‌شفاف (overlay) - با کلیک منو بسته می‌شود */}
             {isOpen && (
                 <div
-                    className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm md:hidden animate-in fade-in duration-200"
+                    className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden animate-in fade-in duration-200"
                     onClick={onClose}
                     aria-hidden="true"
                 />

@@ -5,7 +5,6 @@
  * نمایش اطلاعات پلن فعلی، نوار مصرف، ویژگی‌ها و دکمه ارتقا
  */
 
-import {useMemo} from "react";
 import {useTranslations} from "next-intl";
 import {Icons} from "@/shared/components/ui/icons";
 import {buildAmountLabel, formatInvoiceDate} from "../lib/format";
@@ -39,12 +38,6 @@ export function PlanCard({
 }: PlanCardProps) {
   const t = useTranslations("Billing");
   const locale = useLocale();
-
-  // محاسبه نسبت صندلی‌ها برای نمایش
-  const seatRatio = useMemo(
-    () => Math.min((usedSeats / Math.max(totalSeats, 1)) * 100, 100),
-    [usedSeats, totalSeats],
-  );
 
   return (
     <section className="rounded-[28px] border border-border/40 bg-card/80 p-4 shadow-sm sm:p-5">

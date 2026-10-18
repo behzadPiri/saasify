@@ -56,20 +56,20 @@ function getAnalyticsDataForRange(range: AnalyticsTimeRange): AnalyticsData {
  * هوک اصلی مدیریت داده‌ها و منطق بیزینس ماژول تحلیل
  */
 export function useAnalytics(): UseAnalyticsReturn {
-  const { timeRange, setTimeRange, availableRanges } = useAnalyticsFilters("30d");
+  const { timeRange, setTimeRange: setFilterTimeRange, availableRanges } = useAnalyticsFilters("30d");
   const [data, setData] = useState<AnalyticsData>(() => getAnalyticsDataForRange("30d"));
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   /**
-   * تابع بارگذاری داده‌های تحلیلی
+   * دریافت داده‌های تحلیلی با زنجیرهٔ Promise.
+   * به‌روزرسانی state تنها داخل callbackهای async انجام می‌شود تا با قانون
+   * `set-state-in-effect` سازگار باشد.
    */
-  const fetchAnalyticsData = useCallback(async (currentRange: AnalyticsTimeRange, signal: AbortSignal) => {
-    try {
-      setIsLoading(true);
-      setError(null);
-
-      await new Promise((resolve, reject) => {
+  const fetchAnalyticsData = useCallback(
+    (currentRange: AnalyticsTimeRange, signal: AbortSignal): void => {
+      // شبیه‌سازی تأخیر شبکه با قابلیت لغو شدن
+      const delay = new Promise<void>((resolve, reject) => {
         const timer = setTimeout(resolve, 300);
         signal.addEventListener("abort", () => {
           clearTimeout(timer);
@@ -77,24 +77,41 @@ export function useAnalytics(): UseAnalyticsReturn {
         });
       });
 
-      if (signal.aborted) return;
+      delay
+        .then(() => {
+          if (signal.aborted) return;
+          const resolvedData = getAnalyticsDataForRange(currentRange);
+          startTransition(() => {
+            setData(resolvedData);
+          });
+        })
+        .catch((err: unknown) => {
+          if (err instanceof DOMException && err.name === "AbortError") {
+            return;
+          }
+          setError("خطا در دریافت اطلاعات تحلیلی. لطفاً مجدداً تلاش کنید.");
+          console.error("Analytics fetch error:", err);
+        })
+        .finally(() => {
+          if (!signal.aborted) {
+            setIsLoading(false);
+          }
+        });
+    },
+    []
+  );
 
-      const resolvedData = getAnalyticsDataForRange(currentRange);
-      startTransition(() => {
-        setData(resolvedData);
-      });
-    } catch (err: unknown) {
-      if (err instanceof DOMException && err.name === "AbortError") {
-        return;
-      }
-      setError("خطا در دریافت اطلاعات تحلیلی. لطفاً مجدداً تلاش کنید.");
-      console.error("Analytics fetch error:", err);
-    } finally {
-      if (!signal.aborted) {
-        setIsLoading(false);
-      }
-    }
-  }, []);
+  /**
+   * تغییر بازه زمانی همراه با شروع وضعیت بارگذاری و پاک‌سازی خطا (خارج از افکت)
+   */
+  const setTimeRange = useCallback(
+    (range: AnalyticsTimeRange) => {
+      setIsLoading(true);
+      setError(null);
+      setFilterTimeRange(range);
+    },
+    [setFilterTimeRange]
+  );
 
   useEffect(() => {
     const controller = new AbortController();
@@ -106,6 +123,8 @@ export function useAnalytics(): UseAnalyticsReturn {
   }, [timeRange, fetchAnalyticsData]);
 
   const refetch = useCallback(() => {
+    setIsLoading(true);
+    setError(null);
     const controller = new AbortController();
     fetchAnalyticsData(timeRange, controller.signal);
   }, [timeRange, fetchAnalyticsData]);
