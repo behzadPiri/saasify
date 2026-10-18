@@ -11,7 +11,7 @@ import type {
   FunnelStepItem,
   TopPageItem,
   AnalyticsTimeRange,
-} from "../types/analytics.types";
+} from "@/features/analytics";
 
 /**
  * کارت‌های متریک شاخص کلیدی عملکرد (KPIs) به تفکیک بازه زمانی

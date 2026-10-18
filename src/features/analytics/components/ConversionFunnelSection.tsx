@@ -8,7 +8,7 @@
 
 import React, { memo } from "react";
 import { useTranslations } from "next-intl";
-import type { FunnelStepItem } from "../types/analytics.types";
+import type { FunnelStepItem } from "@/features/analytics";
 
 /**
  * پروپزهای کامپوننت ConversionFunnelSection

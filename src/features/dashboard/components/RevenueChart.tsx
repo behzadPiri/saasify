@@ -7,7 +7,7 @@
 
 import {useTranslations} from "next-intl";
 import type {ChartDataPoint} from "../types";
-import {useRevenueChart} from "../hooks/useRevenueChart";
+import {useRevenueChart} from "@/features/dashboard";
 
 interface RevenueChartProps {
     data: ChartDataPoint[];

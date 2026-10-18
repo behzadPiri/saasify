@@ -7,7 +7,7 @@
 
 import {Icons} from "@/shared/components/ui/icons";
 import type {ActivityItem} from "../types";
-import {useActivityFeed} from "../hooks/useActivityFeed";
+import {useActivityFeed} from "@/features/dashboard";
 
 interface ActivityFeedProps {
     activities: ActivityItem[];

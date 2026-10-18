@@ -75,7 +75,7 @@ export default function ProjectDetailPage({params}: ProjectDetailPageProps) {
           </div>
         </div>
 
-        <div className="mt-6 overflow-hidden rounded-[26px] border border-border/40 bg-gradient-to-r from-primary/10 via-background/50 to-transparent p-5">
+        <div className="mt-6 overflow-hidden rounded-[26px] border border-border/40 bg-linear-to-r from-primary/10 via-background/50 to-transparent p-5">
           <div className="flex items-center justify-between gap-4 text-sm text-muted-foreground">
             <span>{t("progress")}</span>
             <span className="font-semibold text-foreground">{project.progress}%</span>
@@ -176,7 +176,7 @@ export default function ProjectDetailPage({params}: ProjectDetailPageProps) {
             <div className="mt-5 space-y-3">
               {(project.teamMembers ?? []).map((member) => (
                 <div key={member.id} className="flex items-center gap-3 rounded-2xl border border-border/40 bg-background/60 p-3">
-                  <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${member.avatarColor} text-xs font-bold text-white`}>
+                  <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br ${member.avatarColor} text-xs font-bold text-white`}>
                     {member.name
                       .split(" ")
                       .slice(0, 2)
