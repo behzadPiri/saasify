@@ -36,7 +36,7 @@ export const ConversionFunnelSection: React.FC<ConversionFunnelSectionProps> = m
           <h2 className="mt-2 text-lg font-semibold text-foreground">{t("funnelSubtitle")}</h2>
         </div>
         <button type="button" className="text-sm font-medium text-primary hover:underline">
-          نمایش همه
+          {t("viewAll")}
         </button>
       </div>
 
@@ -47,7 +47,9 @@ export const ConversionFunnelSection: React.FC<ConversionFunnelSectionProps> = m
             className="flex items-center justify-between rounded-2xl border border-border/40 bg-background/40 p-3.5"
           >
             <div>
-              <p className="text-sm font-medium text-foreground">{step.stepNameKey}</p>
+              <p className="text-sm font-medium text-foreground">
+                {t(`funnelSteps.${step.stepNameKey}`)}
+              </p>
               <p className="mt-1 text-xs text-muted-foreground">
                 {t("funnelDropoff")}: {step.dropoffRate}%
               </p>
@@ -56,7 +58,7 @@ export const ConversionFunnelSection: React.FC<ConversionFunnelSectionProps> = m
             <div className="text-right">
               <p className="text-lg font-bold text-foreground">{step.conversionRate.toFixed(1)}%</p>
               <span className="inline-flex rounded-full bg-primary/10 px-2 py-1 text-[10px] font-medium text-primary">
-                {step.visitorsCount.toLocaleString()} بازدیدکننده
+                {step.visitorsCount.toLocaleString()} {t("visitors")}
               </span>
             </div>
           </div>

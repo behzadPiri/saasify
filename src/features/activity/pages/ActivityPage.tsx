@@ -2,6 +2,9 @@
  * صفحه فعالیت‌ها (Legacy/Alternative)
  */
 
+"use client";
+
+import { useTranslations } from "next-intl";
 import { ActivityItem } from '@/features/activity';
 import { ActivityCards } from '../components/ActivityCards';
 import { ActivityPagination } from '../components/ActivityPagination';
@@ -11,10 +14,10 @@ const sampleActivities: ActivityItem[] = [
   {
     id: '1',
     type: 'project_created',
-    title: 'پروژه جدید ایجاد شد',
-    description: 'پروژه ساخت سایت وب جدید شروع شد',
+    titleKey: 'items.contentPanelStarted.title',
+    descriptionKey: 'items.contentPanelStarted.description',
     user: {
-      name: 'علی حسینی',
+      name: 'Ali Hosseini',
       avatar: 'https://i.pravatar.cc/150?img=1'
     },
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24),
@@ -22,10 +25,10 @@ const sampleActivities: ActivityItem[] = [
   {
     id: '2',
     type: 'task_completed',
-    title: 'وظیفه اصلی تکمیل شد',
-    description: 'وظیفه طراحی UI اصلی پروژه تکمیل شد',
+    titleKey: 'items.taskCompleted.title',
+    descriptionKey: 'items.taskCompleted.description',
     user: {
-      name: 'زهرا نوروزی',
+      name: 'Zahra Nowrouzi',
       avatar: 'https://i.pravatar.cc/150?img=2'
     },
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 48),
@@ -33,6 +36,7 @@ const sampleActivities: ActivityItem[] = [
 ];
 
 export const ActivityPage = () => {
+  const t = useTranslations("Activity");
   const { currentPage, paginatedData, totalPages, setPage } = usePagination({
     data: sampleActivities,
     itemsPerPage: 4
@@ -41,7 +45,7 @@ export const ActivityPage = () => {
   return (
     <div className="space-y-8">
       <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-        فعالیت‌های اخیر
+        {t("recentEvents")}
       </h1>
 
       <ActivityCards activities={paginatedData} />

@@ -41,9 +41,9 @@ export function ActivityFeed({activities, limit = 5}: ActivityFeedProps) {
                             <Icon size={12} className={config.color} />
                         </div>
                         <div className="flex-1 min-w-0">
-                            <p className="text-xs font-medium">{activity.title}</p>
+                            <p className="text-xs font-medium">{t(activity.titleKey)}</p>
                             <p className="mt-0.5 text-xs text-muted-foreground line-clamp-1">
-                                {activity.description}
+                                {t(activity.descriptionKey)}
                             </p>
                             <div className="mt-0.5 flex items-center gap-1 text-[10px] text-muted-foreground">
                                 <span className="font-medium">{activity.user.name}</span>

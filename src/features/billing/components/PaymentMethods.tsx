@@ -44,7 +44,7 @@ export function PaymentMethods({methods}: PaymentMethodsProps) {
                 <Icon size={18} />
               </div>
               <div>
-                <p className="text-sm font-medium text-foreground">{method.label}</p>
+                <p className="text-sm font-medium text-foreground">{method.labelKey ? t(method.labelKey) : method.label}</p>
                 <p className="text-xs text-muted-foreground">{t(method.modeKey)}</p>
               </div>
             </div>

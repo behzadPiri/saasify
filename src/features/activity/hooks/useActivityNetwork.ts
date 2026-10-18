@@ -6,6 +6,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef, useSyncExternalStore } from "react";
+import { useTranslations } from "next-intl";
 import type { ActivityItem } from "@/features/activity";
 
 /**
@@ -15,65 +16,65 @@ export const DEFAULT_ACTIVITY_ITEMS: ActivityItem[] = [
   {
     id: "a-101",
     type: "project_created",
-    title: "پروژه جدید ایجاد شد",
-    description: "پروژه «پنل مدیریت محتوا» توسط تیم توسعه آغاز شد.",
-    user: { name: "احمد محمدی" },
+    titleKey: "items.contentPanelStarted.title",
+    descriptionKey: "items.contentPanelStarted.description",
+    user: { name: "Ahmad Mohammadi" },
     timestamp: new Date(Date.now() - 1000 * 60 * 18),
   },
   {
     id: "a-102",
     type: "member_joined",
-    title: "عضو جدید به تیم اضافه شد",
-    description: "سارا احمدی به عنوان طراح UI/UX به تیم پیوست.",
-    user: { name: "سارا احمدی" },
+    titleKey: "items.memberJoined.title",
+    descriptionKey: "items.memberJoined.description",
+    user: { name: "Sara Ahmadi" },
     timestamp: new Date(Date.now() - 1000 * 60 * 55),
   },
   {
     id: "a-103",
     type: "task_completed",
-    title: "وظیفه تکمیل شد",
-    description: "پیاده‌سازی احراز هویت دو مرحله‌ای در پروژه اصلی خاتمه یافت.",
-    user: { name: "رضا کریمی" },
+    titleKey: "items.taskCompleted.title",
+    descriptionKey: "items.taskCompleted.description",
+    user: { name: "Reza Karimi" },
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 4),
   },
   {
     id: "a-104",
     type: "payment_received",
-    title: "دریافت پرداخت",
-    description: "اشتراک ماهانه پلن حرفه‌ای با موفقیت دریافت شد.",
-    user: { name: "صورت‌حساب" },
+    titleKey: "items.paymentReceived.title",
+    descriptionKey: "items.paymentReceived.description",
+    user: { name: "Billing" },
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 8),
   },
   {
     id: "a-105",
     type: "project_updated",
-    title: "پروژه بروزرسانی شد",
-    description: "نسخه 2.1 اپلیکیشن موبایل با چند بهبود رابط کاربری منتشر شد.",
-    user: { name: "مریم حسینی" },
+    titleKey: "items.projectUpdated.title",
+    descriptionKey: "items.projectUpdated.description",
+    user: { name: "Maryam Hosseini" },
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 26),
   },
   {
     id: "a-106",
     type: "project_created",
-    title: "پروژه جدید برای مشتری جدید آغاز شد",
-    description: "ساخت داشبورد مدیریتی برای تیم فروش روی پروژه جدید شروع شد.",
-    user: { name: "نیلوفر طاهری" },
+    titleKey: "items.clientDashboard.title",
+    descriptionKey: "items.clientDashboard.description",
+    user: { name: "Niloufar Taheri" },
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 48),
   },
   {
     id: "a-107",
     type: "task_completed",
-    title: "تکمیل milestone",
-    description: "مرحله طراحی و تست API در پروژه Gateway به پایان رسید.",
-    user: { name: "میلاد احمدی" },
+    titleKey: "items.milestoneCompleted.title",
+    descriptionKey: "items.milestoneCompleted.description",
+    user: { name: "Milad Ahmadi" },
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 72),
   },
   {
     id: "a-108",
     type: "member_joined",
-    title: "دعوت عضو جدید پذیرفته شد",
-    description: "امیر رضایی به‌عنوان توسعه‌دهنده فرانت‌اند به تیم اضافه شد.",
-    user: { name: "امیر رضایی" },
+    titleKey: "items.inviteAccepted.title",
+    descriptionKey: "items.inviteAccepted.description",
+    user: { name: "Amir Rezaei" },
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 96),
   },
 ];
@@ -128,6 +129,7 @@ export function useActivityNetwork(
   options: UseActivityNetworkOptions = {}
 ): UseActivityNetworkReturn {
   const { autoFetch = false, fetchFn, onSuccess } = options;
+  const t = useTranslations("Activity");
   const [activities, setActivities] = useState<ActivityItem[]>(initialActivities);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -172,13 +174,13 @@ export function useActivityNetwork(
         if (err instanceof Error && err.name === "AbortError") {
           return; // نادیده گرفتن خطای لغو درخواست
         }
-        const errorMessage = err instanceof Error ? err.message : "خطا در دریافت فعالیت‌ها";
+        const errorMessage = err instanceof Error ? err.message : t("loadErrorMessage");
         setError(errorMessage);
       })
       .finally(() => {
         setIsLoading(false);
       });
-  }, [fetchFn, onSuccess]);
+  }, [fetchFn, onSuccess, t]);
 
   /**
    * اجرای خودکار در صورت فعال بودن autoFetch با رعایت dependency صحیح

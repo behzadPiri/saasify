@@ -7,7 +7,8 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo, startTransition } from "react";
-import type { AnalyticsData, AnalyticsTimeRange } from "../types/analytics.types";
+import { useTranslations } from "next-intl";
+import type { AnalyticsData, AnalyticsTimeRange } from "@/features/analytics";
 import {
   MOCK_METRIC_CARDS,
   MOCK_REVENUE_CHART,
@@ -16,7 +17,7 @@ import {
   MOCK_CONVERSION_FUNNEL,
   MOCK_TOP_PAGES,
 } from "../mocks/analytics.mock";
-import { useAnalyticsFilters } from "./useAnalyticsFilters";
+import { useAnalyticsFilters } from "@/features/analytics";
 
 /**
  * خروجی هوک اصلی استفاده از داده‌ها و منطق تحلیلی
@@ -56,6 +57,7 @@ function getAnalyticsDataForRange(range: AnalyticsTimeRange): AnalyticsData {
  * هوک اصلی مدیریت داده‌ها و منطق بیزینس ماژول تحلیل
  */
 export function useAnalytics(): UseAnalyticsReturn {
+  const t = useTranslations("Analytics");
   const { timeRange, setTimeRange: setFilterTimeRange, availableRanges } = useAnalyticsFilters("30d");
   const [data, setData] = useState<AnalyticsData>(() => getAnalyticsDataForRange("30d"));
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -89,7 +91,7 @@ export function useAnalytics(): UseAnalyticsReturn {
           if (err instanceof DOMException && err.name === "AbortError") {
             return;
           }
-          setError("خطا در دریافت اطلاعات تحلیلی. لطفاً مجدداً تلاش کنید.");
+          setError(t("loadErrorMessage"));
           console.error("Analytics fetch error:", err);
         })
         .finally(() => {
@@ -98,7 +100,7 @@ export function useAnalytics(): UseAnalyticsReturn {
           }
         });
     },
-    []
+    [t]
   );
 
   /**

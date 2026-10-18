@@ -9,13 +9,16 @@ export type ProjectStatus = "active" | "completed" | "on_hold" | "archived";
 export interface ProjectTeamMember {
   id: string;
   name: string;
-  role: string;
+  role: "owner" | "admin" | "member" | "viewer";
   avatarColor: string;
 }
 
 export interface ProjectTask {
   id: string;
-  title: string;
+  /** کلید ترجمه عنوان وظیفه (اختیاری) */
+  titleKey?: string;
+  /** عنوان تحت‌اللفظی وظیفه (برای وظایف ساخته‌شده توسط کاربر) */
+  title?: string;
   assignee: string;
   status: "todo" | "in_progress" | "done";
   dueDate?: Date;
@@ -23,7 +26,13 @@ export interface ProjectTask {
 
 export interface ProjectSummary {
   id: string;
-  name: string;
+  /** کلید ترجمه نام پروژه (برای پروژه‌های داخلی/نمونه) */
+  nameKey?: string;
+  /** نام تحت‌اللفظی پروژه (برای پروژه‌های ساخته‌شده توسط کاربر) */
+  name?: string;
+  /** کلید ترجمه توضیحات پروژه */
+  descriptionKey?: string;
+  /** توضیحات تحت‌اللفظی پروژه */
   description?: string;
   status: ProjectStatus;
   progress: number; // درصد پیشرفت (0-100)

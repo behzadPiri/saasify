@@ -43,25 +43,25 @@ export const QUICK_ACTIONS: QuickAction[] = [
 export const STAT_CARDS_CONFIG = [
     {
         id: "total-projects",
-        label: "کل پروژه‌ها",
+        labelKey: "totalProjects",
         icon: "Folder",
         trend: "up",
     },
     {
         id: "active-projects",
-        label: "پروژه‌های فعال",
+        labelKey: "activeProjects",
         icon: "Activity",
         trend: "up",
     },
     {
         id: "team-members",
-        label: "اعضای تیم",
+        labelKey: "teamMembers",
         icon: "Users",
         trend: "neutral",
     },
     {
         id: "revenue",
-        label: "درآمد",
+        labelKey: "revenue",
         icon: "DollarSign",
         trend: "up",
     },

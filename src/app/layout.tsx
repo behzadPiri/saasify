@@ -4,12 +4,16 @@ import type {Metadata} from "next";
 import Script from "next/script";
 import {NextIntlClientProvider} from "next-intl";
 import {vazirFont, geistFont} from "@/core/fonts";
-import {getLocale, getMessages, setRequestLocale} from "@/i18n/server";
+import {getLocale, getMessages, getTranslations, setRequestLocale} from "@/i18n/server";
 
-export const metadata: Metadata = {
-    title: "SaaSify Platform",
-    description: "Advanced SaaS Management Dashboard",
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const t = await getTranslations("Metadata");
+
+    return {
+        title: t("title"),
+        description: t("description"),
+    };
+}
 
 export default async function RootLayout({children}: Readonly<{ children: ReactNode; }>) {
 

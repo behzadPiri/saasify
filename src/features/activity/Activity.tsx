@@ -47,7 +47,7 @@ export function Activity() {
       <div className="flex flex-col items-center justify-center gap-4 py-12 text-center">
         <Icons.AlertCircle size={48} className="text-destructive" />
         <p className="text-destructive">{error}</p>
-        {!isOnline && <p className="text-muted-foreground">شما در حالت آفلاین هستید</p>}
+        {!isOnline && <p className="text-muted-foreground">{t("offline")}</p>}
         <button
           onClick={refetch}
           disabled={isLoading || !isOnline}
@@ -91,7 +91,7 @@ export function Activity() {
       {!isOnline && (
         <div className="fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-lg bg-amber-500/90 px-4 py-2 text-sm font-medium text-amber-900 shadow-lg animate-in slide-in-from-bottom-2">
           <Icons.AlertCircle size={16} />
-          <span>حالت آفلاین - داده‌ها ممکن است بروز نباشند</span>
+          <span>{t("offlineBanner")}</span>
         </div>
       )}
     </div>

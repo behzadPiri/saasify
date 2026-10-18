@@ -57,7 +57,7 @@ export function InviteMemberModal({open, onClose, onSubmit}: InviteMemberModalPr
             type="email"
             value={email}
             onChange={(event) => handleEmailChange(event.target.value)}
-            placeholder="team@saasify.dev"
+            placeholder={t("invite.emailPlaceholder")}
             className="mt-2 w-full rounded-2xl border border-border/60 bg-background/60 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
         </label>

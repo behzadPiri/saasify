@@ -85,7 +85,7 @@ export function ProjectList({projects, limit = 4}: ProjectListProps) {
                         </div>
                         <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between gap-2">
-                                <h3 className="text-sm font-medium truncate">{project.name}</h3>
+                                <h3 className="text-sm font-medium truncate">{t(project.nameKey)}</h3>
                                 <span
                                     className={`shrink-0 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${statusConfig.bg} ${statusConfig.color}`}
                                 >

@@ -6,10 +6,12 @@
  */
 
 import {useState, useEffect, useCallback, useMemo} from "react";
+import {useTranslations} from "next-intl";
 import {DashboardData, DashboardStats, ChartDataPoint} from "../types";
 import {QUICK_ACTIONS} from "../constants";
 
 export function useDashboard() {
+    const t = useTranslations("Dashboard");
     const [data, setData] = useState<DashboardData | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -39,48 +41,48 @@ export function useDashboard() {
                     {
                         id: "1",
                         type: "project_created",
-                        title: "پروژه جدید ایجاد شد",
-                        description: "پروژه \"_panel مدیریت محتوا\" توسط تیم توسعه آغاز گردید",
-                        user: {name: "احمد محمدی"},
+                        titleKey: "items.projectCreated.title",
+                        descriptionKey: "items.projectCreated.description",
+                        user: {name: "Ahmad Mohammadi"},
                         timestamp: new Date(Date.now() - 1000 * 60 * 15),
                     },
                     {
                         id: "2",
                         type: "member_joined",
-                        title: "عضو جدید به تیم پیوست",
-                        description: "سارا احمدی به عنوان طراح UI/UX به تیم اضافه شد",
-                        user: {name: "سارا احمدی"},
+                        titleKey: "items.memberJoined.title",
+                        descriptionKey: "items.memberJoined.description",
+                        user: {name: "Sara Ahmadi"},
                         timestamp: new Date(Date.now() - 1000 * 60 * 45),
                     },
                     {
                         id: "3",
                         type: "payment_received",
-                        title: "دریافت پرداخت",
-                        description: "پرداخت ماهانه از اشتراک پریمیوم دریافت گردید",
-                        user: {name: "شرکت تکنولوژی"},
+                        titleKey: "items.paymentReceived.title",
+                        descriptionKey: "items.paymentReceived.description",
+                        user: {name: "Tech Corp"},
                         timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2),
                     },
                     {
                         id: "4",
                         type: "task_completed",
-                        title: "وظیفه تکمیل شد",
-                        description: "پیاده‌سازی احراز هویت دو مرحله‌ای Finalize گردید",
-                        user: {name: "رضا کریمی"},
+                        titleKey: "items.taskCompleted.title",
+                        descriptionKey: "items.taskCompleted.description",
+                        user: {name: "Reza Karimi"},
                         timestamp: new Date(Date.now() - 1000 * 60 * 60 * 5),
                     },
                     {
                         id: "5",
                         type: "project_updated",
-                        title: "پروژه به‌روزرسانی شد",
-                        description: "نسخه 2.1 اپلیکیشن موبایل منتشر گردید",
-                        user: {name: "مریم حسینی"},
+                        titleKey: "items.projectUpdated.title",
+                        descriptionKey: "items.projectUpdated.description",
+                        user: {name: "Maryam Hosseini"},
                         timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24),
                     },
                 ],
                 projects: [
                     {
                         id: "1",
-                        name: "پنل مدیریت محتوا",
+                        nameKey: "items.contentPanel",
                         status: "active",
                         progress: 65,
                         members: 4,
@@ -89,7 +91,7 @@ export function useDashboard() {
                     },
                     {
                         id: "2",
-                        name: "اپلیکیشن موبایل",
+                        nameKey: "items.mobileApp",
                         status: "active",
                         progress: 80,
                         members: 3,
@@ -98,7 +100,7 @@ export function useDashboard() {
                     },
                     {
                         id: "3",
-                        name: "API Gateway",
+                        nameKey: "items.apiGateway",
                         status: "on_hold",
                         progress: 30,
                         members: 2,
@@ -107,7 +109,7 @@ export function useDashboard() {
                     },
                     {
                         id: "4",
-                        name: "سیستم احراز هویت",
+                        nameKey: "items.authSystem",
                         status: "completed",
                         progress: 100,
                         members: 3,
@@ -129,12 +131,12 @@ export function useDashboard() {
             setData(mockData);
             setError(null);
         } catch (err) {
-            setError("خطا در دریافت داده‌های داشبورد");
+            setError(t("loadErrorMessage"));
             console.error("Dashboard fetch error:", err);
         } finally {
             setIsLoading(false);
         }
-    }, []);
+    }, [t]);
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/set-state-in-effect

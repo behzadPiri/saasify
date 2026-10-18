@@ -6,11 +6,10 @@
 "use client";
 
 import {Icons} from "@/shared/components/ui/icons";
-import {useLocale, useTranslations} from "next-intl";
+import {useTranslations} from "next-intl";
 
 export function ActivityHero() {
   const t = useTranslations("Activity");
-  const locale = useLocale();
 
   return (
     <section className="relative overflow-hidden rounded-[28px] border border-border/50 bg-card/80 p-5 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:p-6 lg:p-7">
@@ -28,9 +27,7 @@ export function ActivityHero() {
               {t("subtitle")}
             </h1>
             <p className="mt-3 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
-              {locale === "fa"
-                ? "ردیابی وقایع مهم، تغییرات تیم و وضعیت پروژه‌ها در یک جریان زمان‌مند و قابل‌فهم."
-                : "Track important events, team updates, and project health in one clear, time-based stream."}
+              {t("heroDescription")}
             </p>
           </div>
         </div>

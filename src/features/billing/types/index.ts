@@ -21,7 +21,10 @@ export interface Invoice {
   amount: number;
   status: InvoiceStatus;
   method: PaymentMethodType;
-  cardLabel: string;
+  /** برچسب تحت‌اللفظی کارت (برند/شماره) */
+  cardLabel?: string;
+  /** کلید ترجمه برچسب کارت (برای برچسب‌های توصیفی) */
+  cardLabelKey?: string;
   cardNumber: string;
   dueDate: Date;
 }
@@ -32,7 +35,10 @@ export interface Invoice {
  */
 export interface PaymentMethod {
   id: string;
-  label: string;
+  /** برچسب تحت‌اللفظی (برند/شماره کارت) */
+  label?: string;
+  /** کلید ترجمه برچسب توصیفی */
+  labelKey?: string;
   primary: boolean;
   modeKey: string;
   note: string;

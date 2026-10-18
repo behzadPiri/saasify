@@ -39,7 +39,7 @@ export function ActivityFeed({activities, limit = 5, animated = true, locale = "
     return (
       <div className="flex flex-col items-center justify-center gap-2 py-8 text-center text-muted-foreground">
         <Icons.Inbox size={32} className="opacity-50" />
-        <p>هیچ فعالیت جدیدی یافت نشد</p>
+        <p>{t("noActivity")}</p>
       </div>
     );
   }
@@ -65,7 +65,7 @@ export function ActivityFeed({activities, limit = 5, animated = true, locale = "
               <div className="min-w-0 flex-1">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex flex-wrap items-center gap-2">
-                    <p className="text-sm font-semibold text-foreground">{activity.title}</p>
+                    <p className="text-sm font-semibold text-foreground">{t(activity.titleKey)}</p>
                     <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
                       {typeLabels[group as ActivityGroup]}
                     </span>
@@ -73,7 +73,7 @@ export function ActivityFeed({activities, limit = 5, animated = true, locale = "
                   <time className="text-xs text-muted-foreground">{formatRelativeTime(activity.timestamp, locale)}</time>
                 </div>
 
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{activity.description}</p>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">{t(activity.descriptionKey)}</p>
 
                 <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-center gap-2">

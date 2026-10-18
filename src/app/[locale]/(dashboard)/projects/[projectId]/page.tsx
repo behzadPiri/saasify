@@ -3,6 +3,7 @@ import {Link} from "@/i18n/navigation";
 import {Icons} from "@/shared/components/ui/icons";
 import {PROJECT_STATUS_STYLE} from "@/features/projects/constants";
 import {createMockProjects} from "@/features/projects/lib/mockProjects";
+import {getProjectName, getProjectDescription, getTaskTitle, getProjectRole} from "@/features/projects/lib/display";
 
 interface ProjectDetailPageProps {
   params: {
@@ -55,8 +56,8 @@ export default function ProjectDetailPage({params}: ProjectDetailPageProps) {
               {t("projectDetails")}
             </div>
             <div>
-              <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{project.name}</h1>
-              <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">{project.description ?? t("projectDetailsDescription")}</p>
+              <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{getProjectName(project, t)}</h1>
+              <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">{getProjectDescription(project, t) || t("projectDetailsDescription")}</p>
             </div>
           </div>
 
@@ -127,7 +128,7 @@ export default function ProjectDetailPage({params}: ProjectDetailPageProps) {
               {(project.tasks ?? []).map((task) => (
                 <div key={task.id} className="flex flex-col gap-3 rounded-2xl border border-border/40 bg-background/60 p-4 sm:flex-row sm:items-center sm:justify-between">
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-foreground">{task.title}</p>
+                    <p className="truncate text-sm font-semibold text-foreground">{getTaskTitle(task, t)}</p>
                     <p className="mt-1 text-xs text-muted-foreground">{task.assignee}</p>
                   </div>
 
@@ -184,7 +185,7 @@ export default function ProjectDetailPage({params}: ProjectDetailPageProps) {
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-semibold text-foreground">{member.name}</p>
-                    <p className="text-xs text-muted-foreground">{member.role}</p>
+                    <p className="text-xs text-muted-foreground">{getProjectRole(member.role, t)}</p>
                   </div>
                 </div>
               ))}

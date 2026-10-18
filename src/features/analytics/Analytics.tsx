@@ -38,6 +38,7 @@ const DynamicProjectDistribution = dynamic(
  */
 export function Analytics() {
   const t = useTranslations("Dashboard"); // برای کلیدهای عمومی مانند retry و loading
+  const tAnalytics = useTranslations("Analytics");
   const {
     timeRange,
     setTimeRange,
@@ -52,8 +53,8 @@ export function Analytics() {
    * هندلر خروجی گرفتن از گزارش
    */
   const handleExport = useCallback(() => {
-    alert("گزارش تحلیلی با موفقیت آماده دانلود شد.");
-  }, []);
+    alert(tAnalytics("exportSuccess"));
+  }, [tAnalytics]);
 
   if (error) {
     return (

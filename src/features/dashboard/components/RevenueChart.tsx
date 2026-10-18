@@ -5,7 +5,7 @@
  * نمودار جذاب با انیمیشن‌های SVG برای نمایش روند درآمد ماهانه
  */
 
-import {useLocale} from "next-intl";
+import {useTranslations} from "next-intl";
 import type {ChartDataPoint} from "../types";
 import {useRevenueChart} from "../hooks/useRevenueChart";
 
@@ -24,7 +24,7 @@ export function RevenueChart({
     showLabels = true,
     animated = true,
 }: RevenueChartProps) {
-    const locale = useLocale();
+    const t = useTranslations("Dashboard.revenueChart");
     const {
         hoveredIndex,
         setHoveredIndex,
@@ -44,7 +44,7 @@ export function RevenueChart({
     if (data.length === 0) {
         return (
             <div className="flex h-[280px] items-center justify-center text-muted-foreground">
-                <p>داده‌ای برای نمایش وجود ندارد</p>
+                <p>{t("noData")}</p>
             </div>
         );
     }
@@ -90,7 +90,7 @@ export function RevenueChart({
                 viewBox={`0 0 100% ${height}`}
                 preserveAspectRatio="none"
                 role="img"
-                aria-label={locale === "fa" ? "نمودار درآمد ماهانه" : "Monthly Revenue Chart"}
+                aria-label={t("chartAriaLabel")}
                 onMouseLeave={() => setHoveredIndex(null)}
             >
                 {/* Gradient definitions */}
@@ -255,12 +255,12 @@ export function RevenueChart({
             <div className="absolute top-2 right-2 flex items-center gap-2 text-xs text-muted-foreground">
                 <div className="flex items-center gap-1.5">
                     <div className="w-5 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full" />
-                    <span>{locale === "fa" ? "درآمد" : "Revenue"}</span>
+                    <span>{t("legendLabel")}</span>
                 </div>
                 {animated && animationProgress < 1 && (
                     <div className="flex items-center gap-1 text-primary">
                         <span className="animate-pulse">●</span>
-                        <span>{locale === "fa" ? "در حال بارگذاری..." : "Loading..."}</span>
+                        <span>{t("loading")}</span>
                     </div>
                 )}
             </div>

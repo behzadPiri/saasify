@@ -1,4 +1,8 @@
 {
+  "Metadata": {
+    "title": "SaaSify Platform",
+    "description": "Advanced SaaS Management Dashboard"
+  },
   "Header": {
     "placeholder": "Search...",
     "openMenu": "Open menu",
@@ -34,6 +38,8 @@
     "subtitle": "Overview of your projects, team, and revenue",
     "refresh": "Refresh data",
     "retry": "Retry",
+    "loadErrorMessage": "Failed to load dashboard data.",
+    "chartLoading": "Loading chart",
     "statsLabel": "Key metrics",
     "stats": {
       "totalProjects": "Total Projects",
@@ -48,6 +54,8 @@
       "total": "Total Revenue",
       "yAxisTitle": "Revenue (Millions)",
       "legendLabel": "Revenue",
+      "chartAriaLabel": "Monthly Revenue Chart",
+      "loading": "Loading...",
       "noData": "No data to display"
     },
     "projectDistribution": {
@@ -108,13 +116,41 @@
       "justNow": "Just now",
       "minutesAgo": "{count} min ago",
       "hoursAgo": "{count} hr ago",
-      "daysAgo": "{count} days ago"
+      "daysAgo": "{count} days ago",
+      "items": {
+        "projectCreated": {
+          "title": "New project created",
+          "description": "The \"Content Management Panel\" project was kicked off by the development team."
+        },
+        "memberJoined": {
+          "title": "New member joined the team",
+          "description": "Sara Ahmadi joined the team as a UI/UX designer."
+        },
+        "paymentReceived": {
+          "title": "Payment received",
+          "description": "The monthly payment for the premium subscription was received."
+        },
+        "taskCompleted": {
+          "title": "Task completed",
+          "description": "Two-factor authentication implementation was finalized."
+        },
+        "projectUpdated": {
+          "title": "Project updated",
+          "description": "Version 2.1 of the mobile app was released."
+        }
+      }
     },
     "projects": {
       "title": "Recent Projects",
       "viewAll": "View all projects",
       "noProjects": "No projects yet",
       "members": "members",
+      "items": {
+        "contentPanel": "Content Management Panel",
+        "mobileApp": "Mobile App",
+        "apiGateway": "API Gateway",
+        "authSystem": "Authentication System"
+      },
       "status": {
         "active": "Active",
         "completed": "Completed",
@@ -180,7 +216,20 @@
     "projectDetailsStep1": "Review project milestones and update status.",
     "projectDetailsStep2": "Assign team members and track budget usage.",
     "complete": "complete",
-    "tasks": "Tasks",
+    "tasks": {
+      "landingPageCopyRefresh": "Landing page copy refresh",
+      "abTestFunnelSetup": "A/B test funnel setup",
+      "performanceAudit": "Performance audit",
+      "appStoreAssets": "App store assets",
+      "releaseChecklist": "Release checklist",
+      "fieldMapping": "Field mapping",
+      "integrationQa": "Integration QA",
+      "feedbackTagging": "Feedback tagging",
+      "supportDashboard": "Support dashboard",
+      "reviewReport": "Review report",
+      "monitoringDashboard": "Monitoring dashboard",
+      "cacheTuning": "Cache tuning"
+    },
     "taskBoard": "Task board",
     "done": "done",
     "deadline": "Deadline",
@@ -210,6 +259,39 @@
       "budget": "Budget",
       "deadline": "Deadline",
       "status": "Status"
+    },
+    "items": {
+      "marketingWebsite": "Marketing Website Redesign",
+      "mobileAppLaunch": "Mobile App Launch",
+      "crmIntegration": "CRM Integration",
+      "customerFeedbackLoop": "Customer Feedback Loop",
+      "securityAudit": "Security Audit",
+      "performanceOptimization": "Performance Optimization",
+      "platformRebrand": "Platform Rebrand",
+      "retentionDashboard": "Retention Dashboard",
+      "billingOptimization": "Billing Optimization",
+      "customerPortal": "Customer Portal",
+      "crmSync": "CRM Sync",
+      "marketingAutomation": "Marketing Automation",
+      "supportFlow": "Support Flow",
+      "qaPass": "QA Pass",
+      "researchNotes": "Research Notes",
+      "launchCampaign": "Launch Campaign",
+      "opsWorkflow": "Ops Workflow"
+    },
+    "descriptions": {
+      "marketingWebsite": "Refresh the market-facing website with a cleaner funnel and stronger experiment tracking.",
+      "mobileAppLaunch": "Launch the first mobile release with QA sign-off and marketing readiness checks.",
+      "crmIntegration": "Align sales and support workflows by integrating the CRM with the customer lifecycle engine.",
+      "customerFeedbackLoop": "Capture product feedback in a structured loop between support, design, and product teams.",
+      "securityAudit": "Complete security and compliance review for infrastructure, auth, and platform resilience.",
+      "performanceOptimization": "Improve the application response time and reduce operating cost across the platform core."
+    },
+    "roles": {
+      "owner": "Owner",
+      "admin": "Admin",
+      "member": "Member",
+      "viewer": "Viewer"
     }
   },
   "Team": {
@@ -287,6 +369,7 @@
       "title": "Invite member",
       "description": "Add a teammate and assign a role.",
       "email": "Email address",
+      "emailPlaceholder": "team@saasify.dev",
       "role": "Role",
       "submit": "Send invite",
       "success": "Invitation sent to {email}.",
@@ -311,6 +394,8 @@
     "badge": "Enterprise Analytics",
     "heroDescription": "Unified overview of revenue stream, traffic volume, conversion patterns, and device breakdown in real time.",
     "exportReport": "Export Report",
+    "exportSuccess": "The analytics report is ready to download.",
+    "loadErrorMessage": "Failed to load analytics data. Please try again.",
     "liveUpdates": "Live sync enabled",
     "timeRange": {
       "today": "Today",
@@ -347,6 +432,15 @@
       "funnelTitle": "Conversion Funnel",
       "funnelSubtitle": "Visitor progression from first entry to final payment",
       "funnelDropoff": "Drop-off",
+      "funnelSteps": {
+        "landing": "Landing page visit",
+        "features": "View features and pricing",
+        "signup": "Start free sign-up",
+        "workspace": "Workspace setup",
+        "payment": "Purchase subscription and final payment"
+      },
+      "viewAll": "View all",
+      "visitors": "visitors",
       "topPagesTitle": "Top Visited Pages",
       "topPagesSubtitle": "Performance of most popular URLs, bounce rates, and session durations",
       "thPage": "Page Path",
@@ -359,6 +453,10 @@
   "Activity": {
     "title": "Activity",
     "subtitle": "Recent activity across your workspace",
+    "heroDescription": "Track important events, team updates, and project health in one clear, time-based stream.",
+    "loadErrorMessage": "Failed to load activities.",
+    "offline": "You are offline",
+    "offlineBanner": "Offline mode – data may be out of date",
     "noActivity": "No activity to display",
     "filter": "Filter by type",
     "filterTitle": "Event filters",
@@ -369,6 +467,48 @@
     "today": "Today",
     "successfulActions": "Successful actions",
     "itemsCount": "items",
+    "overview": {
+      "totalEvents": "Total events",
+      "server": "Server",
+      "successfulActions": "Successful actions",
+      "errorRate": "Error rate",
+      "fromLastWeek": "from last week",
+      "ariaLabel": "Activity statistics overview"
+    },
+    "items": {
+      "contentPanelStarted": {
+        "title": "New project created",
+        "description": "The \"Content Management Panel\" project was started by the development team."
+      },
+      "memberJoined": {
+        "title": "New member joined the team",
+        "description": "Sara Ahmadi joined the team as a UI/UX designer."
+      },
+      "taskCompleted": {
+        "title": "Task completed",
+        "description": "Two-factor authentication implementation was finished in the main project."
+      },
+      "paymentReceived": {
+        "title": "Payment received",
+        "description": "The monthly premium plan subscription was received successfully."
+      },
+      "projectUpdated": {
+        "title": "Project updated",
+        "description": "Version 2.1 of the mobile app was released with several UI improvements."
+      },
+      "clientDashboard": {
+        "title": "New project started for a new client",
+        "description": "Building a management dashboard for the sales team started on the new project."
+      },
+      "milestoneCompleted": {
+        "title": "Milestone completed",
+        "description": "The design and API testing phase of the Gateway project was completed."
+      },
+      "inviteAccepted": {
+        "title": "New member invitation accepted",
+        "description": "Amir Rezaei joined the team as a front-end developer."
+      }
+    },
     "groups": {
       "all": "All",
       "project": "Project",
@@ -437,7 +577,23 @@
     "invoice": "Invoice",
     "date": "Date",
     "amount": "Amount",
-    "receipt": "Receipt",
+    "receipt": {
+      "documentPrefix": "Invoice",
+      "heading": "Invoice Receipt",
+      "issued": "Issued",
+      "due": "Due",
+      "plan": "Plan",
+      "planName": "Pro Plan",
+      "paymentMethod": "Payment method",
+      "card": "Card",
+      "amount": "Amount",
+      "status": "Status",
+      "statusPaid": "Paid",
+      "statusPending": "Pending",
+      "statusFailed": "Failed",
+      "methodOnline": "Online Payment",
+      "methodBank": "Bank Transfer"
+    },
     "onlinePayment": "Online payment",
     "bankTransfer": "Bank transfer",
     "cardNumber": "Card number",
@@ -574,6 +730,10 @@
     "title": "Settings",
     "subtitle": "Manage your account and preferences",
     "description": "Customize your workspace, privacy settings, and experience preferences.",
+    "generalSettings": "General settings",
+    "generalSettingsDescription": "Theme, language, and panel preferences",
+    "profileSettings": "User profile",
+    "profileSettingsDescription": "Personal information and account security",
     "profile": "Profile",
     "profileDetails": "Profile details",
     "productLead": "Product Lead",
@@ -690,6 +850,7 @@
     "password": "Password",
     "emailPlaceholder": "you@example.com",
     "passwordPlaceholder": "••••••",
+    "togglePassword": "Toggle password visibility",
     "rememberMe": "Remember me",
     "forgotPassword": "Forgot password?",
     "login": "Sign in",

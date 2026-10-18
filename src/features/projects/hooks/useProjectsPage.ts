@@ -19,6 +19,7 @@ import {useLocale, useTranslations} from "next-intl";
 import {ProjectFilterOption} from "../constants";
 import {ProjectStatus, ProjectStats, ProjectSummary} from "@/features/projects";
 import {createMockProjects} from "../lib/mockProjects";
+import {getProjectName} from "../lib/display";
 
 // کمک‌فانکشن شبیه‌سازی تأخیر با پشتیبانی از AbortSignal برای تست و توسعه محلی
 function sleep(ms: number, signal: AbortSignal) {
@@ -43,6 +44,7 @@ function sleep(ms: number, signal: AbortSignal) {
 export function useProjectsPage() {
   const locale = useLocale();
   const tCommon = useTranslations("Common");
+  const tProjects = useTranslations("Projects");
   const [projects, setProjects] = useState<ProjectSummary[]>([]);
   const [statusFilter, setStatusFilter] = useState<ProjectFilterOption>("all");
   const [searchTerm, setSearchTerm] = useState("");
@@ -117,7 +119,7 @@ export function useProjectsPage() {
           return true;
         }
 
-        return project.name.toLowerCase().includes(normalizedSearch);
+        return getProjectName(project, tProjects).toLowerCase().includes(normalizedSearch);
       })
       .sort((left, right) => {
         if (sortBy === "deadline") {
@@ -132,7 +134,7 @@ export function useProjectsPage() {
 
         return right.updatedAt.getTime() - left.updatedAt.getTime();
       });
-  }, [projects, searchTerm, statusFilter, sortBy]);
+  }, [projects, searchTerm, statusFilter, sortBy, tProjects]);
 
   // آمار کلی پروژه‌ها (تعداد کل، فعال، معوق و مجموع بودجه)
   const stats = useMemo<ProjectStats>(() => {

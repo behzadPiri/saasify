@@ -6,6 +6,7 @@
 
 "use client";
 
+import {useTranslations} from "next-intl";
 import {StatCard} from "./StatCard";
 import type {ActivityItem} from "@/features/activity";
 
@@ -94,47 +95,48 @@ function calculateStats(activities: ActivityItem[]): ActivityStats {
 }
 
 export function ActivityOverviewCards({activities, isLoading = false}: ActivityOverviewCardsProps) {
+  const t = useTranslations("Activity.overview");
   const stats = calculateStats(activities);
 
   const cards = [
     {
-      label: "کل رویدادها",
+      label: t("totalEvents"),
       value: isLoading ? "—" : stats.total,
       icon: "Activity" as const,
       variant: "primary" as const,
       trend: isLoading ? undefined : {
         value: stats.totalTrend,
-        label: "از هفته قبل",
+        label: t("fromLastWeek"),
       },
     },
     {
-      label: "سرور",
+      label: t("server"),
       value: isLoading ? "—" : stats.server,
       icon: "Shield" as const,
       variant: "purple" as const,
       trend: isLoading ? undefined : {
         value: stats.serverTrend,
-        label: "از هفته قبل",
+        label: t("fromLastWeek"),
       },
     },
     {
-      label: "عملیات موفق",
+      label: t("successfulActions"),
       value: isLoading ? "—" : stats.successful,
       icon: "Check" as const,
       variant: "success" as const,
       trend: isLoading ? undefined : {
         value: stats.successfulTrend,
-        label: "از هفته قبل",
+        label: t("fromLastWeek"),
       },
     },
     {
-      label: "نرخ خطا",
+      label: t("errorRate"),
       value: isLoading ? "—" : `${stats.failed}%`,
       icon: "AlertTriangle" as const,
       variant: "danger" as const,
       trend: isLoading ? undefined : {
         value: stats.failedTrend,
-        label: "از هفته قبل",
+        label: t("fromLastWeek"),
       },
     },
   ];
@@ -143,7 +145,7 @@ export function ActivityOverviewCards({activities, isLoading = false}: ActivityO
     <div
       className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
       role="region"
-      aria-label="نمای کلی آمار فعالیت‌ها"
+      aria-label={t("ariaLabel")}
     >
       {cards.map((card) => (
         <StatCard

@@ -14,6 +14,7 @@ import {useTeamPage} from "./useTeamPage";
 import type {MemberActivityItem} from "@/features/team";
 import type {TeamMemberView} from "../types";
 import type {ProjectStatus, ProjectSummary} from "@/features/projects";
+import {getProjectName} from "@/features/projects/lib/display";
 
 interface UseTeamMemberDetailOptions {
   memberId: string;
@@ -22,6 +23,7 @@ interface UseTeamMemberDetailOptions {
 
 export function useTeamMemberDetail({memberId, view}: UseTeamMemberDetailOptions) {
   const t = useTranslations("Team");
+  const tProjects = useTranslations("Projects");
   const locale = useLocale();
   const {members, isLoading, error, refresh} = useTeamPage();
 
@@ -43,8 +45,8 @@ export function useTeamMemberDetail({memberId, view}: UseTeamMemberDetailOptions
       return projects;
     }
 
-    return projects.filter((project) => project.name.toLowerCase().includes(normalizedSearch));
-  }, [projects, searchTerm]);
+    return projects.filter((project) => getProjectName(project, tProjects).toLowerCase().includes(normalizedSearch));
+  }, [projects, searchTerm, tProjects]);
 
   const openCreateModal = useCallback(() => setIsCreateOpen(true), []);
   const closeCreateModal = useCallback(() => setIsCreateOpen(false), []);

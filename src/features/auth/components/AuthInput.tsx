@@ -4,6 +4,7 @@
  * کامپوننت ورودی احراز هویت
  */
 import { memo } from "react";
+import { useTranslations } from "next-intl";
 
 interface AuthInputProps {
     label: string;
@@ -28,6 +29,7 @@ export const AuthInput = memo(function AuthInput({
     onToggle,
     showPassword,
 }: AuthInputProps) {
+    const t = useTranslations("Auth");
     const inputType = showToggle ? (showPassword ? "text" : "password") : type;
     return (
         <div className="space-y-1.5">
@@ -51,7 +53,7 @@ export const AuthInput = memo(function AuthInput({
                         type="button"
                         onClick={onToggle}
                         className="absolute inset-y-0 inset-e-3 flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-400"
-                        aria-label="toggle password"
+                        aria-label={t("togglePassword")}
                     >
                         {showPassword ? "🙈" : "👁️"}
                     </button>

@@ -56,51 +56,72 @@ export function formatReceiptDate(date: Date, locale: string): string {
 }
 
 /**
+ * برچسب‌های ترجمه‌شدهٔ رسید فاکتور که از لایهٔ UI تزریق می‌شوند
+ */
+export interface ReceiptLabels {
+  documentPrefix: string;
+  heading: string;
+  issued: string;
+  due: string;
+  plan: string;
+  planName: string;
+  paymentMethod: string;
+  card: string;
+  amount: string;
+  status: string;
+  statusPaid: string;
+  statusPending: string;
+  statusFailed: string;
+  methodOnline: string;
+  methodBank: string;
+}
+
+/**
  * ساخت HTML رسید فاکتور برای دانلود
  */
-export function buildReceiptHtml(invoice: {id: string; date: Date; dueDate: Date; amount: number; cardLabel: string; status: string; method: string}, locale: string): string {
-  const statusText = invoice.status === "paid" ? "Paid" : invoice.status === "pending" ? "Pending" : "Failed";
-  const methodText = invoice.method === "online" ? "Online Payment" : "Bank Transfer";
+export function buildReceiptHtml(invoice: {id: string; date: Date; dueDate: Date; amount: number; cardLabel: string; status: string; method: string}, locale: string, labels: ReceiptLabels): string {
+  const statusText = invoice.status === "paid" ? labels.statusPaid : invoice.status === "pending" ? labels.statusPending : labels.statusFailed;
+  const methodText = invoice.method === "online" ? labels.methodOnline : labels.methodBank;
 
   return `
     <html>
       <head>
         <meta charset="UTF-8" />
-        <title>Invoice ${invoice.id}</title>
+        <title>${labels.documentPrefix} ${invoice.id}</title>
       </head>
       <body style="font-family: Arial, sans-serif; padding: 32px; color: #111827;">
         <div style="max-width: 760px; margin: 0 auto; border: 1px solid #e5e7eb; border-radius: 18px; padding: 24px;">
-          <h1 style="margin: 0 0 12px; font-size: 28px;">Invoice Receipt</h1>
+          <h1 style="margin: 0 0 12px; font-size: 28px;">${labels.heading}</h1>
           <p style="margin: 0 0 20px; color: #6b7280;">${invoice.id}</p>
           <div style="display: flex; justify-content: space-between; margin-bottom: 24px;">
             <div>
-              <div style="font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: .12em;">Issued</div>
+              <div style="font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: .12em;">${labels.issued}</div>
               <div>${formatReceiptDate(invoice.date, locale)}</div>
             </div>
             <div>
-              <div style="font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: .12em;">Due</div>
+              <div style="font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: .12em;">${labels.due}</div>
               <div>${formatReceiptDate(invoice.dueDate, locale)}</div>
             </div>
           </div>
           <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 16px 0;" />
           <div style="display: flex; justify-content: space-between; margin: 18px 0;">
-            <span>Plan</span>
-            <strong>Pro Plan</strong>
+            <span>${labels.plan}</span>
+            <strong>${labels.planName}</strong>
           </div>
           <div style="display: flex; justify-content: space-between; margin: 18px 0;">
-            <span>Payment method</span>
+            <span>${labels.paymentMethod}</span>
             <strong>${methodText}</strong>
           </div>
           <div style="display: flex; justify-content: space-between; margin: 18px 0;">
-            <span>Card</span>
+            <span>${labels.card}</span>
             <strong>${invoice.cardLabel}</strong>
           </div>
           <div style="display: flex; justify-content: space-between; margin: 18px 0;">
-            <span>Amount</span>
+            <span>${labels.amount}</span>
             <strong>${buildAmountLabel(invoice.amount, locale)}</strong>
           </div>
           <div style="display: flex; justify-content: space-between; margin: 18px 0;">
-            <span>Status</span>
+            <span>${labels.status}</span>
             <strong>${statusText}</strong>
           </div>
         </div>
@@ -112,8 +133,8 @@ export function buildReceiptHtml(invoice: {id: string; date: Date; dueDate: Date
 /**
  * دانلود فاکتور به صورت فایل HTML
  */
-export function downloadInvoiceHtml(invoice: {id: string; date: Date; dueDate: Date; amount: number; cardLabel: string; status: string; method: string}, locale: string): void {
-  const html = buildReceiptHtml(invoice, locale);
+export function downloadInvoiceHtml(invoice: {id: string; date: Date; dueDate: Date; amount: number; cardLabel: string; status: string; method: string}, locale: string, labels: ReceiptLabels): void {
+  const html = buildReceiptHtml(invoice, locale, labels);
   const blob = new Blob([html], {type: "text/html;charset=utf-8"});
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");

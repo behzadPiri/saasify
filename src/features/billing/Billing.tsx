@@ -7,7 +7,7 @@
 
 import {useMemo, useCallback} from "react";
 import {useBilling, useInvoices} from "./hooks";
-import {downloadInvoiceHtml} from "./lib/format";
+import {downloadInvoiceHtml, type ReceiptLabels} from "./lib/format";
 import {useLocale, useTranslations} from "next-intl";
 import type {Invoice} from "./types";
 import {BillingHero} from "./components/BillingHero";
@@ -20,6 +20,7 @@ import {Pagination} from "./components/Pagination";
 export function Billing() {
   const locale = useLocale();
   const t = useTranslations("Billing");
+  const tReceipt = useTranslations("Billing.receipt");
 
   // منطق اصلی صورت‌accounts
   const {
@@ -48,12 +49,35 @@ export function Billing() {
     [invoices],
   );
 
+  // برچسب‌های ترجمه‌شدهٔ رسید فاکتور برای تولید فایل HTML
+  const receiptLabels = useMemo<ReceiptLabels>(
+    () => ({
+      documentPrefix: tReceipt("documentPrefix"),
+      heading: tReceipt("heading"),
+      issued: tReceipt("issued"),
+      due: tReceipt("due"),
+      plan: tReceipt("plan"),
+      planName: tReceipt("planName"),
+      paymentMethod: tReceipt("paymentMethod"),
+      card: tReceipt("card"),
+      amount: tReceipt("amount"),
+      status: tReceipt("status"),
+      statusPaid: tReceipt("statusPaid"),
+      statusPending: tReceipt("statusPending"),
+      statusFailed: tReceipt("statusFailed"),
+      methodOnline: tReceipt("methodOnline"),
+      methodBank: tReceipt("methodBank"),
+    }),
+    [tReceipt],
+  );
+
   // تابع دانلود فاکtors - با استفاده از useCallback برای جلوگیری از re-render
   const handleDownloadInvoice = useCallback(
     (invoice: Invoice) => {
-      downloadInvoiceHtml(invoice, locale);
+      const cardLabel = invoice.cardLabelKey ? t(invoice.cardLabelKey) : invoice.cardLabel ?? "";
+      downloadInvoiceHtml({...invoice, cardLabel}, locale, receiptLabels);
     },
-    [locale],
+    [locale, receiptLabels, t],
   );
 
   // تابع دانلود فاکtors فعلی(آخرین فاکtors)

@@ -6,6 +6,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Icons } from "@/shared/components/ui/icons";
 import type { ActivityItem, ActivityGroup } from "@/features/activity";
 import { typeToGroup, getActivityTypeConfig } from "../hooks/useActivity";
@@ -37,6 +38,7 @@ export const ActivityTimelineItem = React.memo(function ActivityTimelineItem({
   const config = getActivityTypeConfig(activity.type);
   const Icon = Icons[config.icon as keyof typeof Icons] || Icons.Activity;
   const group = typeToGroup(activity.type);
+  const t = useTranslations("Activity");
 
   return (
     <article
@@ -53,7 +55,7 @@ export const ActivityTimelineItem = React.memo(function ActivityTimelineItem({
         <div className="min-w-0 flex-1">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap items-center gap-2">
-              <p className="text-sm font-semibold text-foreground">{activity.title}</p>
+              <p className="text-sm font-semibold text-foreground">{t(activity.titleKey)}</p>
               <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
                 {typeLabels[group]}
               </span>
@@ -61,7 +63,7 @@ export const ActivityTimelineItem = React.memo(function ActivityTimelineItem({
             <time className="text-xs text-muted-foreground">{formatRelativeTime(activity.timestamp, locale)}</time>
           </div>
 
-          <p className="mt-2 text-sm leading-6 text-muted-foreground">{activity.description}</p>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">{t(activity.descriptionKey)}</p>
 
           <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-2">

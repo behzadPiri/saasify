@@ -17,8 +17,8 @@ export type ActivityGroup = Exclude<ActivityFilter, "all">;
 export interface ActivityItem {
   id: string;
   type: ActivityType;
-  title: string;
-  description: string;
+  titleKey: string;
+  descriptionKey: string;
   user: {
     name: string;
     avatar?: string;

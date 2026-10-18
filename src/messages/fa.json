@@ -1,4 +1,8 @@
 {
+  "Metadata": {
+    "title": "پلتفرم SaaSify",
+    "description": "داشبورد پیشرفته مدیریت سرویس‌های ابری"
+  },
   "Header": {
     "placeholder": "جستجو...",
     "openMenu": "باز کردن منو",
@@ -34,6 +38,8 @@
     "subtitle": "نمای کلی پروژه‌ها، تیم و درآمد شما",
     "refresh": "به‌روزرسانی داده‌ها",
     "retry": "تلاش مجدد",
+    "loadErrorMessage": "دریافت داده‌های داشبورد با خطا مواجه شد.",
+    "chartLoading": "در حال بارگذاری نمودار",
     "statsLabel": "شاخص‌های کلیدی",
     "stats": {
       "totalProjects": "کل پروژه‌ها",
@@ -48,6 +54,8 @@
       "total": "جمع درآمد",
       "yAxisTitle": "درآمد (میلیون)",
       "legendLabel": "درآمد",
+      "chartAriaLabel": "نمودار درآمد ماهانه",
+      "loading": "در حال بارگذاری...",
       "noData": "داده‌ای برای نمایش وجود ندارد"
     },
     "projectDistribution": {
@@ -108,13 +116,41 @@
       "justNow": "همین الان",
       "minutesAgo": "{count} دقیقه پیش",
       "hoursAgo": "{count} ساعت پیش",
-      "daysAgo": "{count} روز پیش"
+      "daysAgo": "{count} روز پیش",
+      "items": {
+        "projectCreated": {
+          "title": "پروژه جدید ایجاد شد",
+          "description": "پروژه «پنل مدیریت محتوا» توسط تیم توسعه آغاز شد."
+        },
+        "memberJoined": {
+          "title": "عضو جدید به تیم اضافه شد",
+          "description": "سارا احمدی به عنوان طراح UI/UX به تیم پیوست."
+        },
+        "paymentReceived": {
+          "title": "دریافت پرداخت",
+          "description": "اشتراک ماهانه پلن حرفه‌ای با موفقیت دریافت شد."
+        },
+        "taskCompleted": {
+          "title": "وظیفه تکمیل شد",
+          "description": "پیاده‌سازی احراز هویت دو مرحله‌ای در پروژه اصلی خاتمه یافت."
+        },
+        "projectUpdated": {
+          "title": "پروژه به‌روزرسانی شد",
+          "description": "نسخه 2.1 اپلیکیشن موبایل منتشر شد."
+        }
+      }
     },
     "projects": {
       "title": "پروژه‌های اخیر",
       "viewAll": "مشاهده تمام پروژه‌ها",
       "noProjects": "هنوز پروژه‌ای وجود ندارد",
       "members": "عضو",
+      "items": {
+        "contentPanel": "پنل مدیریت محتوا",
+        "mobileApp": "اپلیکیشن موبایل",
+        "apiGateway": "API Gateway",
+        "authSystem": "سیستم احراز هویت"
+      },
       "status": {
         "active": "فعال",
         "completed": "تکمیل شده",
@@ -187,7 +223,20 @@
     "projectDetailsStep1": "نقاط عطف پروژه را بررسی و وضعیت را به‌روزرسانی کنید.",
     "projectDetailsStep2": "اعضای تیم را تخصیص داده و مصرف بودجه را پیگیری کنید.",
     "complete": "کامل",
-    "tasks": "وظیفه‌ها",
+    "tasks": {
+      "landingPageCopyRefresh": "بازنویسی متن صفحه فرود",
+      "abTestFunnelSetup": "راه‌اندازی قیف آزمون A/B",
+      "performanceAudit": "ممیزی عملکرد",
+      "appStoreAssets": "دارایی‌های فروشگاه اپلیکیشن",
+      "releaseChecklist": "چک‌لیست انتشار",
+      "fieldMapping": "نگاشت فیلدها",
+      "integrationQa": "تضمین کیفیت یکپارچه‌سازی",
+      "feedbackTagging": "برچسب‌گذاری بازخورد",
+      "supportDashboard": "داشبورد پشتیبانی",
+      "reviewReport": "گزارش بازبینی",
+      "monitoringDashboard": "داشبورد پایش",
+      "cacheTuning": "تنظیم کش"
+    },
     "taskBoard": "برد وظایف",
     "done": "انجام‌شده",
     "deadline": "مهلت",
@@ -210,7 +259,40 @@
       "totalBudget": "بودجه کل"
     },
     "loadErrorMessage": "بارگذاری پروژه‌ها با مشکل مواجه شد. لطفاً دوباره تلاش کنید.",
-    "back": "بازگشت"
+    "back": "بازگشت",
+    "items": {
+      "marketingWebsite": "بازطراحی وب‌سایت بازاریابی",
+      "mobileAppLaunch": "رونمایی اپلیکیشن موبایل",
+      "crmIntegration": "یکپارچه‌سازی CRM",
+      "customerFeedbackLoop": "حلقه بازخورد مشتری",
+      "securityAudit": "ممیزی امنیتی",
+      "performanceOptimization": "بهینه‌سازی عملکرد",
+      "platformRebrand": "تغییر برند پلتفرم",
+      "retentionDashboard": "داشبورد حفظ مشتری",
+      "billingOptimization": "بهینه‌سازی صورت‌حساب",
+      "customerPortal": "پرتال مشتری",
+      "crmSync": "همگام‌سازی CRM",
+      "marketingAutomation": "اتوماسیون بازاریابی",
+      "supportFlow": "فرایند پشتیبانی",
+      "qaPass": "بازبینی کیفیت",
+      "researchNotes": "یادداشت‌های پژوهشی",
+      "launchCampaign": "کمپین رونمایی",
+      "opsWorkflow": "فرایند عملیات"
+    },
+    "descriptions": {
+      "marketingWebsite": "بازطراحی وب‌سایت بازاریابی با قیف ساده‌تر و ردیابی دقیق‌تر آزمایش‌ها.",
+      "mobileAppLaunch": "رونمایی نخستین نسخه موبایل همراه با تأیید کیفیت و آمادگی بازاریابی.",
+      "crmIntegration": "هم‌سوسازی جریان‌های فروش و پشتیبانی با یکپارچه‌سازی CRM و چرخه عمر مشتری.",
+      "customerFeedbackLoop": "ثبت بازخورد محصول در حلقه‌ای ساختاریافته میان تیم‌های پشتیبانی، طراحی و محصول.",
+      "securityAudit": "بازبینی کامل امنیت و انطباق برای زیرساخت، احراز هویت و تاب‌آوری پلتفرم.",
+      "performanceOptimization": "بهبود زمان پاسخ اپلیکیشن و کاهش هزینه عملیاتی در هسته پلتفرم."
+    },
+    "roles": {
+      "owner": "مالک",
+      "admin": "مدیر",
+      "member": "عضو",
+      "viewer": "بازدیدکننده"
+    }
   },
   "Team": {
     "title": "تیم",
@@ -287,6 +369,7 @@
       "title": "دعوت عضو",
       "description": "یک هم‌تیمی را اضافه کنید و نقش او را مشخص نمایید.",
       "email": "ایمیل",
+      "emailPlaceholder": "team@saasify.dev",
       "role": "نقش",
       "submit": "ارسال دعوت",
       "success": "دعوت‌نامه برای {email} ارسال شد.",
@@ -311,6 +394,8 @@
     "badge": "تحلیل‌های سازمانی",
     "heroDescription": "نمای یکپارچه از جریان درآمد، حجم ترافیک، الگوهای تبدیل و سهم دستگاه‌ها با به‌روزرسانی لحظه‌ای.",
     "exportReport": "خروجی گزارش",
+    "exportSuccess": "گزارش تحلیلی با موفقیت آماده دانلود شد.",
+    "loadErrorMessage": "دریافت اطلاعات تحلیلی با خطا مواجه شد. لطفاً دوباره تلاش کنید.",
     "liveUpdates": "به‌روزرسانی خودکار فعال است",
     "timeRange": {
       "today": "امروز",
@@ -344,9 +429,18 @@
       "desktop": "رایانه دسکتاپ",
       "mobile": "گوشی هوشمند",
       "tablet": "تبلت",
-      "funnelTitle": "قیف تبدیل کاربران (Conversion Funnel)",
+      "funnelTitle": "قیف تبدیل کاربران",
       "funnelSubtitle": "مسیر حرکت بازدیدکننده از اولین ورودی تا پرداخت نهایی",
       "funnelDropoff": "ریزش",
+      "funnelSteps": {
+        "landing": "بازدید صفحه فرود",
+        "features": "مشاهده ویژگی‌ها و قیمت‌گذاری",
+        "signup": "شروع ثبت‌نام رایگان",
+        "workspace": "راه‌اندازی فضای کاری",
+        "payment": "خرید اشتراک و پرداخت نهایی"
+      },
+      "viewAll": "نمایش همه",
+      "visitors": "بازدیدکننده",
       "topPagesTitle": "پربازدیدترین صفحات و مسیرها",
       "topPagesSubtitle": "بررسی عملکرد محبوب‌ترین URLها، زمان حضور و بانس ریت",
       "thPage": "مسیر صفحه",
@@ -359,6 +453,10 @@
   "Activity": {
     "title": "فعالیت‌ها",
     "subtitle": "فعالیت‌های اخیر در فضای کاری شما",
+    "heroDescription": "ردیابی وقایع مهم، تغییرات تیم و وضعیت پروژه‌ها در یک جریان زمان‌مند و قابل‌فهم.",
+    "loadErrorMessage": "دریافت فعالیت‌ها با خطا مواجه شد.",
+    "offline": "شما در حالت آفلاین هستید",
+    "offlineBanner": "حالت آفلاین - داده‌ها ممکن است بروز نباشند",
     "noActivity": "فعالیتی برای نمایش وجود ندارد",
     "filter": "فیلتر بر اساس نوع",
     "filterTitle": "فیلترهای رویدادها",
@@ -369,6 +467,48 @@
     "today": "امروز",
     "successfulActions": "عملیات موفق",
     "itemsCount": "مورد",
+    "overview": {
+      "totalEvents": "کل رویدادها",
+      "server": "سرور",
+      "successfulActions": "عملیات موفق",
+      "errorRate": "نرخ خطا",
+      "fromLastWeek": "از هفته قبل",
+      "ariaLabel": "نمای کلی آمار فعالیت‌ها"
+    },
+    "items": {
+      "contentPanelStarted": {
+        "title": "پروژه جدید ایجاد شد",
+        "description": "پروژه «پنل مدیریت محتوا» توسط تیم توسعه آغاز شد."
+      },
+      "memberJoined": {
+        "title": "عضو جدید به تیم اضافه شد",
+        "description": "سارا احمدی به عنوان طراح UI/UX به تیم پیوست."
+      },
+      "taskCompleted": {
+        "title": "وظیفه تکمیل شد",
+        "description": "پیاده‌سازی احراز هویت دو مرحله‌ای در پروژه اصلی خاتمه یافت."
+      },
+      "paymentReceived": {
+        "title": "دریافت پرداخت",
+        "description": "اشتراک ماهانه پلن حرفه‌ای با موفقیت دریافت شد."
+      },
+      "projectUpdated": {
+        "title": "پروژه بروزرسانی شد",
+        "description": "نسخه 2.1 اپلیکیشن موبایل با چند بهبود رابط کاربری منتشر شد."
+      },
+      "clientDashboard": {
+        "title": "پروژه جدید برای مشتری جدید آغاز شد",
+        "description": "ساخت داشبورد مدیریتی برای تیم فروش روی پروژه جدید شروع شد."
+      },
+      "milestoneCompleted": {
+        "title": "تکمیل نقطه عطف",
+        "description": "مرحله طراحی و تست API در پروژه Gateway به پایان رسید."
+      },
+      "inviteAccepted": {
+        "title": "دعوت عضو جدید پذیرفته شد",
+        "description": "امیر رضایی به‌عنوان توسعه‌دهنده فرانت‌اند به تیم اضافه شد."
+      }
+    },
     "groups": {
       "all": "همه",
       "project": "پروژه",
@@ -417,7 +557,7 @@
     "saved": "ذخیره‌شده",
     "autoRenew": "تمدید خودکار",
     "planName": "پلن حرفه‌ای",
-    "active": "عالی",
+    "active": "فعال",
     "renewsOn": "تمدید در",
     "usage": "مصرف",
     "teamSeats": "نشست تیم",
@@ -426,18 +566,34 @@
     "defaultCard": "روش پرداخت پیش‌فرض",
     "secondaryCard": "کارت پشتیبان",
     "default": "پیش‌فرض",
-    "activity": "عالیت",
-    "lastPayment": " آخرین پرداخت",
+    "activity": "فعالیت",
+    "lastPayment": "آخرین پرداخت",
     "status": "وضعیت",
     "paid": "پرداخت‌شده",
     "pending": "در انتظار",
-    "failed": "نا موفق",
+    "failed": "ناموفق",
     "invoiceHistory": "تاریخچه فاکتورها",
     "viewAll": "نمایش همه",
     "invoice": "فاکتور",
     "date": "تاریخ",
     "amount": "مبلغ",
-    "receipt": "رسید",
+    "receipt": {
+      "documentPrefix": "فاکتور",
+      "heading": "رسید فاکتور",
+      "issued": "صدور",
+      "due": "سررسید",
+      "plan": "پلن",
+      "planName": "پلن حرفه‌ای",
+      "paymentMethod": "روش پرداخت",
+      "card": "کارت",
+      "amount": "مبلغ",
+      "status": "وضعیت",
+      "statusPaid": "پرداخت‌شده",
+      "statusPending": "در انتظار",
+      "statusFailed": "ناموفق",
+      "methodOnline": "پرداخت آنلاین",
+      "methodBank": "انتقال بانکی"
+    },
     "onlinePayment": "پرداخت آنلاین",
     "bankTransfer": "کارت به کارت",
     "cardNumber": "شماره کارت",
@@ -494,7 +650,7 @@
         "2": "مدیریت حساب اختصاصی",
         "3": "آپتایم ۹۹.۹۹٪",
         "4": "امنیت پیشرفته",
-        "5": "API دسترسی"
+        "5": "دسترسی API"
       }
     },
     "paymentDates": {
@@ -574,6 +730,10 @@
     "title": "تنظیمات",
     "subtitle": "مدیریت حساب و ترجیحات",
     "description": "فضای کاری، تنظیمات حریم خصوصی و ترجیحات تجربه را شخصی‌سازی کنید.",
+    "generalSettings": "تنظیمات عمومی",
+    "generalSettingsDescription": "تنظیمات تم، زبان و ترجیحات پنل",
+    "profileSettings": "پروفایل کاربری",
+    "profileSettingsDescription": "تنظیمات اطلاعات شخصی و امنیت حساب",
     "profile": "پروفایل",
     "profileDetails": "جزئیات پروفایل",
     "productLead": "مدیر محصول",
@@ -690,6 +850,7 @@
     "password": "رمز عبور",
     "emailPlaceholder": "you@example.com",
     "passwordPlaceholder": "••••••",
+    "togglePassword": "نمایش یا مخفی کردن رمز عبور",
     "rememberMe": "مرا به خاطر بسپار",
     "forgotPassword": "فراموشی رمز عبور",
     "login": "ورود",

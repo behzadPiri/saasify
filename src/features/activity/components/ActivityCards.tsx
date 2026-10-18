@@ -8,12 +8,14 @@
 import { ActivityItem } from '@/features/activity';
 import { ACTIVITY_TYPES } from '../constants/activity-types';
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 interface ActivityCardsProps {
   activities: ActivityItem[];
 }
 
 export const ActivityCards = ({ activities }: ActivityCardsProps) => {
+  const t = useTranslations("Activity");
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {activities.map((activity) => {
@@ -31,7 +33,7 @@ export const ActivityCards = ({ activities }: ActivityCardsProps) => {
               <div>
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                    {activity.title}
+                    {t(activity.titleKey)}
                   </h3>
                   <span className="text-xs text-gray-500 dark:text-gray-400">
                     {new Date(activity.timestamp).toLocaleDateString()}
@@ -39,7 +41,7 @@ export const ActivityCards = ({ activities }: ActivityCardsProps) => {
                 </div>
 
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  {activity.description}
+                  {t(activity.descriptionKey)}
                 </p>
 
                 {activity.user && (

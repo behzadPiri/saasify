@@ -13,6 +13,7 @@ import {Icons} from "@/shared/components/ui/icons";
 import {Link} from "@/i18n/navigation";
 import type {ProjectSummary} from "../types";
 import {PROJECT_STATUS_STYLE} from "../constants";
+import {getProjectName} from "../lib/display";
 
 interface ProjectCardProps {
   project: ProjectSummary;
@@ -58,7 +59,7 @@ export function ProjectCard({project, formatDate, formatCurrency}: ProjectCardPr
       <div className="flex flex-col gap-5 min-w-0">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
-            <h3 className="text-base font-semibold tracking-tight text-foreground line-clamp-2">{project.name}</h3>
+            <h3 className="text-base font-semibold tracking-tight text-foreground line-clamp-2">{getProjectName(project, t)}</h3>
             <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
               {project.members !== undefined && (
                 <span className="inline-flex items-center gap-1 rounded-full bg-muted/60 px-2 py-1">

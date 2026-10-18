@@ -20,8 +20,8 @@ export interface DashboardStats {
 export interface ActivityItem {
     id: string;
     type: "project_created" | "project_updated" | "member_joined" | "payment_received" | "task_completed";
-    title: string;
-    description: string;
+    titleKey: string;
+    descriptionKey: string;
     user: {
         name: string;
         avatar?: string;
@@ -38,7 +38,7 @@ export interface ChartDataPoint {
 
 export interface ProjectSummary {
     id: string;
-    name: string;
+    nameKey: string;
     status: "active" | "completed" | "on_hold" | "archived";
     progress: number;
     members: number;

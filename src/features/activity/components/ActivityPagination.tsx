@@ -1,3 +1,7 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 interface ActivityPaginationProps {
   currentPage: number;
   totalPages: number;
@@ -5,6 +9,7 @@ interface ActivityPaginationProps {
 }
 
 export const ActivityPagination = ({ currentPage, totalPages, onPageChange }: ActivityPaginationProps) => {
+  const t = useTranslations("Activity.pagination");
   const pageNumbers = [];
   const maxPageButtons = 5;
 
@@ -26,7 +31,7 @@ export const ActivityPagination = ({ currentPage, totalPages, onPageChange }: Ac
         disabled={currentPage === 1}
         className="px-4 py-2 text-sm text-gray-700 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        قبلی
+        {t("prev")}
       </button>
 
       <div className="flex -space-x-px">
@@ -54,7 +59,7 @@ export const ActivityPagination = ({ currentPage, totalPages, onPageChange }: Ac
         disabled={currentPage === totalPages}
         className="px-4 py-2 text-sm text-gray-700 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        بعدی
+        {t("next")}
       </button>
     </div>
   );
