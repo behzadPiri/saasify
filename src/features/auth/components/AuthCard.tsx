@@ -11,7 +11,7 @@ interface AuthCardProps {
 
 export function AuthCard({ children }: AuthCardProps) {
     return (
-        <div className="animate-[slideUp_0.5s_ease-out] rounded-2xl bg-white p-8 shadow-xl dark:bg-gray-900">
+        <div className="rounded-2xl border border-border/60 bg-card p-6 text-foreground shadow-xl shadow-black/5 sm:p-8">
             {children}
         </div>
     );

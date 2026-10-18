@@ -12,10 +12,10 @@ interface StatusMessageProps {
 export function StatusMessage({ status }: StatusMessageProps) {
     const t = useTranslations("Auth");
     if (status === "success") {
-        return <p className="text-center text-sm text-green-600">{t("loginSuccess")}</p>;
+        return <p className="text-center text-sm text-emerald-600">{t("loginSuccess")}</p>;
     }
     if (status === "error") {
-        return <p className="text-center text-sm text-red-600">{t("loginError")}</p>;
+        return <p className="text-center text-sm text-red-500">{t("loginError")}</p>;
     }
     return null;
 }

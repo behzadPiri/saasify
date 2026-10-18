@@ -35,7 +35,7 @@ export const sessionCookieName = `${
  * کاربران نمونه (Mock) برای احراز هویت
  */
 const MOCK_USERS = [
-    { id: "1", email: "admin@example.com", password: "123456", name: "Admin" },
+    { id: "1", email: "admin@gmail.com", password: "123456", name: "Admin" },
 ];
 
 /**

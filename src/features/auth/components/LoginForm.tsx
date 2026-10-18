@@ -54,36 +54,36 @@ export function LoginForm({ form }: LoginFormProps) {
                 onToggle={togglePassword}
             />
             <div className="flex items-center justify-between text-sm">
-                <label className="flex items-center gap-2">
+                <label className="flex items-center gap-2 text-foreground/80">
                     <input
                         type="checkbox"
                         checked={rememberMe}
                         onChange={toggleRememberMe}
-                        className="h-4 w-4 rounded border-gray-300"
+                        className="h-4 w-4 rounded border-border accent-primary"
                     />
                     {t("rememberMe")}
                 </label>
-                <a href="#" className="text-blue-600 hover:underline">
+                <a href="#" className="text-primary hover:underline">
                     {t("forgotPassword")}
                 </a>
             </div>
             <button
                 type="submit"
                 disabled={status === "loading" || !isFormValid}
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:opacity-60"
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-60"
             >
                 {status === "loading" && (
-                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent" />
                 )}
                 {t("login")}
             </button>
             <StatusMessage status={status} />
             <div className="relative my-4">
                 <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-200 dark:border-gray-700" />
+                    <div className="w-full border-t border-border" />
                 </div>
                 <div className="relative flex justify-center text-xs">
-                    <span className="bg-white px-2 text-gray-500 dark:bg-gray-900">{t("or")}</span>
+                    <span className="bg-card px-2 text-muted-foreground">{t("or")}</span>
                 </div>
             </div>
             <SocialAuth />
