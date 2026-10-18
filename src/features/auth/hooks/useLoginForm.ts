@@ -4,7 +4,9 @@
  * هوک مدیریت فرم ورود
  */
 import { useCallback, useMemo, useState } from "react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
 import { INITIAL_LOGIN_FORM } from "@/features/auth";
 import { validateLoginForm } from "../lib/validate";
 import type { LoginFormErrors, AuthStatus } from "../types";
@@ -14,6 +16,7 @@ import type { LoginFormErrors, AuthStatus } from "../types";
  */
 export function useLoginForm() {
     const router = useRouter();
+    const locale = useLocale();
     const [email, setEmail] = useState(INITIAL_LOGIN_FORM.email);
     const [password, setPassword] = useState(INITIAL_LOGIN_FORM.password);
     const [rememberMe, setRememberMe] = useState(INITIAL_LOGIN_FORM.rememberMe);
@@ -52,17 +55,27 @@ export function useLoginForm() {
             }
             setStatus("loading");
             try {
-                await new Promise((resolve) => setTimeout(resolve, 1200));
+                const res = await signIn("credentials", {
+                    email,
+                    password,
+                    redirect: false,
+                });
+                if (res?.error) {
+                    setStatus("error");
+                    setShake(true);
+                    setTimeout(() => setShake(false), 500);
+                    return;
+                }
                 setStatus("success");
                 if (rememberMe) {
                     localStorage.setItem("auth_remember", "true");
                 }
-                setTimeout(() => router.push("/dashboard"), 600);
+                setTimeout(() => router.push(`/${locale}/dashboard`), 600);
             } catch {
                 setStatus("error");
             }
         },
-        [email, password, rememberMe, router]
+        [email, password, rememberMe, router, locale]
     );
 
     const isFormValid = useMemo(
