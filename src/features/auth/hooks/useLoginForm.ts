@@ -54,10 +54,13 @@ export function useLoginForm() {
                 return;
             }
             setStatus("loading");
+            // مسیر مقصد با پیشوند زبان فعلی (next-intl) تا ریدایرکت پس از لاگین معتبر باشد
+            const callbackUrl = `/${locale}/dashboard`;
             try {
                 const res = await signIn("credentials", {
                     email,
                     password,
+                    callbackUrl,
                     redirect: false,
                 });
                 if (res?.error) {
@@ -70,7 +73,7 @@ export function useLoginForm() {
                 if (rememberMe) {
                     localStorage.setItem("auth_remember", "true");
                 }
-                setTimeout(() => router.push(`/${locale}/dashboard`), 600);
+                setTimeout(() => router.push(callbackUrl), 600);
             } catch {
                 setStatus("error");
             }

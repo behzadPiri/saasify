@@ -35,16 +35,21 @@
 import { routing } from "./i18n/routing";
 import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
+import { authSecret, sessionCookieName, useSecureCookies } from "@/auth";
 
 const intlMiddleware = createMiddleware(routing);
 
-export default function proxy(req: NextRequest) {
+// لیست مسیرهای خصوصی که نیاز به لاگین دارند
+const protectedRoutes = ["/dashboard", "/settings", "/billing", "/notifications", "/analytics", "/activity"];
+
+export default async function proxy(req: NextRequest) {
     const { pathname } = req.nextUrl;
     const firstSegment = pathname.split("/")[1];
 
     const supportedLocales = routing.locales as readonly string[];
 
-    // اگر سگمنت اول دو حرفی بود اما در زبان‌های پشتیبانی شده نبود (مثل /ar)
+    // بررسی زبان‌های نامعتبر
     if (
         firstSegment &&
         firstSegment.length === 2 &&
@@ -55,11 +60,44 @@ export default function proxy(req: NextRequest) {
         return NextResponse.redirect(url);
     }
 
-    // سپردن مابقی کارها به میدل‌ور نیتیو پکیج (که حالا کوکی‌ها را هم می‌خواند)
+    const locale = supportedLocales.includes(firstSegment) ? firstSegment : routing.defaultLocale;
+
+    const pathWithoutLocale = supportedLocales.includes(firstSegment)
+        ? pathname.replace(`/${firstSegment}`, "") || "/"
+        : pathname;
+
+    // 🔥 پاس دادن همان secret و نام کوکیِ کانفیگ NextAuth به getToken
+    // تا کوکی نشست (در حالت HTTP لوکال بدون پیشوند __Secure-) درست خوانده شود
+    const token = await getToken({
+        req,
+        secret: authSecret,
+        secureCookie: useSecureCookies,
+        cookieName: sessionCookieName,
+    });
+    const isAuthenticated = !!token;
+
+    const isProtectedRoute = protectedRoutes.some((route) =>
+        pathWithoutLocale.startsWith(route)
+    );
+
+    // ۱. اگر کاربر لاگین نکرده و می‌خواهد وارد صفحه خصوصی شود -> ریدایرکت به لاگین
+    if (isProtectedRoute && !isAuthenticated) {
+        const loginUrl = req.nextUrl.clone();
+        loginUrl.pathname = `/${locale}/login`;
+        return NextResponse.redirect(loginUrl);
+    }
+
+    // ۲. اگر کاربر لاگین کرده و می‌خواهد صفحه لاگین را باز کند -> هدایت به داشبورد
+    if (pathWithoutLocale.startsWith("/login") && isAuthenticated) {
+        const dashboardUrl = req.nextUrl.clone();
+        dashboardUrl.pathname = `/${locale}/dashboard`;
+        return NextResponse.redirect(dashboardUrl);
+    }
+
+    // ۳. ادامه پردازش ترجمه‌ها توسط next-intl
     return intlMiddleware(req);
 }
 
 export const config = {
-    // مچر استاندارد توصیه شده توسط next-intl
     matcher: ["/", "/(fa|en)/:path*", "/((?!api|_next|_vercel|.*\\..*).*)"],
 };
