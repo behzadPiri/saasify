@@ -19,8 +19,21 @@ export interface ProjectTask {
   titleKey?: string;
   /** عنوان تحت‌اللفظی وظیفه (برای وظایف ساخته‌شده توسط کاربر) */
   title?: string;
+  /** کلید ترجمه توضیحات وظیفه (اختیاری) */
+  descriptionKey?: string;
+  /** توضیحات تحت‌اللفظی وظیفه (برای وظایف ساخته‌شده توسط کاربر) */
+  description?: string;
   assignee: string;
   status: "todo" | "in_progress" | "done";
+  dueDate?: Date;
+}
+
+/** ورودی ساخت وظیفهٔ جدید */
+export interface NewProjectTaskInput {
+  title: string;
+  assignee: string;
+  description?: string;
+  status: ProjectTask["status"];
   dueDate?: Date;
 }
 

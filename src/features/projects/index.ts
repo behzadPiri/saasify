@@ -1,4 +1,5 @@
 export * from "./hooks";
 export * from "./types";
 export * from "./constants";
-export {Projects} from "./Projects"
+export {Projects} from "./Projects";
+export {ProjectDetail} from "./components/ProjectDetail";

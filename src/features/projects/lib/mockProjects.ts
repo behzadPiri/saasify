@@ -25,9 +25,9 @@ export const createMockProjects = (): ProjectSummary[] => {
         {id: "tm-103", name: "Noah Kim", role: "member", avatarColor: "from-emerald-500 to-teal-500"},
       ],
       tasks: [
-        {id: "tsk-1", titleKey: "tasks.landingPageCopyRefresh", assignee: "Ava", status: "in_progress", dueDate: new Date(now.getTime() + 1000 * 60 * 60 * 24 * 2)},
-        {id: "tsk-2", titleKey: "tasks.abTestFunnelSetup", assignee: "Behzad", status: "todo", dueDate: new Date(now.getTime() + 1000 * 60 * 60 * 24 * 5)},
-        {id: "tsk-3", titleKey: "tasks.performanceAudit", assignee: "Noah", status: "done", dueDate: new Date(now.getTime() - 1000 * 60 * 60 * 12)},
+        {id: "tsk-1", titleKey: "tasks.landingPageCopyRefresh", descriptionKey: "taskDescriptions.landingPageCopyRefresh", assignee: "Ava", status: "in_progress", dueDate: new Date(now.getTime() + 1000 * 60 * 60 * 24 * 2)},
+        {id: "tsk-2", titleKey: "tasks.abTestFunnelSetup", descriptionKey: "taskDescriptions.abTestFunnelSetup", assignee: "Behzad", status: "todo", dueDate: new Date(now.getTime() + 1000 * 60 * 60 * 24 * 5)},
+        {id: "tsk-3", titleKey: "tasks.performanceAudit", descriptionKey: "taskDescriptions.performanceAudit", assignee: "Noah", status: "done", dueDate: new Date(now.getTime() - 1000 * 60 * 60 * 12)},
       ],
     },
     {
@@ -49,8 +49,8 @@ export const createMockProjects = (): ProjectSummary[] => {
         {id: "tm-104", name: "Mila Garcia", role: "member", avatarColor: "from-amber-500 to-orange-500"},
       ],
       tasks: [
-        {id: "tsk-4", titleKey: "tasks.appStoreAssets", assignee: "Mila", status: "done"},
-        {id: "tsk-5", titleKey: "tasks.releaseChecklist", assignee: "Ava", status: "done"},
+        {id: "tsk-4", titleKey: "tasks.appStoreAssets", descriptionKey: "taskDescriptions.appStoreAssets", assignee: "Mila", status: "done"},
+        {id: "tsk-5", titleKey: "tasks.releaseChecklist", descriptionKey: "taskDescriptions.releaseChecklist", assignee: "Ava", status: "done"},
       ],
     },
     {
@@ -72,8 +72,8 @@ export const createMockProjects = (): ProjectSummary[] => {
         {id: "tm-106", name: "Sara Nouri", role: "admin", avatarColor: "from-pink-500 to-rose-500"},
       ],
       tasks: [
-        {id: "tsk-6", titleKey: "tasks.fieldMapping", assignee: "Noah", status: "in_progress"},
-        {id: "tsk-7", titleKey: "tasks.integrationQa", assignee: "Sara", status: "todo"},
+        {id: "tsk-6", titleKey: "tasks.fieldMapping", descriptionKey: "taskDescriptions.fieldMapping", assignee: "Noah", status: "in_progress"},
+        {id: "tsk-7", titleKey: "tasks.integrationQa", descriptionKey: "taskDescriptions.integrationQa", assignee: "Sara", status: "todo"},
       ],
     },
     {
@@ -95,8 +95,8 @@ export const createMockProjects = (): ProjectSummary[] => {
         {id: "tm-105", name: "Leo Martin", role: "viewer", avatarColor: "from-stone-500 to-slate-500"},
       ],
       tasks: [
-        {id: "tsk-8", titleKey: "tasks.feedbackTagging", assignee: "Mila", status: "in_progress"},
-        {id: "tsk-9", titleKey: "tasks.supportDashboard", assignee: "Leo", status: "todo"},
+        {id: "tsk-8", titleKey: "tasks.feedbackTagging", descriptionKey: "taskDescriptions.feedbackTagging", assignee: "Mila", status: "in_progress"},
+        {id: "tsk-9", titleKey: "tasks.supportDashboard", descriptionKey: "taskDescriptions.supportDashboard", assignee: "Leo", status: "todo"},
       ],
     },
     {
@@ -117,7 +117,7 @@ export const createMockProjects = (): ProjectSummary[] => {
         {id: "tm-105", name: "Leo Martin", role: "viewer", avatarColor: "from-stone-500 to-slate-500"},
       ],
       tasks: [
-        {id: "tsk-10", titleKey: "tasks.reviewReport", assignee: "Leo", status: "done"},
+        {id: "tsk-10", titleKey: "tasks.reviewReport", descriptionKey: "taskDescriptions.reviewReport", assignee: "Leo", status: "done"},
       ],
     },
     {
@@ -139,8 +139,8 @@ export const createMockProjects = (): ProjectSummary[] => {
         {id: "tm-101", name: "Behzad Piray", role: "owner", avatarColor: "from-violet-500 to-indigo-500"},
       ],
       tasks: [
-        {id: "tsk-11", titleKey: "tasks.monitoringDashboard", assignee: "Sara", status: "in_progress"},
-        {id: "tsk-12", titleKey: "tasks.cacheTuning", assignee: "Behzad", status: "done"},
+        {id: "tsk-11", titleKey: "tasks.monitoringDashboard", descriptionKey: "taskDescriptions.monitoringDashboard", assignee: "Sara", status: "in_progress"},
+        {id: "tsk-12", titleKey: "tasks.cacheTuning", descriptionKey: "taskDescriptions.cacheTuning", assignee: "Behzad", status: "done"},
       ],
     },
   ];
