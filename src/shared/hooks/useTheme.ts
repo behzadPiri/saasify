@@ -1,80 +1,79 @@
 /**
  * هوک مدیریت تم برنامه
  * شامل تغییر تم (روشن/تاریک/غروب)، حالت خودکار بر اساس ساعت تهران
- * و ذخیره ترجیحات کاربر در localStorage
+ * و ذخیره ترجیحات کاربر در localStorage و کوکی
+ *
+ * همگام‌سازی اولیه تم قبل از اولین رنگ‌آمیزی توسط اسکریپت inline داخل
+ * `src/app/layout.tsx` انجام می‌شود؛ این هوک فقط وضعیت را با DOM هماهنگ نگه می‌دارد.
  */
 
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+    DEFAULT_THEME,
+    THEME_CHANGE_EVENT,
+    ThemeChangeDetail,
+    ThemeType,
+    applyThemeToDocument,
+    getTehranAutoTheme,
+    persistTheme,
+    readStoredAuto,
+    readStoredTheme,
+} from "@/core/theme";
 
-// نوع تم‌های قابل انتخاب
-export type ThemeType = "light" | "dark" | "afternoon";
+// نوع تم‌های قابل انتخاب (برای سازگاری با importهای قبلی)
+export type { ThemeType } from "@/core/theme";
 
 export function useTheme() {
-    const [theme, setTheme] = useState<ThemeType>("light");
-    const [isAuto, setIsAuto] = useState<boolean>(false);
+    // وضعیت اولیه از DOM/localStorage خوانده می‌شود تا اولین رندر کلاینت هم تم صحیح را نشان دهد.
+    // در سمت سرور مقدار پیش‌فرض برگردانده می‌شود و سپس اسکریپت همگام، تم را قبل از رنگ‌آمیزی اعمال می‌کند.
+    const [theme, setTheme] = useState<ThemeType>(() => readInitialTheme());
+    const [isAuto, setIsAuto] = useState<boolean>(() => readInitialAuto());
     const [mounted, setMounted] = useState<boolean>(false);
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    // تابع محاسبه تم خودکار بر اساس ساعت تهران
-    // 6-17 روشن | 17-20 غروب | 20-6 تاریک
-    const getTehranAutoTheme = useCallback((): ThemeType => {
-        const tehranHourStr = new Date().toLocaleTimeString("en-US", {
-            timeZone: "Asia/Tehran",
-            hour: "2-digit",
-            hour12: false,
-        });
-        const hour = parseInt(tehranHourStr, 10);
-
-        if (hour >= 6 && hour < 17) return "light";
-        if (hour >= 17 && hour < 20) return "afternoon";
-        return "dark";
+    // اثر ۱: علامت‌گذاری mount شدن برای جلوگیری از ناسازگاری hydration
+    useEffect(() => {
+        const timer = setTimeout(() => setMounted(true), 0);
+        return () => clearTimeout(timer);
     }, []);
 
-    // اثر ۱: خواندن تم ذخیره‌شده از localStorage هنگام mount شدن
-    // از setTimeout(0) استفاده می‌شود تا عملیات به چرخه بعدی مرورگر موکول شود
-    // این کار از خطای ESLint در Next.js جلوگیری می‌کند
+    // اثر ۲: اعمال تم روی html و ذخیره آن در localStorage/کوکی
+    // ابتدا DOM به‌صورت همگام به‌روزرسانی می‌شود تا هیچ فریم روشنی نمایش داده نشود.
     useEffect(() => {
-        const savedAuto = localStorage.getItem("saasify-theme-auto") === "true";
-        const savedTheme = (localStorage.getItem("saasify-theme") as ThemeType) || "light";
+        applyThemeToDocument(theme);
+        persistTheme(theme, isAuto);
+    }, [theme, isAuto]);
 
-        const timer = setTimeout(() => {
-            if (savedAuto) {
-                setIsAuto(true);
-                setTheme(getTehranAutoTheme());
-            } else {
-                setTheme(savedTheme);
+    // اثر ۳: همگام‌سازی همه نمونه‌های useTheme (دسکتاپ/موبایل) و سایر تب‌ها
+    useEffect(() => {
+        const syncFromEvent = (event: Event) => {
+            const detail = (event as CustomEvent<ThemeChangeDetail>).detail;
+
+            if (detail) {
+                setTheme(detail.theme);
+                setIsAuto(detail.isAuto);
+                return;
             }
-            setMounted(true);
-        }, 0);
 
-        return () => clearTimeout(timer);
-    }, [getTehranAutoTheme]);
+            // رویداد storage فقط وقتی رخ می‌دهد که تب دیگری مقدار را تغییر داده باشد
+            setTheme(readStoredTheme());
+            setIsAuto(readStoredAuto());
+        };
 
-    // اثر ۲: اعمال کلاس‌ها به تگ HTML و ذخیره تغییرات در localStorage
-    // این effect هر زمان که theme یا isAuto تغییر کند اجرا می‌شود
-    useEffect(() => {
-        if (!mounted) return;
+        window.addEventListener(THEME_CHANGE_EVENT, syncFromEvent);
+        window.addEventListener("storage", syncFromEvent);
 
-        // تنظیم data-theme روی تگ html برای CSS custom properties
-        document.documentElement.setAttribute("data-theme", theme);
-        // اضافه/حذف کلاس dark روی تگ html
-        if (theme === "dark") {
-            document.documentElement.classList.add("dark");
-        } else {
-            document.documentElement.classList.remove("dark");
-        }
+        return () => {
+            window.removeEventListener(THEME_CHANGE_EVENT, syncFromEvent);
+            window.removeEventListener("storage", syncFromEvent);
+        };
+    }, []);
 
-        // ذخیره تم و حالت خودکار در localStorage
-        localStorage.setItem("saasify-theme", theme);
-        localStorage.setItem("saasify-theme-auto", String(isAuto));
-    }, [theme, isAuto, mounted]);
-
-    // اثر ۳: اینتروال حالت خودکار - هر 60 ثانیه تم را بر اساس ساعت تهران بررسی می‌کند
-    // اگر تم فعلی با تم محاسبه‌شده متفاوت باشد، آن را به‌روزرسانی می‌کند
+    // اثر ۴: اینتروال حالت خودکار - هر 60 ثانیه تم را بر اساس ساعت تهران بررسی می‌کند
     useEffect(() => {
         if (!isAuto || !mounted) return;
 
@@ -83,13 +82,12 @@ export function useTheme() {
             if (theme !== currentAutoTheme) {
                 setTheme(currentAutoTheme);
             }
-        }, 60000);  // هر 60 ثانیه (1 دقیقه)
+        }, 60000);
 
         return () => clearInterval(interval);
-    }, [isAuto, theme, mounted, getTehranAutoTheme]);
+    }, [isAuto, theme, mounted]);
 
-    // اثر ۴: مدیریت کلیک بیرونی برای بستن دراپ‌داون تم
-    // اگر کاربر در خارج از دراپ‌داون کلیک کند، دراپ‌داون بسته می‌شود
+    // اثر ۵: مدیریت کلیک بیرونی برای بستن دراپ‌داون تم
     useEffect(() => {
         if (!isOpen) return;
 
@@ -103,19 +101,38 @@ export function useTheme() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [isOpen]);
 
+    // اطلاع‌رسانی تغییر تم به سایر نمونه‌های هوک
+    const publishThemeChange = useCallback((nextTheme: ThemeType, nextIsAuto: boolean) => {
+        if (typeof window === "undefined") return;
+
+        window.dispatchEvent(
+            new CustomEvent<ThemeChangeDetail>(THEME_CHANGE_EVENT, {
+                detail: { theme: nextTheme, isAuto: nextIsAuto },
+            }),
+        );
+    }, []);
+
     // تابع تغییر تم - فقط در حالت غیرخودکار اجازه تغییر می‌دهد
+    // DOM بلافاصله به‌روزرسانی می‌شود تا تغییر رنگ بدون تاخیر و بدون پرش انجام شود
     const changeTheme = (themeName: ThemeType) => {
         if (isAuto) return;
+
+        applyThemeToDocument(themeName);
+        persistTheme(themeName, false);
         setTheme(themeName);
+        publishThemeChange(themeName, false);
     };
 
     // تابع فعال/غیرفعال کردن حالت خودکار
     // اگر حالت خودکار فعال شود، تم فوراً بر اساس ساعت تهران تنظیم می‌شود
     const toggleAuto = (checked: boolean) => {
+        const nextTheme = checked ? getTehranAutoTheme() : theme;
+
+        applyThemeToDocument(nextTheme);
+        persistTheme(nextTheme, checked);
         setIsAuto(checked);
-        if (checked) {
-            setTheme(getTehranAutoTheme());
-        }
+        setTheme(nextTheme);
+        publishThemeChange(nextTheme, checked);
     };
 
     // تابع دریافت نوع آیکون فعال بر اساس تم فعلی یا حالت خودکار
@@ -126,16 +143,39 @@ export function useTheme() {
         return "dark";
     };
 
-    // برگرداندن state و توابع مورد نیاز کامپوننت‌های تم‌سوئیچر
     return {
-        theme,              // تم فعلی (light/dark/afternoon)
-        isAuto,             // آیا حالت خودکار فعال است؟
-        mounted,            // آیا کامپوننت mount شده؟ (برای جلوگیری از خطای hydration)
-        changeTheme,        // تابع تغییر تم
-        toggleAuto,         // تابع فعال/غیرفعال کردن حالت خودکار
-        isOpen,             // آیا دراپ‌داون تم باز است؟
-        setIsOpen,          // تابع تنظیم وضعیت باز/بسته بودن دراپ‌داون
-        dropdownRef,        // رفرنس به المان دراپ‌داون برای بستن با کلیک بیرون
-        getActiveIconType   // تابع دریافت نوع آیکون فعال
+        theme,
+        isAuto,
+        mounted,
+        changeTheme,
+        toggleAuto,
+        isOpen,
+        setIsOpen,
+        dropdownRef,
+        getActiveIconType,
     };
+}
+
+/**
+ * خواندن تم اولیه در کلاینت
+ * اولویت با مقدار already-applied روی html است (که اسکریپت همگام ست کرده)
+ * و در نبود آن، localStorage و سپس تم پیش‌فرض.
+ */
+function readInitialTheme(): ThemeType {
+    if (typeof document === "undefined") return DEFAULT_THEME;
+
+    const domTheme = document.documentElement.getAttribute("data-theme");
+    if (domTheme === "light" || domTheme === "dark" || domTheme === "afternoon") {
+        return domTheme;
+    }
+
+    return readStoredTheme();
+}
+
+/**
+ * خواندن وضعیت اولیه حالت خودکار در کلاینت
+ */
+function readInitialAuto(): boolean {
+    if (typeof window === "undefined") return false;
+    return readStoredAuto();
 }

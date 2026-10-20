@@ -1,9 +1,16 @@
 import {ReactNode} from "react";
 import "./globals.css";
 import type {Metadata} from "next";
-import Script from "next/script";
+import {cookies} from "next/headers";
 import {NextIntlClientProvider} from "next-intl";
 import {vazirFont, geistFont} from "@/core/fonts";
+import {
+    DEFAULT_THEME,
+    THEME_BACKGROUND_COLORS,
+    THEME_COOKIE_NAME,
+    isThemeType,
+    themeInitScript,
+} from "@/core/theme";
 import {getLocale, getMessages, getTranslations, setRequestLocale} from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -27,27 +34,36 @@ export default async function RootLayout({children}: Readonly<{ children: ReactN
     const messages = await getMessages();
     const dir = locale === "fa" ? "rtl" : "ltr";
 
+    // خواندن تم ذخیره‌شده از کوکی تا سرور هم در همان رندر اول، تم صحیح را روی html قرار دهد.
+    // این کار همراه با اسکریپت همگام پایین، از پرش رنگ تم (Theme Flash) در تغییر زبان جلوگیری می‌کند.
+    const cookieStore = await cookies();
+    const savedTheme = cookieStore.get(THEME_COOKIE_NAME)?.value;
+    const initialTheme = isThemeType(savedTheme) ? savedTheme : DEFAULT_THEME;
+
     return (
         <html
             dir={dir}
             lang={locale}
-            suppressHydrationWarning // <-- این دستور به ری‌آکت می‌گوید تغییرات تم توسط اسکریپت پایین قانونی است
-            className={`${vazirFont.variable} ${geistFont.variable} h-full antialiased`}
+            data-theme={initialTheme}
+            suppressHydrationWarning // <-- تغییر تم توسط اسکریپت همگام پایین مجاز است
+            className={`${vazirFont.variable} ${geistFont.variable} ${initialTheme === "dark" ? "dark" : ""} h-full antialiased`}
+            style={{
+                colorScheme: initialTheme === "dark" ? "dark" : "light",
+                backgroundColor: THEME_BACKGROUND_COLORS[initialTheme],
+            }}
         >
         <head>
-            {/* این اسکریپت کوچک قبل از بالا آمدن بدنه سایت، تم را هماهنگ می‌کند */}
-            <Script id="theme-sync" strategy="beforeInteractive">
-              {`try {
-                var savedTheme = localStorage.getItem("saasify-theme");
-                if (savedTheme) {
-                  document.documentElement.setAttribute("data-theme", savedTheme);
-                }
-              } catch (e) {}`}
-            </Script>
+            {/* اسکریپت همگام تم: باید به صورت inline ساده (نه next/script) باشد تا
+                پیش از اولین رنگ‌آمیزی مرورگر اجرا شود و از پرش رنگ جلوگیری کند. */}
+            <script
+                id="theme-init"
+                suppressHydrationWarning
+                dangerouslySetInnerHTML={{__html: themeInitScript}}
+            />
             {/* تگ تایتل دستی حذف شد تا با شیء metadata تداخل پیدا نکند */}
         </head>
 
-        <body className="min-h-full flex flex-col bg-background text-foreground" >
+        <body className="min-h-full flex flex-col bg-background text-foreground">
         <NextIntlClientProvider locale={locale} messages={messages}>
             {children}
         </NextIntlClientProvider>

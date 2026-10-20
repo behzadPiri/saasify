@@ -1,7 +1,17 @@
 @import "tailwindcss";
 
+/* واریانت dark بر اساس کلاس روی html (نه تنظیمات سیستم‌عامل)
+   تا تم انتخابی کاربر همیشه و در همه‌جا (از جمله پس از تغییر زبان) پایدار بماند. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* پس‌زمینه پایه html، قبل از رنگ‌آمیزی body و برای جلوگیری از پرش رنگ سفید */
+html {
+    background-color: var(--background);
+}
+
 /* ۱. تعریف متغیرهای رنگی پیش‌فرض (تم روشن - Light) */
 :root {
+    color-scheme: light;
     --background: #f9fafb;
     --foreground: #111827;
     --card: #ffffff;
@@ -16,6 +26,7 @@
 
 /* ۲. تم شب (Dark) */
 :root[data-theme="dark"] {
+    color-scheme: dark;
     --background: #0f172a;
     --foreground: #f8fafc;
     --card: #1e293b;

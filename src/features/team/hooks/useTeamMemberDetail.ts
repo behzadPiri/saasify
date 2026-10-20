@@ -13,13 +13,11 @@ import {formatCurrency} from "@/shared/lib/number-format";
 import {useToast} from "@/shared/components/ui";
 import {getRelativeTime} from "../lib/relative-time";
 import {MEMBER_ACTIVITY} from "../constants";
-import {useMemberProjects} from "./useMemberProjects";
+import {useMemberProjects} from "@/features/team";
 import {useTeamPage} from "./useTeamPage";
-import type {MemberActivityItem} from "@/features/team";
-import type {MemberEditValues} from "./useMemberEditForm";
-import type {TeamMemberView} from "../types";
+import type {MemberActivityItem, MemberEditValues} from "@/features/team";
+import type {TeamMemberView , TeamRole} from "../types";
 import type {ProjectStatus, ProjectSummary} from "@/features/projects";
-import type {TeamRole} from "../types";
 import {getProjectName} from "@/features/projects/lib/display";
 
 interface UseTeamMemberDetailOptions {

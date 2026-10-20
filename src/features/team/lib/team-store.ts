@@ -12,7 +12,7 @@
  */
 
 import type {ProjectSummary} from "@/features/projects";
-import {TEAM_MEMBER_PROJECTS} from "../constants/member-projects";
+import {TEAM_MEMBER_PROJECTS} from "@/features/team";
 import type {TeamMember, TeamRole} from "../types";
 import {createMockTeam} from "./mockTeam";
 

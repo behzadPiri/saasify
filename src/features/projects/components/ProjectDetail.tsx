@@ -8,7 +8,7 @@
 import type {ProjectSummary} from "../types";
 import {useProjectDetail, useProjectTasks} from "../hooks";
 import {ProjectDetailHeader} from "./ProjectDetailHeader";
-import {ProjectDetailNotFound} from "./ProjectDetailNotFound";
+import {ProjectDetailNotFound} from "@/features/projects";
 import {ProjectDetailOverview} from "./ProjectDetailOverview";
 import {ProjectDetailTaskBoard} from "./ProjectDetailTaskBoard";
 import {ProjectDetailTeam} from "./ProjectDetailTeam";
