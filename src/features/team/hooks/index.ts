@@ -11,3 +11,7 @@ export {useTeamToolbar} from "./useTeamToolbar";
 export {useTeamMemberCard} from "./useTeamMemberCard";
 export {useInviteMemberModal} from "./useInviteMemberModal";
 export {useTeamMemberDetail} from "./useTeamMemberDetail";
+export {useMemberProject, useMemberProjects} from "./useMemberProjects";
+export {useMemberAccessForm} from "./useMemberAccessForm";
+export {useMemberEditForm} from "./useMemberEditForm";
+export type {MemberEditValues} from "./useMemberEditForm";

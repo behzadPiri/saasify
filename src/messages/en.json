@@ -371,6 +371,7 @@
     "backToTeam": "Back to team",
     "createProject": "New project",
     "tabs": {
+      "label": "Member sections",
       "overview": "Overview",
       "projects": "Projects"
     },
@@ -378,10 +379,14 @@
       "joined": "Joined",
       "activeStatus": "Status",
       "recentActivity": "Recent activity",
+      "manage": "Manage member",
       "actions": {
         "edit": "Edit profile",
         "delete": "Delete member",
-        "access": "Change access"
+        "access": "Change access",
+        "editHint": "Update name, email, and location.",
+        "accessHint": "Choose the permission level for this teammate.",
+        "deleteHint": "Remove this person from the workspace."
       },
       "activity": {
         "reviewedSprint": "Reviewed sprint goals",
@@ -390,6 +395,46 @@
         "twoHoursAgo": "2 hours ago",
         "yesterday": "Yesterday",
         "threeDaysAgo": "3 days ago"
+      },
+      "edit": {
+        "badge": "Profile details",
+        "title": "Edit profile",
+        "description": "Update this teammate's personal information.",
+        "name": "Full name",
+        "namePlaceholder": "Jane Cooper",
+        "email": "Email address",
+        "emailPlaceholder": "jane@saasify.dev",
+        "location": "Location",
+        "locationPlaceholder": "London, UK",
+        "submit": "Save changes",
+        "success": "Profile updated successfully.",
+        "validation": {
+          "nameRequired": "Please enter the member's name.",
+          "invalidEmail": "Please enter a valid email address.",
+          "locationRequired": "Please enter a location."
+        }
+      },
+      "access": {
+        "badge": "Permissions",
+        "title": "Change access",
+        "description": "Choose a new permission level for {name}.",
+        "submit": "Update role",
+        "success": "Access level updated to {role}.",
+        "roles": {
+          "owner": "Full control over the workspace, billing, and every team member.",
+          "admin": "Manages projects, members, and most workspace settings.",
+          "member": "Creates and collaborates on projects with the team.",
+          "viewer": "Can view projects and reports without making changes."
+        }
+      },
+      "remove": {
+        "title": "Remove member",
+        "description": "Are you sure you want to remove {name} from the team?",
+        "warning": "This action cannot be undone. The member will immediately lose access to the workspace.",
+        "cancel": "Keep member",
+        "confirm": "Remove member",
+        "success": "{name} was removed from the team.",
+        "error": "The member could not be removed. Please try again."
       }
     },
     "invite": {

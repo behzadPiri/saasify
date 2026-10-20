@@ -6,7 +6,12 @@ import {useTranslations} from "next-intl";
 import {Link} from "@/i18n/navigation";
 import {Icons} from "@/shared/components/ui/icons";
 
-export function ProjectDetailNotFound() {
+interface ProjectDetailNotFoundProps {
+  backHref?: string;
+  backLabel?: string;
+}
+
+export function ProjectDetailNotFound({backHref = "/projects", backLabel}: ProjectDetailNotFoundProps) {
   const t = useTranslations("Projects");
 
   return (
@@ -18,11 +23,11 @@ export function ProjectDetailNotFound() {
         <h1 className="mt-5 text-2xl font-bold text-foreground">{t("projectNotFound")}</h1>
         <p className="mt-2 text-sm leading-6 text-muted-foreground">{t("projectNotFoundDescription")}</p>
         <Link
-          href="/projects"
+          href={backHref}
           className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/95"
         >
           <Icons.ArrowLeft size={16} />
-          {t("backToProjects")}
+          {backLabel ?? t("backToProjects")}
         </Link>
       </div>
     </section>

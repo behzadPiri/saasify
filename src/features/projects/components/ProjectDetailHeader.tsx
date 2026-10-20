@@ -12,9 +12,13 @@ import {getProjectDescription, getProjectName} from "../lib/display";
 
 interface ProjectDetailHeaderProps {
   project: ProjectSummary;
+  /** مقصد بازگشت (پیش‌فرض: فهرست عمومی پروژه‌ها) */
+  backHref?: string;
+  /** برچسب بازگشت (پیش‌فرض: ترجمهٔ Projects.back) */
+  backLabel?: string;
 }
 
-export function ProjectDetailHeader({project}: ProjectDetailHeaderProps) {
+export function ProjectDetailHeader({project, backHref = "/projects", backLabel}: ProjectDetailHeaderProps) {
   const t = useTranslations("Projects");
   const statusStyle = PROJECT_STATUS_STYLE[project.status];
   // عرض نوار پیشرفت ابتدا صفر است و پس از mount به مقدار واقعی می‌رسد
@@ -50,10 +54,10 @@ export function ProjectDetailHeader({project}: ProjectDetailHeaderProps) {
             {t(statusStyle.labelKey)}
           </span>
           <Link
-            href="/projects"
+            href={backHref}
             className="inline-flex items-center gap-2 rounded-2xl border border-border/60 bg-card/90 px-4 py-3 text-sm font-semibold text-foreground transition hover:bg-accent/40"
           >
-              {t("back")}
+              {backLabel ?? t("back")}
               <Icons.ArrowLeft className="ltr:rotate-180" size={16} />
           </Link>
         </div>

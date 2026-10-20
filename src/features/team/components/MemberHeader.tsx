@@ -2,11 +2,18 @@
 
 /**
  * هدر صفحهٔ جزئیات عضو
- * آواتار، نقش، تب‌های ناوبری و کارت‌های متادیتا
+ * آواتار، نقش، تب‌های ناوبری کلاینتی و کارت‌های متادیتا
+ *
+ * تب‌ها دیگر لینک نیستند؛ با تغییر state والد جابه‌جا می‌شوند تا هیچ
+ * ناوبری/رفرش کامل صفحه‌ای رخ ندهد. نشانگر (indicator) با ترنزیشن نرم
+ * بین دو تب حرکت می‌کند و در حالت RTL نیز با `inset-inline-start` درست
+ * رفتار می‌کند.
  */
 
 import {useTranslations} from "next-intl";
 import {Link} from "@/i18n/navigation";
+import {Tabs} from "@/shared/components/ui";
+import type {TabItem} from "@/shared/components/ui";
 import {Icons} from "@/shared/components/ui/icons";
 import {TEAM_ROLE_STYLE, TEAM_STATUS_STYLE} from "../constants";
 import type {TeamMember, TeamMemberView} from "../types";
@@ -14,24 +21,25 @@ import type {TeamMember, TeamMemberView} from "../types";
 interface MemberHeaderProps {
   member: TeamMember;
   initials: string;
-  view: TeamMemberView;
+  activeTab: TeamMemberView;
+  onTabChange: (tab: TeamMemberView) => void;
   projectCount: number;
 }
 
-export function MemberHeader({member, initials, view, projectCount}: MemberHeaderProps) {
+export function MemberHeader({member, initials, activeTab, onTabChange, projectCount}: MemberHeaderProps) {
   const t = useTranslations("Team");
   const roleStyle = TEAM_ROLE_STYLE[member.role];
 
-  const tabs = [
-    {key: "overview" as const, label: t("tabs.overview"), href: `/team/${member.id}`},
-    {key: "projects" as const, label: t("tabs.projects"), href: `/team/${member.id}/projects`},
+  const tabs: TabItem<TeamMemberView>[] = [
+    {value: "overview", label: t("tabs.overview"), icon: <Icons.Users size={15} />},
+    {value: "projects", label: t("tabs.projects"), icon: <Icons.Folder size={15} />, badge: projectCount},
   ];
 
   return (
     <div className="rounded-[30px] border border-border/50 bg-card/80 p-5 shadow-[0_18px_48px_rgba(15,23,42,0.06)] backdrop-blur-xl sm:p-6">
       <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex items-start gap-4">
-          <div className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${member.avatarColor} text-lg font-bold text-white`}>
+          <div className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br ${member.avatarColor} text-lg font-bold text-white`}>
             {initials}
           </div>
 
@@ -48,31 +56,20 @@ export function MemberHeader({member, initials, view, projectCount}: MemberHeade
           href="/team"
           className="inline-flex items-center justify-center gap-2 rounded-2xl border border-border/60 bg-card/90 px-4 py-3 text-sm font-semibold text-foreground transition hover:bg-accent/40"
         >
-          <Icons.ArrowLeft size={16} />
-          {t("backToTeam")}
+            {t("backToTeam")}
+            <Icons.ArrowLeft className="ltr:rotate-180" size={16} />
         </Link>
       </div>
 
-      <nav className="mt-6 flex flex-wrap gap-2" aria-label={t("title")}>
-        {tabs.map((tab) => {
-          const isActive = tab.key === view;
-
-          return (
-            <Link
-              key={tab.key}
-              href={tab.href}
-              aria-current={isActive ? "page" : undefined}
-              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${
-                isActive
-                  ? "bg-primary text-primary-foreground shadow-sm"
-                  : "border border-border/60 bg-background/60 text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {tab.key === "projects" ? <Icons.Folder size={14} /> : <Icons.Users size={14} />}
-              {tab.label}
-            </Link>
-          );
-        })}
+      <nav className="mt-6" aria-label={t("title")}>
+        <Tabs
+          items={tabs}
+          value={activeTab}
+          onChange={onTabChange}
+          ariaLabel={t("tabs.label")}
+          idPrefix="member"
+          className="w-full sm:max-w-lg"
+        />
       </nav>
 
       <div className="mt-6 grid gap-3 sm:grid-cols-3">

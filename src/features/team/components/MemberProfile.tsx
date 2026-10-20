@@ -3,6 +3,7 @@
 /**
  * پنل پروفایل عضو
  * تاریخ پیوستن، وضعیت، فعالیت‌های اخیر و اکشن‌های مدیریتی
+ * هر اکشن مودال مربوط به خود را باز می‌کند (ویرایش، تغییر دسترسی، حذف).
  */
 
 import {useTranslations} from "next-intl";
@@ -16,15 +17,47 @@ interface MemberProfileProps {
   joinedDate: string;
   relativeLastSeen: string;
   activityItems: readonly MemberActivityItem[];
+  onEdit: () => void;
+  onChangeAccess: () => void;
+  onRemove: () => void;
 }
 
-export function MemberProfile({member, joinedDate, relativeLastSeen, activityItems}: MemberProfileProps) {
+export function MemberProfile({
+  member,
+  joinedDate,
+  relativeLastSeen,
+  activityItems,
+  onEdit,
+  onChangeAccess,
+  onRemove,
+}: MemberProfileProps) {
   const t = useTranslations("Team");
 
   const actions = [
-    {key: "edit" as const, label: t("profile.actions.edit"), icon: Icons.Edit, danger: false},
-    {key: "access" as const, label: t("profile.actions.access"), icon: Icons.Settings, danger: false},
-    {key: "delete" as const, label: t("profile.actions.delete"), icon: Icons.AlertCircle, danger: true},
+    {
+      key: "edit" as const,
+      label: t("profile.actions.edit"),
+      hint: t("profile.actions.editHint"),
+      icon: Icons.Edit,
+      danger: false,
+      onClick: onEdit,
+    },
+    {
+      key: "access" as const,
+      label: t("profile.actions.access"),
+      hint: t("profile.actions.accessHint"),
+      icon: Icons.Shield,
+      danger: false,
+      onClick: onChangeAccess,
+    },
+    {
+      key: "remove" as const,
+      label: t("profile.actions.delete"),
+      hint: t("profile.actions.deleteHint"),
+      icon: Icons.AlertCircle,
+      danger: true,
+      onClick: onRemove,
+    },
   ];
 
   return (
@@ -62,19 +95,40 @@ export function MemberProfile({member, joinedDate, relativeLastSeen, activityIte
       </section>
 
       <aside className="rounded-[28px] border border-border/50 bg-card/80 p-5 shadow-sm backdrop-blur-xl sm:p-6">
-        <div className="space-y-3">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">{t("profile.manage")}</p>
+
+        <div className="mt-4 space-y-3">
           {actions.map((action) => (
             <button
               key={action.key}
               type="button"
-              className={`flex w-full items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-left text-sm font-medium transition ${
+              onClick={action.onClick}
+              aria-haspopup="dialog"
+              className={`group flex w-full items-start gap-3 rounded-2xl border px-4 py-3 text-left transition ${
                 action.danger
                   ? "border-red-200 bg-red-500/5 text-red-700 hover:bg-red-500/10"
-                  : "border-border/50 bg-background/60 text-foreground hover:bg-accent/40"
+                  : "border-border/50 bg-background/60 text-foreground hover:border-primary/25 hover:bg-accent/40"
               }`}
             >
-              <span>{action.label}</span>
-              <action.icon size={16} />
+              <span
+                className={`mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${
+                  action.danger ? "bg-red-500/10 text-red-600" : "bg-primary/10 text-primary"
+                }`}
+              >
+                <action.icon size={16} />
+              </span>
+
+              <span className="min-w-0 flex-1">
+                <span className="block text-sm font-semibold">{action.label}</span>
+                <span className={`mt-1 block text-xs leading-5 ${action.danger ? "text-red-600/80" : "text-muted-foreground"}`}>
+                  {action.hint}
+                </span>
+              </span>
+
+              <Icons.ArrowLeft
+                size={14}
+                className="mt-1 shrink-0 opacity-50 transition group-hover:opacity-100 ltr:rotate-180"
+              />
             </button>
           ))}
         </div>

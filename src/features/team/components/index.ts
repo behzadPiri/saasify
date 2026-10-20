@@ -12,3 +12,6 @@ export {MemberHeader} from "./MemberHeader";
 export {MemberProfile} from "./MemberProfile";
 export {MemberProjects} from "./MemberProjects";
 export {MemberNotFound} from "./MemberNotFound";
+export {EditMemberModal} from "./EditMemberModal";
+export {ChangeAccessModal} from "./ChangeAccessModal";
+export {RemoveMemberModal} from "./RemoveMemberModal";

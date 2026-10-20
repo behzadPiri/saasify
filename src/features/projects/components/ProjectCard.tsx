@@ -19,9 +19,11 @@ interface ProjectCardProps {
   project: ProjectSummary;
   formatDate: (date: Date) => string;
   formatCurrency: (value: number) => string;
+  /** مقصد کلیک؛ به‌صورت پیش‌فرض صفحهٔ عمومی پروژه است. */
+  href?: string;
 }
 
-export function ProjectCard({project, formatDate, formatCurrency}: ProjectCardProps) {
+export function ProjectCard({project, formatDate, formatCurrency, href}: ProjectCardProps) {
   const statusStyle = PROJECT_STATUS_STYLE[project.status];
   const [now, setNow] = useState<number | null>(null);
 
@@ -53,7 +55,7 @@ export function ProjectCard({project, formatDate, formatCurrency}: ProjectCardPr
   // تمرکز (focus) و موتورهای دسترسی در نظر گرفته شده‌اند.
   return (
     <Link
-      href={`/projects/${project.id}`}
+      href={href ?? `/projects/${project.id}`}
       className="group block w-full rounded-3xl border border-border/40 bg-card/80 p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-primary/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
     >
       <div className="flex flex-col gap-5 min-w-0">

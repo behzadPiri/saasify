@@ -28,6 +28,18 @@ export const INVITE_ROLE_OPTIONS: ReadonlyArray<{value: TeamRole; labelKey: stri
   {value: "viewer", labelKey: "roles.viewer"},
 ];
 
+/** گزینه‌های نقش برای مودال «تغییر دسترسی» (شامل مالک) */
+export const TEAM_ACCESS_ROLE_OPTIONS: ReadonlyArray<{
+  value: TeamRole;
+  labelKey: string;
+  descriptionKey: string;
+}> = [
+  {value: "owner", labelKey: "roles.owner", descriptionKey: "profile.access.roles.owner"},
+  {value: "admin", labelKey: "roles.admin", descriptionKey: "profile.access.roles.admin"},
+  {value: "member", labelKey: "roles.member", descriptionKey: "profile.access.roles.member"},
+  {value: "viewer", labelKey: "roles.viewer", descriptionKey: "profile.access.roles.viewer"},
+];
+
 export const TEAM_ROLE_STYLE: Record<TeamRole, {badge: string; labelKey: string}> = {
   owner: {
     badge: "bg-violet-100 text-violet-700 dark:bg-violet-500/15 dark:text-violet-300",

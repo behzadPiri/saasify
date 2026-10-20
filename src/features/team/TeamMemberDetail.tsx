@@ -3,10 +3,19 @@
 /**
  * کامپوننت جزئیات عضو تیم
  * ترکیب منطق (useTeamMemberDetail) و ویو (هدر، پروفایل، پروژه‌ها)
- * بسته به view ارسالی از مسیر، پروفایل یا پروژه‌ها نمایش داده می‌شود
+ * تب‌های پایین صفحه به‌صورت کاملاً کلاینتی و بدون ناوبری/رفرش کامل جابه‌جا می‌شوند.
  */
 
-import {MemberHeader, MemberNotFound, MemberProfile, MemberProjects, TeamMembersSkeleton} from "./components";
+import {
+  ChangeAccessModal,
+  EditMemberModal,
+  MemberHeader,
+  MemberNotFound,
+  MemberProfile,
+  MemberProjects,
+  RemoveMemberModal,
+  TeamMembersSkeleton,
+} from "./components";
 import {useTeamMemberDetail} from "./hooks";
 import type {TeamMemberView} from "./types";
 
@@ -32,9 +41,20 @@ export function TeamMemberDetail({memberId, view = "overview"}: TeamMemberDetail
     openCreateModal,
     closeCreateModal,
     handleCreateProject,
+    activeTab,
+    setActiveTab,
+    activeModal,
+    isRemoving,
+    openEditModal,
+    openAccessModal,
+    openRemoveModal,
+    closeActionModal,
+    handleEditSubmit,
+    handleAccessSubmit,
+    handleRemoveConfirm,
   } = useTeamMemberDetail({memberId, view});
 
-  if (isLoading) {
+  if (isLoading || isRemoving) {
     return (
       <div className="space-y-6 w-full">
         <TeamMembersSkeleton count={3} />
@@ -48,27 +68,74 @@ export function TeamMemberDetail({memberId, view = "overview"}: TeamMemberDetail
 
   return (
     <div className="space-y-6 w-full">
-      <MemberHeader member={member} initials={initials} view={view} projectCount={projects.length} />
+      <MemberHeader
+        member={member}
+        initials={initials}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        projectCount={projects.length}
+      />
 
-      {view === "overview" ? (
-        <MemberProfile
-          member={member}
-          joinedDate={joinedDate}
-          relativeLastSeen={relativeLastSeen}
-          activityItems={activityItems}
-        />
+      {activeTab === "overview" ? (
+        <div
+          key="overview"
+          id="member-panel-overview"
+          role="tabpanel"
+          aria-labelledby="member-tab-overview"
+          className="animate-in fade-in [animation-duration:320ms] space-y-6"
+        >
+          <MemberProfile
+            member={member}
+            joinedDate={joinedDate}
+            relativeLastSeen={relativeLastSeen}
+            activityItems={activityItems}
+            onEdit={openEditModal}
+            onChangeAccess={openAccessModal}
+            onRemove={openRemoveModal}
+          />
+        </div>
       ) : (
-        <MemberProjects
-          visibleProjects={visibleProjects}
-          searchTerm={searchTerm}
-          feedback={feedback}
-          isCreateOpen={isCreateOpen}
-          onSearchChange={setSearchTerm}
-          onOpenCreate={openCreateModal}
-          onCloseCreate={closeCreateModal}
-          onCreate={handleCreateProject}
-        />
+        <div
+          key="projects"
+          id="member-panel-projects"
+          role="tabpanel"
+          aria-labelledby="member-tab-projects"
+          className="animate-in fade-in [animation-duration:320ms] space-y-6"
+        >
+          <MemberProjects
+            memberId={memberId}
+            visibleProjects={visibleProjects}
+            searchTerm={searchTerm}
+            feedback={feedback}
+            isCreateOpen={isCreateOpen}
+            onSearchChange={setSearchTerm}
+            onOpenCreate={openCreateModal}
+            onCloseCreate={closeCreateModal}
+            onCreate={handleCreateProject}
+          />
+        </div>
       )}
+
+      <EditMemberModal
+        open={activeModal === "edit"}
+        member={member}
+        onClose={closeActionModal}
+        onSubmit={handleEditSubmit}
+      />
+
+      <ChangeAccessModal
+        open={activeModal === "access"}
+        member={member}
+        onClose={closeActionModal}
+        onSubmit={handleAccessSubmit}
+      />
+
+      <RemoveMemberModal
+        open={activeModal === "remove"}
+        member={member}
+        onClose={closeActionModal}
+        onConfirm={handleRemoveConfirm}
+      />
     </div>
   );
 }

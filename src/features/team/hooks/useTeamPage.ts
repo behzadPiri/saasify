@@ -3,19 +3,22 @@
 /**
  * هوک مرکزی تیم - مدیریت داده، فیلتر، مرتب‌سازی، جستجو و خلاصه
  * تنها منبع حقیقت برای وضعیت اعضا در صفحات تیم
- * بهینه شده برای جلوگیری از حافظه‌گرفت و رندرهای اضافی
+ * داده از فروشگاه مشترک `team-store` خوانده می‌شود تا ویرایش/حذف عضو
+ * بین صفحهٔ فهرست و صفحهٔ جزئیات هم‌زمان بازتاب پیدا کند.
  */
 
-import {useCallback, useEffect, useMemo, useRef, useState} from "react";
-import {createMockTeam} from "../lib/mockTeam";
+import {useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore} from "react";
+import {
+  addTeamMember,
+  avatarColorForRole,
+  getServerTeamMembersSnapshot,
+  getTeamMembersSnapshot,
+  removeTeamMember,
+  subscribeTeamMembers,
+  updateTeamMember,
+  type TeamMemberPatch,
+} from "../lib/team-store";
 import type {TeamFilterOption, TeamMember, TeamRole, TeamSortOption} from "../types";
-
-const toAvatarColor = (role: TeamRole) => {
-  if (role === "owner") return "from-violet-500 to-indigo-500";
-  if (role === "admin") return "from-sky-500 to-cyan-500";
-  if (role === "member") return "from-emerald-500 to-teal-500";
-  return "from-stone-500 to-slate-500";
-};
 
 export interface TeamSummary {
   total: number;
@@ -23,31 +26,31 @@ export interface TeamSummary {
   managers: number;
 }
 
+const LOADING_DELAY = 400;
+
 export function useTeamPage() {
-  const [members, setMembers] = useState<TeamMember[]>([]);
+  const members = useSyncExternalStore(
+    subscribeTeamMembers,
+    getTeamMembersSnapshot,
+    getServerTeamMembersSnapshot
+  );
+
   const [statusFilter, setStatusFilter] = useState<TeamFilterOption>("all");
   const [sortBy, setSortBy] = useState<TeamSortOption>("name");
   const [searchValue, setSearchValue] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const mountRef = useRef(true);
 
-  // Initialize data immediately without calling setState in effect
+  // نمایش کوتاه اسکلت بارگذاری در اولین mount (حفظ UX قبلی)
   useEffect(() => {
-    // Schedule the data loading but don't set state here
-    timeoutRef.current = setTimeout(() => {
-      try {
-        setMembers(createMockTeam());
-      } catch {
-        setError("Unable to load team members.");
-      } finally {
-        if (mountRef.current) {
-          setIsLoading(false);
-        }
-      }
-    }, 400);
+    const timeout = setTimeout(() => setIsLoading(false), LOADING_DELAY);
 
+    return () => clearTimeout(timeout);
+  }, []);
+
+  // پاک‌سازی تایمرِ refresh هنگام unmount
+  useEffect(() => {
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -56,28 +59,18 @@ export function useTeamPage() {
     };
   }, []);
 
-  const loadMembers = useCallback(() => {
+  const refresh = useCallback(() => {
     setIsLoading(true);
     setError(null);
 
-    timeoutRef.current = setTimeout(() => {
-      try {
-        setMembers(createMockTeam());
-      } catch {
-        setError("Unable to load team members.");
-      } finally {
-        if (mountRef.current) {
-          setIsLoading(false);
-        }
-      }
-    }, 400);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
 
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
-    };
+    timeoutRef.current = setTimeout(() => {
+      setIsLoading(false);
+      timeoutRef.current = null;
+    }, LOADING_DELAY);
   }, []);
 
   const filteredMembers = useMemo(() => {
@@ -137,10 +130,6 @@ export function useTeamPage() {
     setStatusFilter("all");
   }, []);
 
-  const refresh = useCallback(() => {
-    loadMembers();
-  }, [loadMembers]);
-
   const addMember = useCallback(
     ({email, role, locale}: {email: string; role: TeamRole; locale: string}) => {
       const name = email.split("@")[0].replace(/[._-]/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
@@ -155,14 +144,21 @@ export function useTeamPage() {
         lastActive: "just now",
         lastActiveAt: new Date().toISOString(),
         joinedAt: new Date().toISOString(),
-        avatarColor: toAvatarColor(role),
+        avatarColor: avatarColorForRole(role),
       };
 
-      setMembers((current) => [created, ...current]);
-      return created;
+      return addTeamMember(created);
     },
     []
   );
+
+  const updateMember = useCallback((memberId: string, patch: TeamMemberPatch) => {
+    return updateTeamMember(memberId, patch);
+  }, []);
+
+  const removeMember = useCallback((memberId: string) => {
+    return removeTeamMember(memberId);
+  }, []);
 
   return {
     // Data
@@ -181,6 +177,8 @@ export function useTeamPage() {
     // Actions
     refresh,
     addMember,
+    updateMember,
+    removeMember,
 
     // Filter handlers
     handleRoleFilterChange,
